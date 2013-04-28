@@ -1,30 +1,27 @@
 #include <iostream>
 #include <string>
-class music
-{
+
+class Music {
 private:
-	int music_id;
-	std::string title;
-	std::string artist;
-	std::string author;
-	std::string album;
-	std::string music_genre;
-	std::string year;
-	std::string likes;
-	std::string dislikes;
+	unsigned int id;
+
+public:
+	// Doing this with constructors and deconstructors is much better as we can
+	// automatically fill the song id by accessing the radio music database.
+
+	Music();
+	~Music();
+
+	unsigned int year;
+
+	unsigned int likes;
+	unsigned int dislikes;
 
 	bool available;
 
-public:
-	void addLike (); // Adds a Like to a music
-	void addDislike (); // Adds a Dislike to a music
-	void setAvailable(bool availability); // Signal the music as unavailable
-	//void DisplayTrack (); // Display the track
+	bool addLike(); // Adds a Like to a music
+	bool addDislike(); // Adds a Dislike to a music
 
-	void setMusicId(int theMusicId);
-	int musicId();
-
-	// por ai fora
-
+	void setAvailability(bool availability); // Signal the music as unavailable
 };
 

@@ -15,16 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Radio_Station.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Music.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Users.h">
+    <ClInclude Include="UserManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="topmusic.h">
+    <ClInclude Include="Playlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RadioStation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilesIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
