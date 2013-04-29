@@ -1,3 +1,10 @@
+//
+//  Playlist.h
+//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//
+//  This class manages a single playlist object and its songs/song count.
+//
+
 #include <iostream>
 #include <vector>
 #include <map>

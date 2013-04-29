@@ -1,3 +1,10 @@
+//
+//  User.h
+//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//
+//  This class takes care of the User objects and their information.
+//
+
 #include <iostream>
 #include <string>
 #include <vector>

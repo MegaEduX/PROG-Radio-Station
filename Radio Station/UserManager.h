@@ -1,3 +1,10 @@
+//
+//  UserManager.h
+//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//
+//  This class manages the different users and their permissions.
+//
+
 #include <iostream>
 #include <string>
 #include <vector>

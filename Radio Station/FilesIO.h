@@ -1,3 +1,10 @@
+//
+//  FilesIO.h
+//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//
+//  This class manages everything that has to do with files.
+//
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -9,7 +16,7 @@ class FilesIO {
     
 private:
     
-	FilesIO(); // By this point, you must already have noticed that I love singletons.
+	FilesIO(); // We hope we aren't using too many singletons!
 
 	FilesIO(FilesIO const&); // Copy constructor is private.
 	FilesIO& operator=(FilesIO const&); // Assignment operator is private.

@@ -1,3 +1,10 @@
+//
+//  Music.h
+//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//
+//  This class manages a single song object and its data.
+//
+
 #include <iostream>
 #include <string>
 
