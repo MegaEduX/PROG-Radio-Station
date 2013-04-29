@@ -29,4 +29,7 @@ public:
     const User* getUser(int userId);
     const User* getUser(std::string userName);
     
+    const unsigned int userCount();
+    const unsigned int adminCount();
+
 };
