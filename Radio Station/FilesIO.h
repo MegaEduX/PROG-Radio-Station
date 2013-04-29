@@ -16,5 +16,12 @@ private:
 
 public:
 	static FilesIO* Instance();
-	
+    
+    bool loadGlobals();
+    bool storeGlobals();
+    
+    Playlist playlistForUser(int userid);
+    Playlist playlistForUser(std::string userName);
+
+    bool storePlaylistForUser(int userid);
 };
