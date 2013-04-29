@@ -2,11 +2,13 @@
 #include <vector>
 #include <string>
 
-#include "Music.h";
-#include "Playlist.h"
+class Music;
+class Playlist;
 
 class FilesIO {
+    
 private:
+    
 	FilesIO(); // By this point, you must already have noticed that I love singletons.
 
 	FilesIO(FilesIO const&); // Copy constructor is private.
@@ -15,6 +17,7 @@ private:
 	static FilesIO *fio_pInstance;
 
 public:
+    
 	static FilesIO* Instance();
     
     //
@@ -45,4 +48,5 @@ public:
     //
 
     bool storePlaylistForUser(int userid);
+    
 };

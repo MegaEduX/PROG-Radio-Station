@@ -2,11 +2,13 @@
 #include <vector>
 #include <string>
 
-#include "Music.h";
-#include "Playlist.h"
+class Music;
+class Playlist;
 
 class RadioStation {
+    
 private:
+    
 	RadioStation(); // There can only be one radio station, so a singleton here is completely appropriate.
 
 	RadioStation(RadioStation const&); // Copy constructor is private.
@@ -21,6 +23,7 @@ private:
 	Playlist currentPlaySet;
 
 public:
+    
 	static RadioStation* Instance();
 
 	void generateSet(); // Generates a set randomly
