@@ -6,14 +6,29 @@
 
 class Playlist {
 private:
-	std::map <Music, int> thePlaylist;
+	std::vector <Music> thePlaylist;
 
 public:
-	void addSong(Music theSong, int playCount);
-	void removeSong(Music theSong);
+    //
+    // Add and remove songs to the playlist, nothing major here.
+    //
+    
+	void addSong(Music *theSong, int playCount);
+	void removeSong(Music *theSong);
+    
+    //
+    // As we are using the Music objects by reference, and using
+    // the same object on the global/user/... playlists, we can
+    // generate the top ten songs list dynamically.
+    //
 
-	std::vector <Music> topTenSongs();
-	std::vector <int> topTenSongCount();
+    // Returns Music * as the key and the song count as the object.
+    
+    // As maps are ordered, we can just loop through this.
+    
+	std::map <Music *, int> topTenSongs();
+    
+    // Searches through the playlist and returns a vector with matches.
 
-	std::vector<Music> search(std::string title, int year, std::string artist, std::string music_genre);
+	std::vector<Music *> search(std::string title, int year, std::string artist, std::string music_genre);
 };

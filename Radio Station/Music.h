@@ -11,17 +11,21 @@ public:
 
 	Music();
 	~Music();
+    
+    //
+    // User variables.
+    //
 
 	unsigned int year;
 
 	unsigned int likes;
 	unsigned int dislikes;
+    
+    unsigned int playCount;
 
 	bool available;
 
 	bool addLike(); // Adds a Like to a music
 	bool addDislike(); // Adds a Dislike to a music
-
-	void setAvailability(bool availability); // Signal the music as unavailable
 };
 

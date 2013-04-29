@@ -17,11 +17,32 @@ private:
 public:
 	static FilesIO* Instance();
     
+    //
+    // The global files
+    //  - radioStationMusics.csv
+    //  - topTen.csv
+    //  - users.csv
+    //
+    // Usually only need to be loaded / written to
+    // a few times per session.
+    //
+    // So we can merge them, for simplicity.
+    //
+    
     bool loadGlobals();
     bool storeGlobals();
     
+    //
+    // Loads the playlistUserXXX.csv or searches
+    // for an user with that username.
+    //
+    
     Playlist playlistForUser(int userid);
     Playlist playlistForUser(std::string userName);
+    
+    //
+    // Saves the user playlist.
+    //
 
     bool storePlaylistForUser(int userid);
 };
