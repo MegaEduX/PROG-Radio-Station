@@ -2,7 +2,7 @@
 #include <vector>
 #include <map>
 
-#include "Music.h"
+class Music;
 
 class Playlist {
 private:
@@ -26,9 +26,9 @@ public:
     
     // As maps are ordered, we can just loop through this.
     
-	std::map <Music *, int> topTenSongs();
+	const std::map <Music *, int> topTenSongs();
     
     // Searches through the playlist and returns a vector with matches.
 
-	std::vector<Music *> search(std::string title, int year, std::string artist, std::string music_genre);
+	const std::vector<Music *> search(std::string title, int year, std::string artist, std::string music_genre);
 };
