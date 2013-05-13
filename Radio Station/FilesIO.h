@@ -50,14 +50,14 @@ public:
     // for an user with that username.
     //
     
-    Playlist playlistForUser(int userid);
+    Playlist playlistForUser(int userId);
     Playlist playlistForUser(std::string userName);
     
     //
     // Saves the user playlist.
     //
 
-    bool storePlaylistForUser(int userid);
+    bool storePlaylistForUser(int userId);
     
 };
 
