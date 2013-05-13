@@ -1,9 +1,19 @@
+//
+//  RadioStation.h
+//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//
+//  This class takes care of the main Radio Station.
+//
+
+#ifndef RadioStationHeader
+#define RadioStationHeader
+
 #include <iostream>
 #include <vector>
 #include <string>
 
-class Music;
-class Playlist;
+#include "Music.h"
+#include "Playlist.h"
 
 class RadioStation {
     
@@ -16,11 +26,11 @@ private:
 
 	static RadioStation *rs_pInstance;
 
-	std::string Name;
+	std::string _name;
 
-	Playlist allTracks;
+	Playlist _allTracks;
 
-	Playlist currentPlaySet;
+	Playlist _currentPlaySet;
 
 public:
     
@@ -30,3 +40,4 @@ public:
 	
 };
 
+#endif

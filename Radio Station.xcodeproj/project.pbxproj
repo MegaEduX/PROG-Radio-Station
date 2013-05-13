@@ -1,0 +1,240 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6FC73A0A1740EF650084D306 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A091740EF650084D306 /* main.cpp */; };
+		6FC73A0C1740EF650084D306 /* Radio_Station.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FC73A0B1740EF650084D306 /* Radio_Station.1 */; };
+		6FC73A191740EF9B0084D306 /* User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A181740EF9B0084D306 /* User.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6FC73A041740EF650084D306 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				6FC73A0C1740EF650084D306 /* Radio_Station.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6FC73A061740EF650084D306 /* Radio Station */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Radio Station"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC73A091740EF650084D306 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6FC73A0B1740EF650084D306 /* Radio_Station.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Radio_Station.1; sourceTree = "<group>"; };
+		6FC73A121740EF830084D306 /* FilesIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesIO.h; sourceTree = "<group>"; };
+		6FC73A131740EF830084D306 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
+		6FC73A141740EF830084D306 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
+		6FC73A151740EF830084D306 /* RadioStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioStation.h; sourceTree = "<group>"; };
+		6FC73A161740EF830084D306 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		6FC73A171740EF830084D306 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		6FC73A181740EF9B0084D306 /* User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = User.cpp; sourceTree = "<group>"; };
+		6FC73A1A1740F5050084D306 /* boo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = boo.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6FC73A031740EF650084D306 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6FC739FD1740EF650084D306 = {
+			isa = PBXGroup;
+			children = (
+				6FC73A081740EF650084D306 /* Radio Station */,
+				6FC73A071740EF650084D306 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6FC73A071740EF650084D306 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6FC73A061740EF650084D306 /* Radio Station */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6FC73A081740EF650084D306 /* Radio Station */ = {
+			isa = PBXGroup;
+			children = (
+				6FC73A121740EF830084D306 /* FilesIO.h */,
+				6FC73A131740EF830084D306 /* Music.h */,
+				6FC73A141740EF830084D306 /* Playlist.h */,
+				6FC73A151740EF830084D306 /* RadioStation.h */,
+				6FC73A161740EF830084D306 /* User.h */,
+				6FC73A181740EF9B0084D306 /* User.cpp */,
+				6FC73A171740EF830084D306 /* UserManager.h */,
+				6FC73A091740EF650084D306 /* main.cpp */,
+				6FC73A0B1740EF650084D306 /* Radio_Station.1 */,
+				6FC73A1A1740F5050084D306 /* boo.h */,
+			);
+			path = "Radio Station";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6FC73A051740EF650084D306 /* Radio Station */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FC73A0F1740EF650084D306 /* Build configuration list for PBXNativeTarget "Radio Station" */;
+			buildPhases = (
+				6FC73A021740EF650084D306 /* Sources */,
+				6FC73A031740EF650084D306 /* Frameworks */,
+				6FC73A041740EF650084D306 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Radio Station";
+			productName = "Radio Station";
+			productReference = 6FC73A061740EF650084D306 /* Radio Station */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6FC739FE1740EF650084D306 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Bitten Apps";
+			};
+			buildConfigurationList = 6FC73A011740EF650084D306 /* Build configuration list for PBXProject "Radio Station" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6FC739FD1740EF650084D306;
+			productRefGroup = 6FC73A071740EF650084D306 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6FC73A051740EF650084D306 /* Radio Station */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6FC73A021740EF650084D306 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FC73A0A1740EF650084D306 /* main.cpp in Sources */,
+				6FC73A191740EF9B0084D306 /* User.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6FC73A0D1740EF650084D306 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6FC73A0E1740EF650084D306 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6FC73A101740EF650084D306 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6FC73A111740EF650084D306 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6FC73A011740EF650084D306 /* Build configuration list for PBXProject "Radio Station" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FC73A0D1740EF650084D306 /* Debug */,
+				6FC73A0E1740EF650084D306 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FC73A0F1740EF650084D306 /* Build configuration list for PBXNativeTarget "Radio Station" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FC73A101740EF650084D306 /* Debug */,
+				6FC73A111740EF650084D306 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6FC739FE1740EF650084D306 /* Project object */;
+}

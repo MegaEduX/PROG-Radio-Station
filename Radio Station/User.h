@@ -5,11 +5,14 @@
 //  This class takes care of the User objects and their information.
 //
 
+#ifndef UserHeader
+#define UserHeader
+
 #include <iostream>
 #include <string>
 #include <vector>
 
-class Playlist;
+#include "Playlist.h"
 
 typedef enum {
 	kSexMale,
@@ -20,20 +23,22 @@ class User {
     
 private:
     
-	unsigned int userId;
-	unsigned int age;
+	unsigned int _userId;
+	unsigned int _age;
     
-	kSex gender;
+	kSex _gender;
     
-	std::string name;
+	std::string _name;
     
-	bool isAdministrator;
+	bool _isAdministrator;
 	
-	Playlist userPlaylist;
+	Playlist _userPlaylist;
     
 public:
     
     User();
+    User(int userId, int age, kSex gender, std::string name, Playlist playlist);
+    
     ~User();
     
     bool setUserId(unsigned int theId);
@@ -52,3 +57,5 @@ public:
     const Playlist playlist();
     
 };
+
+#endif

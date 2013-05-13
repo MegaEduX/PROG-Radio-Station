@@ -5,11 +5,14 @@
 //  This class manages the different users and their permissions.
 //
 
+#ifndef UserManagerHeader
+#define UserManagerHeader
+
 #include <iostream>
 #include <string>
 #include <vector>
 
-class User;
+#include "User.h"
 
 class UserManager {
     
@@ -22,7 +25,7 @@ private:
 
 	static UserManager *um_pInstance;
 
-	std::vector<User *> userVector;
+	std::vector<User *> _userVector;
 
 public:
     
@@ -40,3 +43,5 @@ public:
     const unsigned int adminCount();
 
 };
+
+#endif

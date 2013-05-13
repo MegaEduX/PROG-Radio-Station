@@ -5,6 +5,9 @@
 //  This class manages a single song object and its data.
 //
 
+#ifndef MusicHeader
+#define MusicHeader
+
 #include <iostream>
 #include <string>
 
@@ -12,16 +15,16 @@ class Music {
     
 private:
     
-	unsigned int musicId;
+	unsigned int _musicId;
     
-    unsigned int year;
+    unsigned int _year;
     
-    unsigned int likes;
-    unsigned int dislikes;
+    unsigned int _likes;
+    unsigned int _dislikes;
     
-    unsigned int playCount;
+    unsigned int _playCount;
     
-    bool available;
+    bool _available;
 
 public:
     
@@ -55,3 +58,4 @@ public:
     
 };
 
+#endif

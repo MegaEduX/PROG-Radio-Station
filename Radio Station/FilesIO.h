@@ -5,12 +5,15 @@
 //  This class manages everything that has to do with files.
 //
 
+#ifndef FilesIOHeader
+#define FilesIOHeader
+
 #include <iostream>
 #include <vector>
 #include <string>
 
-class Music;
-class Playlist;
+#include "Music.h"
+#include "Playlist.h"
 
 class FilesIO {
     
@@ -57,3 +60,5 @@ public:
     bool storePlaylistForUser(int userid);
     
 };
+
+#endif

@@ -5,15 +5,18 @@
 //  This class manages a single playlist object and its songs/song count.
 //
 
+#ifndef PlaylistHeader
+#define PlaylistHeader
+
 #include <iostream>
 #include <vector>
 #include <map>
 
-class Music;
+#include "Music.h"
 
 class Playlist {
 private:
-	std::vector <Music> thePlaylist;
+	std::vector <Music> _thePlaylist;
 
 public:
     //
@@ -39,3 +42,5 @@ public:
 
 	const std::vector<Music *> search(std::string title, int year, std::string artist, std::string music_genre);
 };
+
+#endif
