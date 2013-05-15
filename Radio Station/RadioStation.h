@@ -37,6 +37,8 @@ public:
 	static RadioStation* Instance();
 
 	void generateSet(); // Generates a set randomly
+
+	Playlist allTracks(); // Adicionado por razoes obvias
 	
 };
 

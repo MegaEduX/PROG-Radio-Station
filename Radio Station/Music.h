@@ -32,6 +32,8 @@ public:
 	// automatically fill the song id by accessing the radio music database.
 
 	Music();
+	Music(unsigned int musicId , unsigned int year , unsigned int _likes , unsigned int _dislikes , unsigned int playCount, bool available); 
+	// Adicionado por questoes obvias
 	~Music();
     
     //
@@ -47,14 +49,14 @@ public:
     const unsigned int likes();
     const unsigned int dislikes();
     
-    bool addLike();
-    bool addDislike();
+    void addLike(); // Por razoes Obvias de bool para void
+    void addDislike(); // Por razoes Obvias de bool para void
     
     const unsigned int playCount();
-    bool addPlay();
+    void addPlay(); // Por razoes Obvias de bool para void
     
     const bool available();
-    bool setAvailable(bool availability);
+    void setAvailable(bool availability); // Por razoes Obvias de bool para void
     
 };
 
