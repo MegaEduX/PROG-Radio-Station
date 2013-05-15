@@ -21,11 +21,19 @@ private:
     
     std::string _filePath;
     
+    std::vector<std::vector<std::string>> _cachedResult;
+    
 public:
     
     CSVParser(std::string filePath);
     
     std::vector<std::vector<std::string>> parseCSV();
+    
+    std::vector<std::string> tableHeader(bool reparse);
+    
+    std::vector<std::vector<std::string>> tableRows(bool reparse);
+    
+    std::string encodeCSV(std::vector<std::vector<std::string>> vecToEncode);
 };
 
 #endif

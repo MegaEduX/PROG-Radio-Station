@@ -12,6 +12,8 @@
 #include <iostream>
 #include <vector>
 
-std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
+namespace Additions {
+    std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
+}
 
 #endif
