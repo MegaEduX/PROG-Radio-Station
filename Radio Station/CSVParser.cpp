@@ -10,6 +10,10 @@
 
 #include "Additions.h"
 
+CSVParser::CSVParser() {
+    
+}
+
 CSVParser::CSVParser(std::string filePath) {
     _filePath = filePath;
 }

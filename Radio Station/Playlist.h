@@ -43,6 +43,8 @@ public:
 	const std::vector<Music *> search(int musicId, std::string title, int year, std::string artist, std::string music_genre);
     
     unsigned int count(); // Adicionado por razoes obvias
+    
+    void shuffle();
 };
 
 #endif

@@ -15,6 +15,7 @@
 
 #include "Music.h"
 #include "Playlist.h"
+#include "User.h"
 
 class FilesIO {
     
@@ -60,6 +61,13 @@ public:
 
     bool storePlaylistForUser(int userId);
     
+    //
+    // Load / Save user details
+    //
+    
+    User* loadUser(int userId);
+    bool saveUser(User *theUser);
+
 };
 
 #endif

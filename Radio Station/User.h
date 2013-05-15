@@ -36,13 +36,15 @@ private:
     
 public:
     
-    User();
     User(int userId, int age, kSex gender, std::string name, Playlist playlist);
     
     ~User();
     
     bool setUserId(unsigned int theId);
     const unsigned int userId();
+    
+    bool setAge(unsigned int theAge);
+    const unsigned int age();
     
     bool setGender(kSex theGender);
     const kSex gender();

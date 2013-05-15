@@ -30,8 +30,7 @@ public:
     
 	// Doing this with constructors and deconstructors is much better as we can
 	// automatically fill the song id by accessing the radio music database.
-
-	Music();
+    
 	Music(unsigned int musicId , unsigned int year , unsigned int _likes , unsigned int _dislikes , unsigned int playCount, bool available); 
 	// Adicionado por questoes obvias
 	~Music();

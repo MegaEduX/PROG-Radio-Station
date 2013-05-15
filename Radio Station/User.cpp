@@ -10,17 +10,6 @@
 
 #include "UserManager.h"
 
-User::User() {
-    _userId = UserManager::Instance() -> userCount();
-    _age = 0;
-    _gender = kSexMale;
-    _name = "";
-    _userPlaylist = Playlist();
-    
-    if (!_userId) // If user id == 0
-        _isAdministrator = false;
-}
-
 User::User(int userId, int age, kSex gender, std::string name, Playlist playlist) {
     _userId = userId;
     _age = age;

@@ -11,16 +11,7 @@
 #include "Playlist.h"
 #include "RadioStation.h"
 
-Music::Music() {
-    _musicId = 0;
-    _year = 0;
-    _likes = 0;
-    _dislikes = 0;
-    _playCount = 0;
-	_available = true;
-}
-
-Music::Music ( unsigned int musicId , unsigned int year , unsigned int likes , unsigned int dislikes , unsigned int playCount, bool available){
+Music::Music (unsigned int musicId , unsigned int year , unsigned int likes , unsigned int dislikes , unsigned int playCount, bool available) {
 	_musicId = musicId;
 	_year = year;
 	_likes = likes;

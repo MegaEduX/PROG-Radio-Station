@@ -25,7 +25,10 @@ private:
     
 public:
     
+    CSVParser();
     CSVParser(std::string filePath);
+    
+    ~CSVParser();
     
     std::vector<std::vector<std::string>> parseCSV();
     

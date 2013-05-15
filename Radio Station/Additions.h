@@ -10,10 +10,14 @@
 #define AdditionsHeader
 
 #include <iostream>
+#include <sstream>
+#include <fstream>
+#include <cerrno>
 #include <vector>
 
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
+    std::string get_file_contents(const char *filename);
 }
 
 #endif
