@@ -36,8 +36,8 @@ public:
 	bool removeUser(User *aUser);
 	bool removeUser(int userId);
     
-    const User* getUser(int userId);
-    const User* getUser(std::string userName);
+    User* getUser(int userId);
+    User* getUser(std::string userName);
     
     const unsigned int userCount();
     const unsigned int adminCount();

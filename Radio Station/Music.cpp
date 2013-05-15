@@ -2,7 +2,9 @@
 //  User.cpp
 //  Radio Station
 //
-//  Created by João Almeida on 13/05/13.
+//  Created by Jo‹o Almeida on 13/05/13.
+//
+
 #include <ctime>
 
 #include "Music.h"
@@ -17,6 +19,7 @@ Music::Music() {
     _playCount = 0;
 	_available = true;
 }
+
 Music::Music ( unsigned int musicId , unsigned int year , unsigned int likes , unsigned int dislikes , unsigned int playCount, bool available){
 	_musicId = musicId;
 	_year = year;
@@ -25,32 +28,37 @@ Music::Music ( unsigned int musicId , unsigned int year , unsigned int likes , u
 	_playCount = playCount;
 	_available = available;
 }
-bool Music::setMusicId ( unsigned int TheId){
+
+bool Music::setMusicId (unsigned int TheId){
 	if (TheId > RadioStation::Instance()->allTracks().count())
 		return false;
 
 	_musicId = TheId;
+    
+    return true;
 }
-bool Music::setYear ( unsigned int TheYear) {
+
+bool Music::setYear (unsigned int TheYear) {
 	if ( (TheYear-1970) * 60 * 60 * 24 * 365 > time(NULL))
 		return false;
 
 	_year = TheYear;
-		return true;
+    
+    return true;
 }
-void Music::addLike(){
-	_likes ++;
+
+void Music::addLike() {
+	_likes++;
 }
-void Music::addDislike(){
-	_dislikes ++;
+
+void Music::addDislike() {
+	_dislikes++;
 }
-void Music::addPlay (){
-	_playCount ++;
+
+void Music::addPlay () {
+	_playCount++;
 }
-void Music::setAvailable( bool availability) {
+
+void Music::setAvailable (bool availability) {
 	_available = availability;
 }
-
-
-
-

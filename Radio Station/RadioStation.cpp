@@ -5,7 +5,7 @@
 
 
 bool RadioStation::setName(std::string name){
-	if (name.size <= 0)
+	if (name.size() <= 0)
 		return false;
 	
 	_name = name;
