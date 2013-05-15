@@ -26,10 +26,23 @@ FilesIO* FilesIO::Instance() {
     return fio_pInstance;
 }
 
-
+//
+// Globals File Format: (prone to change!)
+// key,value
+// name,the-name
+//
 
 bool FilesIO::loadGlobals() {
+    CSVParser parser(globalsFile);
     
+    std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
+    
+    if (parsedCsv.size() < 1)
+        return false;
+    
+    RadioStation::Instance()->setName(parsedCsv[1][1]);
+    
+    return true;
 }
 
 bool FilesIO::storeGlobals() {
@@ -45,7 +58,7 @@ bool FilesIO::storeGlobals() {
 User* FilesIO::loadUser(int userId) {
     CSVParser parser(usersFile);
     
-    std::vector<std::vector<std::string>> parsedCsv = parser.parseCSV();
+    std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
     
     User *aUser;
     
@@ -69,28 +82,28 @@ bool FilesIO::saveUser(User *theUser) {
     
     CSVParser parser(usersFile.c_str());
     
-    std::vector<std::vector<std::string>> userList = parser.parseCSV();
+    std::vector<std::vector<std::string>> userList = parser.tableRows(true);
     
     // Do the change on the row
     
     bool foundRow = false;
     
+    std::vector<std::string> vecToReplace;
+    
+    vecToReplace.push_back(std::to_string(theUser->userId()));
+    vecToReplace.push_back(theUser->name());
+    vecToReplace.push_back(std::to_string(theUser->age()));
+    vecToReplace.push_back(std::to_string(theUser->gender()));
+    
     for (int i = 0; i < userList.size(); i++)
         if (atoi(userList[i][0].c_str()) == theUser->userId()) {
-            std::vector<std::string> vecToReplace;
-            
-            vecToReplace.push_back(std::to_string(theUser->userId()));
-            vecToReplace.push_back(theUser->name());
-            vecToReplace.push_back(std::to_string(theUser->age()));
-            vecToReplace.push_back(std::to_string(theUser->gender()));
-            
             userList[i] = vecToReplace;
             
             foundRow = true;
         }
     
     if (!foundRow)
-        return false;
+        userList.push_back(vecToReplace);
     
     // Re-convert back to CSV
     
