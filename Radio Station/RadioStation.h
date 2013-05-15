@@ -37,6 +37,8 @@ public:
 	static RadioStation* Instance();
     
     bool setName(std::string name);
+    
+    std::string name();
 
 	void generateSet(); // Generates a set randomly
 

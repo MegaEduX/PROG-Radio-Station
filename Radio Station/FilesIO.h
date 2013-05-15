@@ -27,6 +27,8 @@ private:
 	FilesIO& operator=(FilesIO const&); // Assignment operator is private.
 
 	static FilesIO *fio_pInstance;
+    
+    bool _writeToFile(std::string filePath, std::string contents, bool replace);
 
 public:
     

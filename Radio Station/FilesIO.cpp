@@ -16,6 +16,7 @@
 static const std::string userBase = "playListUser";
 static const std::string usersFile = "users.csv";
 static const std::string globalsFile = "globals.csv";
+static const std::string topTenFile = "topTen.csv"; // Still not done!
 
 FilesIO *FilesIO::fio_pInstance = NULL;
 
@@ -32,6 +33,23 @@ FilesIO* FilesIO::Instance() {
 // name,the-name
 //
 
+bool FilesIO::_writeToFile(std::string filePath, std::string contents, bool replace) {
+    if (replace)
+        std::remove(filePath.c_str());
+    
+    std::ofstream thefile(filePath);
+    
+    if (thefile.is_open()) {
+        thefile << contents;
+        
+        thefile.close();
+        
+        return true;
+    }
+    
+    return false;
+}
+
 bool FilesIO::loadGlobals() {
     CSVParser parser(globalsFile);
     
@@ -40,13 +58,48 @@ bool FilesIO::loadGlobals() {
     if (parsedCsv.size() < 1)
         return false;
     
-    RadioStation::Instance()->setName(parsedCsv[1][1]);
+    RadioStation::Instance()->setName(parsedCsv[0][1]);
     
     return true;
 }
 
 bool FilesIO::storeGlobals() {
+    CSVParser parser(globalsFile);
     
+    // Check for file existance
+    
+    std::ifstream thefile(globalsFile);
+    
+    std::vector<std::vector<std::string>> parsedCsv;
+    
+    if (thefile.is_open()) {
+        thefile.close();
+        
+        parsedCsv = parser.tableRows(true);
+        
+        if (strcmp(parsedCsv[0][0].c_str(), "name") == 0)
+            parsedCsv[0][1] = RadioStation::Instance()->name();
+        else
+            return false;
+    } else {
+        std::vector<std::string> headerVec;
+        
+        headerVec.push_back("key");
+        headerVec.push_back("value");
+        
+        parsedCsv.push_back(headerVec);
+        
+        std::vector<std::string> kvVec;
+        
+        kvVec.push_back("name");
+        kvVec.push_back(RadioStation::Instance()->name());
+        
+        parsedCsv.push_back(kvVec);
+    }
+    
+    std::string outCsv = parser.encodeCSV(parsedCsv);
+    
+    return _writeToFile(globalsFile, outCsv, true);
 }
 
 //
@@ -111,18 +164,7 @@ bool FilesIO::saveUser(User *theUser) {
     
     // Save the changes back to the file
     
-    std::remove(usersFile.c_str());
-    
-    std::ofstream thefile(usersFile);
-    
-    if (thefile.is_open()) {
-        thefile << outCsv;
-        
-        thefile.close();
-        
-        return true;
-    } else
-        return false;
+    return _writeToFile(usersFile, outCsv, true);
 }
 
 //
@@ -199,16 +241,5 @@ bool FilesIO::storePlaylistForUser(int userId) {
     
     userFileName.append(".csv");
     
-    std::remove(userFileName.c_str());
-    
-    std::ofstream thefile(userFileName);
-    
-    if (thefile.is_open()) {
-        thefile << outCsv;
-        
-        thefile.close();
-        
-        return true;
-    } else
-        return false;
+    return _writeToFile(userFileName, outCsv, true);
 }
