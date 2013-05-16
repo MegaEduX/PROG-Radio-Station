@@ -34,6 +34,8 @@ public:
     
 	static FilesIO* Instance();
     
+    bool loadTopTen();
+    
     //
     // The global files
     //  - radioStationMusics.csv

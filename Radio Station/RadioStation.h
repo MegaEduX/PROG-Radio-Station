@@ -31,6 +31,8 @@ private:
 	Playlist _allTracks;
 
 	Playlist _currentPlaySet;
+    
+    Playlist _topTen;
 
 public:
     
@@ -43,6 +45,10 @@ public:
 	void generateSet(); // Generates a set randomly
 
 	Playlist allTracks(); // Adicionado por razoes obvias
+    
+    Playlist topTen();
+    
+    bool updateTopTen(Playlist thePlaylist);
 	
 };
 

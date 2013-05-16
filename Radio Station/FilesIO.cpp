@@ -27,12 +27,6 @@ FilesIO* FilesIO::Instance() {
     return fio_pInstance;
 }
 
-//
-// Globals File Format: (prone to change!)
-// key,value
-// name,the-name
-//
-
 bool FilesIO::_writeToFile(std::string filePath, std::string contents, bool replace) {
     if (replace)
         std::remove(filePath.c_str());
@@ -49,6 +43,12 @@ bool FilesIO::_writeToFile(std::string filePath, std::string contents, bool repl
     
     return false;
 }
+
+//
+//  Globals File Format: (prone to change!)
+//  key,value
+//  name,the-name
+//
 
 bool FilesIO::loadGlobals() {
     CSVParser parser(globalsFile);
@@ -100,6 +100,31 @@ bool FilesIO::storeGlobals() {
     std::string outCsv = parser.encodeCSV(parsedCsv);
     
     return _writeToFile(globalsFile, outCsv, true);
+}
+
+//
+//  Top 10 File Format: (prone to change!)
+//
+//  id
+//
+
+bool FilesIO::loadTopTen() {
+    CSVParser parser(topTenFile);
+    
+    std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
+    
+    Playlist topTenPlaylist;
+    
+    if (parsedCsv.size() < 1)
+        return false;
+    
+    for (int i = 0; i < parsedCsv.size(); i++) {
+        std::vector<Music *> search = RadioStation::Instance()->allTracks().search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "");
+        
+        if (search.size() > 0) {
+            topTenPlaylist.addSong(<#Music *theSong#>, <#int playCount#>)
+        }
+    }
 }
 
 //
