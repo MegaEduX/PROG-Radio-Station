@@ -118,13 +118,24 @@ bool FilesIO::loadTopTen() {
     if (parsedCsv.size() < 1)
         return false;
     
+    bool foundErrors = false;
+    
     for (int i = 0; i < parsedCsv.size(); i++) {
         std::vector<Music *> search = RadioStation::Instance()->allTracks().search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "");
         
         if (search.size() > 0) {
-            topTenPlaylist.addSong(<#Music *theSong#>, <#int playCount#>)
+            topTenPlaylist.addSong(search[0], atoi(parsedCsv[i][1].c_str()));
+        } else {
+            std::cout << "Couldn't find song with ID " << parsedCsv[i][0] << ". Maybe the database is corrupt? Proceeding anyway..." << std::endl;
+            
+            foundErrors = true;
         }
     }
+    
+    if (RadioStation::Instance() -> updateTopTen(topTenPlaylist) && !foundErrors)
+        return true;
+    
+    return false;
 }
 
 //

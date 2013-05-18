@@ -49,3 +49,46 @@ bool User::setGender(kSex theGender) {
 const kSex User::gender() {
     return _gender;
 }
+
+bool User::setAge(unsigned int theAge) {
+    if (!theAge)
+        return false;
+    
+    _age = theAge;
+    
+    return true;
+}
+
+const unsigned int User::age() {
+    return _age;
+}
+
+bool User::setName(std::string theName) {
+    if (theName.size() <= 0)
+        return false;
+    
+    _name = theName;
+    
+    return true;
+}
+
+const std::string User::name() {
+    return _name;
+}
+
+const bool User::isAdmin() {
+    if (_userId)
+        return false;
+    
+    return true;
+}
+
+bool User::setPlaylist(Playlist thePlaylist) {
+    _userPlaylist = thePlaylist;
+    
+    return true; // Should this ever return false? :|
+}
+
+const Playlist User::playlist() {
+    return _userPlaylist;
+}

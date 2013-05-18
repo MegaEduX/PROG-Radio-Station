@@ -52,7 +52,7 @@ public:
     bool setName(std::string theName);
     const std::string name();
     
-    bool setAsAdmin(bool isAdmin);
+    // bool setAsAdmin(bool isAdmin); -> This is useless. Sincerly, me.
     const bool isAdmin();
     
     bool setPlaylist(Playlist thePlaylist);

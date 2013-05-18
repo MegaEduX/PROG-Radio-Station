@@ -10,7 +10,6 @@
 		6FA60E651743091100DE6D59 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA60E641743091100DE6D59 /* Music.cpp */; };
 		6FA60E69174309D800DE6D59 /* RadioStation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA60E68174309D800DE6D59 /* RadioStation.cpp */; };
 		6FC73A0A1740EF650084D306 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A091740EF650084D306 /* main.cpp */; };
-		6FC73A0C1740EF650084D306 /* Radio_Station.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FC73A0B1740EF650084D306 /* Radio_Station.1 */; };
 		6FC73A191740EF9B0084D306 /* User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A181740EF9B0084D306 /* User.cpp */; };
 		6FC73A1C174100D90084D306 /* FilesIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A1B174100D90084D306 /* FilesIO.cpp */; };
 		6FC73A23174109DE0084D306 /* CSVParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A21174109DE0084D306 /* CSVParser.cpp */; };
@@ -24,7 +23,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				6FC73A0C1740EF650084D306 /* Radio_Station.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -37,7 +35,6 @@
 		6FA60E68174309D800DE6D59 /* RadioStation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RadioStation.cpp; sourceTree = "<group>"; };
 		6FC73A061740EF650084D306 /* Radio Station */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Radio Station"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC73A091740EF650084D306 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		6FC73A0B1740EF650084D306 /* Radio_Station.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Radio_Station.1; sourceTree = "<group>"; };
 		6FC73A121740EF830084D306 /* FilesIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesIO.h; sourceTree = "<group>"; };
 		6FC73A141740EF830084D306 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
 		6FC73A161740EF830084D306 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -95,7 +92,6 @@
 				6FA60E68174309D800DE6D59 /* RadioStation.cpp */,
 				6FC73A171740EF830084D306 /* UserManager.h */,
 				6FC73A091740EF650084D306 /* main.cpp */,
-				6FC73A0B1740EF650084D306 /* Radio_Station.1 */,
 			);
 			path = "Radio Station";
 			sourceTree = "<group>";

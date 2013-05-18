@@ -32,8 +32,33 @@ bool RadioStation::setName(std::string name) {
 	return true;
 }
 
+std::string RadioStation::name() {
+    return _name;
+}
+
 void RadioStation::generateSet() {
 	_currentPlaySet = _allTracks;
 
 	_currentPlaySet.shuffle();
+}
+
+Playlist RadioStation::allTracks() {
+    return _allTracks;
+}
+
+Playlist RadioStation::topTen() {
+    // Better update the top ten here!
+    
+    // And only then return it.
+    
+    return _topTen;
+}
+
+bool RadioStation::updateTopTen(Playlist thePlaylist) {
+    if (thePlaylist.count() != 10)
+        return false;
+    
+    _topTen = thePlaylist;
+        
+    return true;
 }

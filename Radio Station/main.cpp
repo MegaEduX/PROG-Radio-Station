@@ -8,11 +8,9 @@
 
 #include <iostream>
 
-int main(int argc, const char * argv[])
-{
-
-    // insert code here...
-    std::cout << "Hello, World!\n";
+int main(int argc, const char * argv[]) {
+    std::cout << "Is there anything here?" << std::endl << std::endl << "No? Still no?! STILL FUCKING NO?!" << std::endl << std::endl << "#TRABALHAKATUKII #YOLOSWAG #!!!" << std::endl;
+    
     return 0;
 }
 

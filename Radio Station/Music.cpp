@@ -25,6 +25,10 @@ Music::Music (unsigned int musicId , unsigned int year , std::string title, std:
 	_available = available;
 }
 
+Music::~Music() {
+    
+}
+
 bool Music::setMusicId (unsigned int TheId){
 	if (TheId > RadioStation::Instance()->allTracks().count())
 		return false;
