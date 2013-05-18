@@ -11,9 +11,14 @@
 #include "Playlist.h"
 #include "RadioStation.h"
 
-Music::Music (unsigned int musicId , unsigned int year , unsigned int likes , unsigned int dislikes , unsigned int playCount, bool available) {
+Music::Music (unsigned int musicId , unsigned int year , std::string title, std::string artist, std::string author, std::string album, std::string music_genre, unsigned int likes , unsigned int dislikes , unsigned int playCount, bool available) {
 	_musicId = musicId;
 	_year = year;
+	_title = title;
+	_artist = artist;
+	_author = author;
+	_album = album;
+	_music_genre = music_genre;
 	_likes = likes;
 	_dislikes = dislikes;
 	_playCount = playCount;
@@ -36,6 +41,30 @@ bool Music::setYear (unsigned int TheYear) {
 	_year = TheYear;
     
     return true;
+}
+
+bool Music::setTitle (std::string title) {
+	if (title.size() <= 0)
+		return false;
+	_title = title;
+}
+
+bool Music::setArtist (std::string artist) {
+	if (artist.size() <= 0)
+		return false;
+	_artist = artist;
+}
+
+bool Music::setAuthor (std::string author) {
+	if (author.size() <= 0)
+		return false;
+	_author = author;
+}
+
+bool Music::setMusicGenre (std::string music_genre) {
+	if (music_genre.size() <= 0)
+		return false;
+	_music_genre = music_genre;
 }
 
 void Music::addLike() {
