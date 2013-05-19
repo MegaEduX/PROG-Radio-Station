@@ -53,10 +53,24 @@ bool Music::setTitle (std::string title) {
 	_title = title;
 }
 
+bool Music::setTitle (std::string title) {
+	if (title.size() <= 0)
+		return false;
+	_title = title;
+}
+
+std::string Music::getTitle (){
+	return _title;
+}
+
 bool Music::setArtist (std::string artist) {
 	if (artist.size() <= 0)
 		return false;
 	_artist = artist;
+}
+
+std::string Music::getArtist(){
+	return _artist;
 }
 
 bool Music::setAuthor (std::string author) {
@@ -65,10 +79,18 @@ bool Music::setAuthor (std::string author) {
 	_author = author;
 }
 
+std::string Music::getAuthor(){
+	return _author;
+}
+
 bool Music::setMusicGenre (std::string music_genre) {
 	if (music_genre.size() <= 0)
 		return false;
 	_music_genre = music_genre;
+}
+
+std::string Music::getMusicGenre(){
+	return _music_genre;
 }
 
 void Music::addLike() {

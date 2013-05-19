@@ -53,15 +53,23 @@ public:
 
 	bool setTitle(std::string title);
 
-	bool getTitle(unsigned int theId);
+	std::string getTitle();
 	
 	bool setArtist(std::string artist);
+
+	std::string getArtist();
     
 	bool setAuthor(std::string author);
+
+	std::string getAuthor();
 	
 	bool setAlbum(std::string album);
 
+	std::string getAlbum();
+
 	bool setMusicGenre(std::string music_genre);
+
+	std::string getMusicGenre();
     
 	const unsigned int likes();
     const unsigned int dislikes();
