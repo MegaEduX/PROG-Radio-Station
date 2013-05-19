@@ -80,7 +80,18 @@
     <ClInclude Include="Music.h" />
     <ClInclude Include="Playlist.h" />
     <ClInclude Include="RadioStation.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="UserManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Additions.cpp" />
+    <ClCompile Include="CSVParser.cpp" />
+    <ClCompile Include="FilesIO.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Music.cpp" />
+    <ClCompile Include="Playlist.cpp" />
+    <ClCompile Include="RadioStation.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
