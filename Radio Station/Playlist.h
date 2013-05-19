@@ -40,7 +40,7 @@ public:
     
     // Searches through the playlist and returns a vector with matches.
 
-	const std::vector<Music *> search(int musicId, std::string title,  std::string artist, std::string author , std::string album,std::string music_genre, int year);
+	const std::vector<Music *> search(int musicId, std::string title,  std::string artist, std::string author , std::string album, std::string music_genre, int year);
     
     unsigned int count(); // Adicionado por razoes obvias
     

@@ -40,7 +40,8 @@ public:
     User* getUser(std::string userName);
     
     const unsigned int userCount();
-    const unsigned int adminCount();
+    
+    // const unsigned int adminCount(); - This is retarded.
 
 };
 

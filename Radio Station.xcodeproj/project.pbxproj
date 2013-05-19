@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F9F57C51749442700CCACB6 /* UserManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F57C41749442700CCACB6 /* UserManager.cpp */; };
 		6FA60E651743091100DE6D59 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA60E641743091100DE6D59 /* Music.cpp */; };
 		6FA60E69174309D800DE6D59 /* RadioStation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA60E68174309D800DE6D59 /* RadioStation.cpp */; };
 		6FC73A0A1740EF650084D306 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A091740EF650084D306 /* main.cpp */; };
@@ -29,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F9F57C41749442700CCACB6 /* UserManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserManager.cpp; sourceTree = "<group>"; };
 		6FA60E641743091100DE6D59 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
 		6FA60E661743092500DE6D59 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
 		6FA60E671743095E00DE6D59 /* RadioStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioStation.h; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				6FA60E671743095E00DE6D59 /* RadioStation.h */,
 				6FA60E68174309D800DE6D59 /* RadioStation.cpp */,
 				6FC73A171740EF830084D306 /* UserManager.h */,
+				6F9F57C41749442700CCACB6 /* UserManager.cpp */,
 				6FC73A091740EF650084D306 /* main.cpp */,
 			);
 			path = "Radio Station";
@@ -154,6 +157,7 @@
 				6FC73A2617410C6C0084D306 /* Additions.cpp in Sources */,
 				6FA60E651743091100DE6D59 /* Music.cpp in Sources */,
 				6FA60E69174309D800DE6D59 /* RadioStation.cpp in Sources */,
+				6F9F57C51749442700CCACB6 /* UserManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

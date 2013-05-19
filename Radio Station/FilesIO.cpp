@@ -121,7 +121,7 @@ bool FilesIO::loadTopTen() {
     bool foundErrors = false;
     
     for (int i = 0; i < parsedCsv.size(); i++) {
-        std::vector<Music *> search = RadioStation::Instance()->allTracks().search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "");
+        std::vector<Music *> search = RadioStation::Instance()->allTracks().search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "", "", 0);
         
         if (search.size() > 0) {
             topTenPlaylist.addSong(search[0], atoi(parsedCsv[i][1].c_str()));
@@ -227,7 +227,7 @@ Playlist FilesIO::playlistForUser(int userId) {
     std::vector<std::vector<std::string>> rows = parser.tableRows(true);
     
     for (int i = 0; i < rows.size(); i++) {
-        std::vector<Music *> searchResult = RadioStation::Instance()->allTracks().search(atoi(rows[i][0].c_str()), "", 0, "", "");
+        std::vector<Music *> searchResult = RadioStation::Instance()->allTracks().search(atoi(rows[i][0].c_str()), "", 0, "", "", "", 0);
         
         if (searchResult.size() != 1) {
             std::cout << "A music track wasn't found for ID " << rows[i][0] << ", or the result was ambiguous. Please look into this!" << std::endl;
@@ -245,7 +245,7 @@ Playlist FilesIO::playlistForUser(std::string userName) {
 bool FilesIO::storePlaylistForUser(int userId) {
     Playlist userPlaylist = UserManager::Instance()->getUser(userId)->playlist();
     
-    std::vector<Music *> result = userPlaylist.search(0, "", 0, "", "");
+    std::vector<Music *> result = userPlaylist.search(0, "", 0, "", "", "", 0);
     
     std::vector<std::vector<std::string>> csvVec;
     
