@@ -50,13 +50,10 @@ bool Music::setYear (unsigned int TheYear) {
 bool Music::setTitle (std::string title) {
 	if (title.size() <= 0)
 		return false;
-	_title = title;
-}
-
-bool Music::setTitle (std::string title) {
-	if (title.size() <= 0)
-		return false;
-	_title = title;
+	
+    _title = title;
+    
+    return true;
 }
 
 std::string Music::getTitle (){
@@ -66,7 +63,10 @@ std::string Music::getTitle (){
 bool Music::setArtist (std::string artist) {
 	if (artist.size() <= 0)
 		return false;
+    
 	_artist = artist;
+    
+    return true;
 }
 
 std::string Music::getArtist(){
@@ -76,7 +76,10 @@ std::string Music::getArtist(){
 bool Music::setAuthor (std::string author) {
 	if (author.size() <= 0)
 		return false;
+    
 	_author = author;
+    
+    return true;
 }
 
 std::string Music::getAuthor(){
@@ -86,7 +89,10 @@ std::string Music::getAuthor(){
 bool Music::setMusicGenre (std::string music_genre) {
 	if (music_genre.size() <= 0)
 		return false;
+    
 	_music_genre = music_genre;
+    
+    return true;
 }
 
 std::string Music::getMusicGenre(){
@@ -101,8 +107,16 @@ void Music::addDislike() {
 	_dislikes++;
 }
 
-void Music::addPlay () {
+void Music::addPlay() {
 	_playCount++;
+}
+
+const unsigned int Music::playCount() {
+    return _playCount;
+}
+
+const unsigned int Music::musicId() {
+    return _musicId;
 }
 
 void Music::setAvailable (bool availability) {
