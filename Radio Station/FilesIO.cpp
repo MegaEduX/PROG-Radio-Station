@@ -265,7 +265,7 @@ bool FilesIO::storePlaylistForUser(int userId) {
         
         std::vector<std::string> songVec;
         
-        songVec.push_back(std::to_string(song->musicId()));
+        songVec.push_back(std::to_string(song->getId()));
         songVec.push_back(std::to_string(song->playCount()));
         
         csvVec.push_back(songVec);

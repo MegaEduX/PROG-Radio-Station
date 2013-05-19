@@ -15,10 +15,16 @@
 #include "Music.h"
 
 class Playlist {
+    
 private:
-	std::vector <Music> _thePlaylist;
+    
+	std::vector <Music *> _thePlaylist;
 
 public:
+    
+    Playlist();
+    ~Playlist();
+    
     //
     // Add and remove songs to the playlist, nothing major here.
     //

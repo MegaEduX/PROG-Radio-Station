@@ -115,7 +115,7 @@ const unsigned int Music::playCount() {
     return _playCount;
 }
 
-const unsigned int Music::musicId() {
+const unsigned int Music::getId() {
     return _musicId;
 }
 

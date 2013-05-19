@@ -46,29 +46,24 @@ public:
     //
     
     bool setMusicId(unsigned int theId);
-    const unsigned int musicId();
+    const unsigned int getId();
     
     bool setYear(unsigned int theYear);
-    const unsigned int year();
+    const unsigned int getYear();
 
 	bool setTitle(std::string title);
-
 	std::string getTitle();
 	
 	bool setArtist(std::string artist);
-
 	std::string getArtist();
     
 	bool setAuthor(std::string author);
-
 	std::string getAuthor();
-	
+    
 	bool setAlbum(std::string album);
-
 	std::string getAlbum();
-
+    
 	bool setMusicGenre(std::string music_genre);
-
 	std::string getMusicGenre();
     
 	const unsigned int likes();
@@ -80,7 +75,7 @@ public:
     const unsigned int playCount();
     void addPlay(); // Por razoes Obvias de bool para void
     
-    const bool available();
+    const bool getAvailable();
     void setAvailable(bool availability); // Por razoes Obvias de bool para void
     
 };
