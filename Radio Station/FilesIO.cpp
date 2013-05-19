@@ -27,6 +27,10 @@ FilesIO* FilesIO::Instance() {
     return fio_pInstance;
 }
 
+FilesIO::FilesIO() {
+    
+}
+
 bool FilesIO::_writeToFile(std::string filePath, std::string contents, bool replace) {
     if (replace)
         std::remove(filePath.c_str());

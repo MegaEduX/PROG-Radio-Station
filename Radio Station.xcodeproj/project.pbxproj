@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F9F57C51749442700CCACB6 /* UserManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F57C41749442700CCACB6 /* UserManager.cpp */; };
+		6F9F57C717495F7B00CCACB6 /* Playlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F57C617495F7B00CCACB6 /* Playlist.cpp */; };
 		6FA60E651743091100DE6D59 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA60E641743091100DE6D59 /* Music.cpp */; };
 		6FA60E69174309D800DE6D59 /* RadioStation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA60E68174309D800DE6D59 /* RadioStation.cpp */; };
 		6FC73A0A1740EF650084D306 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC73A091740EF650084D306 /* main.cpp */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		6F9F57C41749442700CCACB6 /* UserManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserManager.cpp; sourceTree = "<group>"; };
+		6F9F57C617495F7B00CCACB6 /* Playlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Playlist.cpp; sourceTree = "<group>"; };
 		6FA60E641743091100DE6D59 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
 		6FA60E661743092500DE6D59 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
 		6FA60E671743095E00DE6D59 /* RadioStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioStation.h; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				6FA60E661743092500DE6D59 /* Music.h */,
 				6FA60E641743091100DE6D59 /* Music.cpp */,
 				6FC73A141740EF830084D306 /* Playlist.h */,
+				6F9F57C617495F7B00CCACB6 /* Playlist.cpp */,
 				6FC73A161740EF830084D306 /* User.h */,
 				6FC73A181740EF9B0084D306 /* User.cpp */,
 				6FA60E671743095E00DE6D59 /* RadioStation.h */,
@@ -158,6 +161,7 @@
 				6FA60E651743091100DE6D59 /* Music.cpp in Sources */,
 				6FA60E69174309D800DE6D59 /* RadioStation.cpp in Sources */,
 				6F9F57C51749442700CCACB6 /* UserManager.cpp in Sources */,
+				6F9F57C717495F7B00CCACB6 /* Playlist.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

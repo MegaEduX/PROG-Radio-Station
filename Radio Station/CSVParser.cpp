@@ -18,6 +18,10 @@ CSVParser::CSVParser(std::string filePath) {
     _filePath = filePath;
 }
 
+CSVParser::~CSVParser() {
+    
+}
+
 //
 // parseCSV()
 //
