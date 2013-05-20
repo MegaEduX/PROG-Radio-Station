@@ -9,7 +9,10 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+
+#ifdef WIN32
 #include <conio.h>
+#endif
 
 #include "UserManager.h"
 #include "User.h"
@@ -86,7 +89,7 @@ void newUser() {
 
 	} while ( sex.size() > 1 );
 
-	sex = sex[0];
+	char sexChar = sex[0];
     
     do {
 		std::cout << "Full Name: ";
@@ -98,7 +101,7 @@ void newUser() {
     
     Playlist newPlaylist;
     
-    User *theUser = new User(UserManager::Instance()->userCount(), age, (sex == 'F' ? kSexFemale : kSexMale), name, newPlaylist);
+    User *theUser = new User(UserManager::Instance()->userCount(), age, (sexChar == 'F' ? kSexFemale : kSexMale), name, newPlaylist);
     
     if (UserManager::Instance() -> addUser(theUser))
         std::cout << "You were registeried. You may now login!" << std::endl << std::endl;
@@ -122,7 +125,7 @@ void start() {
     
     std::cout << std::endl;
     
-    std::cout << "Select an Option: ";
+    std::cout << "Please Select an Option." << std::endl << std::endl;
 	opc = getch();
 
 	switch (opc) {

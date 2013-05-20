@@ -15,17 +15,16 @@
 #include <cerrno>
 #include <vector>
 
+#ifndef WIN32
+int getch();
+#endif
+
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
     
     std::string get_file_contents(const char *filename);
     
     void clearConsole();
-    
-#ifndef WIN32
-    int getch()
-#endif
-    
 }
 
 #endif

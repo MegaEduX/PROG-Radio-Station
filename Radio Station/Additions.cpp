@@ -17,6 +17,21 @@
 #include <unistd.h>
 #endif
 
+#ifndef WIN32
+int getch() {
+    struct termios oldt,
+    newt;
+    int            ch;
+    tcgetattr( STDIN_FILENO, &oldt );
+    newt = oldt;
+    newt.c_lflag &= ~( ICANON | ECHO );
+    tcsetattr( STDIN_FILENO, TCSANOW, &newt );
+    ch = getchar();
+    tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
+    return ch;
+}
+#endif
+
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str) {
         std::vector<std::string> arr;
@@ -83,19 +98,4 @@ namespace Additions {
         SetConsoleCursorPosition(hCon, upperLeftCorner);
 #endif
     }
-    
-#ifndef WIN32
-    int getch() {
-        struct termios oldt,
-        newt;
-        int            ch;
-        tcgetattr( STDIN_FILENO, &oldt );
-        newt = oldt;
-        newt.c_lflag &= ~( ICANON | ECHO );
-        tcsetattr( STDIN_FILENO, TCSANOW, &newt );
-        ch = getchar();
-        tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
-        return ch;
-    }
-#endif
 }
