@@ -40,7 +40,7 @@ void login() {
     do {
         std::string username;
         
-        std::cout << "Enter ID or Username: ";
+        std::cout << "Enter ID or Name: ";
         std::cin >> username;
         
         if (!username.compare("-1")) {
@@ -54,7 +54,9 @@ void login() {
             theUser = UserManager::Instance()->getUser(username);
         
         if (!theUser)
-            std::cout << "ID/Username not found! Try again! You may also cancel with '-1'." << std::endl;
+            std::cout << "ID/Name not found! Try again! You may also cancel with '-1'." << std::endl;
+        else
+            std::cout << "You are now logged-in as " << theUser -> getName() << std::endl;
         
         
     } while (!theUser);
@@ -64,13 +66,21 @@ void newUser() {
 	int age = 0;
     
 	std::string name;
-    std::string username;    
+    //std::string username;
     std::string sex;
+    
+    do {
+		std::cout << "Name: ";
+		
+        std::cin >> name;
+        
+		std::cout << std::endl;
+    } while (atoi(name.c_str()));
 
-    std::cout << "Username: ";
+    /*std::cout << "Username: ";
     std::cin >> username;
     
-    std::cout << std::endl;
+    std::cout << std::endl;*/
     
     do {
         std::cout << "Age: ";
@@ -91,13 +101,7 @@ void newUser() {
 
 	char sexChar = sex[0];
     
-    do {
-		std::cout << "Full Name: ";
-		
-        std::cin >> name;
-        
-		std::cout << std::endl;
-    } while (atoi(name.c_str()));
+    
     
     Playlist newPlaylist;
     
@@ -126,8 +130,9 @@ void start() {
     std::cout << std::endl;
     
     std::cout << "Please Select an Option." << std::endl << std::endl;
+    
 	opc = getch();
-
+    
 	switch (opc) {
 
         case 49:
@@ -139,6 +144,10 @@ void start() {
         case 50:
             
             newUser();
+            
+            Additions::clearConsole();
+            
+            start();
             
             break;
 
@@ -152,8 +161,12 @@ void start() {
 
 			            
         default:
+            
            Additions::clearConsole();
+            
            start();
+            
+           break;
 	}
 
 }
