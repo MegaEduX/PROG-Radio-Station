@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+#include <conio.h>
 
 #include "UserManager.h"
 #include "User.h"
@@ -16,6 +17,7 @@
 #include "RadioStation.h"
 
 #include "Playlist.h"
+#include "Additions.h"
 
 //
 // Function Definitions
@@ -59,9 +61,8 @@ void newUser() {
 	int age = 0;
     
 	std::string name;
-    std::string username;
-    
-    char sex;
+    std::string username;    
+    std::string sex;
 
     std::cout << "Username: ";
     std::cin >> username;
@@ -78,12 +79,14 @@ void newUser() {
     do {
 		std::cout << "Gender(M/F): ";
 		std::cin >> sex;
-        
+		
 		std::cout << std::endl;
 		
-        sex = toupper(sex);
-		
-    } while (!(sex == 'M' || sex == 'F'));
+        sex[0] = toupper(sex[0]);
+
+	} while ( sex.size() > 1 );
+
+	sex = sex[0];
     
     do {
 		std::cout << "Full Name: ";
@@ -115,34 +118,39 @@ void start() {
     
     std::cout << std::endl;
     
-    std::cout << "Press any other key to quit." << std::endl;
+    std::cout << "Press the zero key to quit." << std::endl;
     
     std::cout << std::endl;
     
     std::cout << "Select an Option: ";
-	std::cin >> opc;
+	opc = getch();
 
 	switch (opc) {
 
-        case 1:
+        case 49:
             
             login();
 			
             break;
             
-        case 2:
+        case 50:
             
             newUser();
             
             break;
-            
-        default:
-            
-            std::cout << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
+
+		case 48:
+
+			std::cout << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
             
             exit(0);
             
             break;
+
+			            
+        default:
+           Additions::clearConsole();
+           start();
 	}
 
 }
