@@ -71,6 +71,7 @@ public:
     
     User* loadUser(int userId);
     bool saveUser(User *theUser);
+    bool removeUser(User *theUser);
 
 };
 

@@ -8,6 +8,8 @@
 
 #include "UserManager.h"
 
+#include "FilesIO.h"
+
 UserManager *UserManager::um_pInstance = NULL;
 
 UserManager* UserManager::Instance() {
@@ -27,6 +29,8 @@ bool UserManager::addUser(User *aUser) {
             return false;
     
     _userVector.push_back(aUser);
+    
+    FilesIO::Instance() -> saveUser(aUser);
     
     return true;
 }

@@ -198,6 +198,24 @@ bool FilesIO::saveUser(User *theUser) {
     if (!foundRow)
         userList.push_back(vecToReplace);
     
+    if (userList[0][0].compare("id")) {
+        std::vector<std::vector<std::string>> newVec;
+        
+        std::vector<std::string> headerVec;
+        
+        headerVec.push_back("id");
+        headerVec.push_back("name");
+        headerVec.push_back("age");
+        headerVec.push_back("gender");
+        
+        newVec.push_back(headerVec);
+        
+        for (int i = 0; i < userList.size(); i++)
+            newVec.push_back(userList[i]);
+        
+        userList = newVec;
+    }
+    
     // Re-convert back to CSV
     
     std::string outCsv = parser.encodeCSV(userList);
@@ -205,6 +223,14 @@ bool FilesIO::saveUser(User *theUser) {
     // Save the changes back to the file
     
     return _writeToFile(usersFile, outCsv, true);
+}
+
+bool FilesIO::removeUser(User *theUser) {
+    /*std::ifstream thefile(usersFile);
+    
+    std::vector<std::vector<std::string>> parsedCsv;
+    
+    if (thefile.is_open()) {*/
 }
 
 //

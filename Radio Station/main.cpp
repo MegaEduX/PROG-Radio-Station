@@ -17,9 +17,19 @@
 
 #include "Playlist.h"
 
-void start();
+//
+// Function Definitions
+//
 
-void login(){
+void start();
+void login();
+void newUser();
+
+//
+// Code Start
+//
+
+void login() {
 	User *theUser = NULL;
 
     do {
