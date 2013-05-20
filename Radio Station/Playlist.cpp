@@ -92,3 +92,41 @@ void Playlist::shuffle(){
 const unsigned int Playlist::count() {
     return (const unsigned int) _thePlaylist.size();
 }
+
+const std::vector<Music *> Playlist::topTenSongs() {
+    if (topTenSongs().size() == 0)
+        updateTopTen();
+    
+    return _topTen;
+}
+
+void Playlist::updateTopTen() {
+    std::vector<Music *> newTopTen;
+    
+    int topCount = 0;
+    
+    for (int i = 0; i < 10; i++) {
+        int localTop = 0;
+        
+        for (int j = 0; j < _thePlaylist.size(); j++) {
+            int diff = _thePlaylist[i] -> likes() - _thePlaylist[i] -> dislikes();
+        
+            if (diff > localTop)
+                if (topCount == 0 || diff < topCount)
+                    localTop = diff;
+        }
+        
+        if (localTop != 0) {
+            for (int j = 0; j < _thePlaylist.size(); j++) {
+                int diff = _thePlaylist[i] -> likes() - _thePlaylist[i] -> dislikes();
+                
+                if (localTop == diff)
+                    newTopTen.push_back(_thePlaylist[i]);
+            }
+        }
+        
+        topCount = localTop;
+    }
+    
+    _topTen = newTopTen;
+}

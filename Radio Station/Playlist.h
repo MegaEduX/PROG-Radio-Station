@@ -19,6 +19,8 @@ class Playlist {
 private:
     
 	std::vector <Music *> _thePlaylist;
+    
+    std::vector <Music *> _topTen;
 
 public:
     
@@ -38,11 +40,15 @@ public:
     // generate the top ten songs list dynamically.
     //
 
-    // Returns Music * as the key and the song count as the object.
+    // Returns Music * as the key and the like / dislike difference as the object.
     
     // As maps are ordered, we can just loop through this.
     
-	const std::map <Music *, int> topTenSongs();
+	// const std::map <Music *, int> topTenSongs();
+    
+    const std::vector<Music *> topTenSongs();
+    
+    void updateTopTen();
     
     // Searches through the playlist and returns a vector with matches.
 

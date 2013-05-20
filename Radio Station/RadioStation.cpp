@@ -47,10 +47,6 @@ Playlist RadioStation::allTracks() {
 }
 
 Playlist RadioStation::topTen() {
-    // Better update the top ten here!
-    
-    // And only then return it.
-    
     return _topTen;
 }
 

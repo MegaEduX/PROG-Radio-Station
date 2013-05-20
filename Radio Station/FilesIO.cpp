@@ -16,7 +16,7 @@
 static const std::string userBase = "playListUser";
 static const std::string usersFile = "users.csv";
 static const std::string globalsFile = "globals.csv";
-static const std::string topTenFile = "topTen.csv"; // Still not done!
+static const std::string topTenFile = "topTen.csv";
 
 FilesIO *FilesIO::fio_pInstance = NULL;
 
