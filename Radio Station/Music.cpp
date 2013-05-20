@@ -111,6 +111,14 @@ void Music::addPlay() {
 	_playCount++;
 }
 
+const unsigned int Music::getLikes() {
+    return _likes;
+}
+
+const unsigned int Music::getDislikes() {
+    return _dislikes;
+}
+
 const unsigned int Music::playCount() {
     return _playCount;
 }

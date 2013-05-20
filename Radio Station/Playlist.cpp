@@ -109,7 +109,7 @@ void Playlist::updateTopTen() {
         int localTop = 0;
         
         for (int j = 0; j < _thePlaylist.size(); j++) {
-            int diff = _thePlaylist[i] -> likes() - _thePlaylist[i] -> dislikes();
+            int diff = _thePlaylist[i] -> getLikes() - _thePlaylist[i] -> getDislikes();
         
             if (diff > localTop)
                 if (topCount == 0 || diff < topCount)
@@ -118,7 +118,7 @@ void Playlist::updateTopTen() {
         
         if (localTop != 0) {
             for (int j = 0; j < _thePlaylist.size(); j++) {
-                int diff = _thePlaylist[i] -> likes() - _thePlaylist[i] -> dislikes();
+                int diff = _thePlaylist[i] -> getLikes() - _thePlaylist[i] -> getDislikes();
                 
                 if (localTop == diff)
                     newTopTen.push_back(_thePlaylist[i]);

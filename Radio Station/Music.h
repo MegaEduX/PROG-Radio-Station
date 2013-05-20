@@ -66,8 +66,8 @@ public:
 	bool setMusicGenre(std::string music_genre);
 	const std::string getMusicGenre();
     
-	const unsigned int likes();
-    const unsigned int dislikes();
+	const unsigned int getLikes();
+    const unsigned int getDislikes();
     
     void addLike(); // Por razoes Obvias de bool para void
     void addDislike(); // Por razoes Obvias de bool para void

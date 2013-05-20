@@ -23,7 +23,7 @@ UserManager::UserManager() {
 
 bool UserManager::addUser(User *aUser) {
     for (int i = 0; i < _userVector.size(); i++)
-        if (_userVector[i] -> userId() == aUser -> userId())
+        if (_userVector[i] -> getId() == aUser -> getId())
             return false;
     
     _userVector.push_back(aUser);
@@ -33,7 +33,7 @@ bool UserManager::addUser(User *aUser) {
 
 bool UserManager::removeUser(User *aUser) {
     for (int i = 0; i < _userVector.size(); i++)
-        if (_userVector[i] -> userId() == aUser -> userId()) {
+        if (_userVector[i] -> getId() == aUser -> getId()) {
             _userVector.erase(_userVector.begin() + i);
             
             return true;
@@ -44,7 +44,7 @@ bool UserManager::removeUser(User *aUser) {
 
 bool UserManager::removeUser(int userId) {
     for (int i = 0; i < _userVector.size(); i++)
-        if (_userVector[i] -> userId() == userId) {
+        if (_userVector[i] -> getId() == userId) {
             _userVector.erase(_userVector.begin() + i);
             
             return true;
@@ -55,7 +55,7 @@ bool UserManager::removeUser(int userId) {
 
 User* UserManager::getUser(int userId) {
     for (int i = 0; i < _userVector.size(); i++)
-        if (_userVector[i] -> userId() == userId)
+        if (_userVector[i] -> getId() == userId)
             return _userVector[i];
     
     return NULL;
@@ -63,7 +63,7 @@ User* UserManager::getUser(int userId) {
 
 User* UserManager::getUser(std::string userName) {
     for (int i = 0; i < _userVector.size(); i++)
-        if (!(_userVector[i] -> name().compare(userName)))
+        if (!(_userVector[i] -> getName().compare(userName)))
             return _userVector[i];
     
     return NULL;

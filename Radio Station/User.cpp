@@ -38,7 +38,7 @@ bool User::setUserId(unsigned int theId) {
     return true;
 }
 
-const unsigned int User::userId() {
+const unsigned int User::getId() {
     return _userId;
 }
 
@@ -51,7 +51,7 @@ bool User::setGender(kSex theGender) {
     return true;
 }
 
-const kSex User::gender() {
+const kSex User::getGender() {
     return _gender;
 }
 
@@ -64,7 +64,7 @@ bool User::setAge(unsigned int theAge) {
     return true;
 }
 
-const unsigned int User::age() {
+const unsigned int User::getAge() {
     return _age;
 }
 
@@ -77,7 +77,7 @@ bool User::setName(std::string theName) {
     return true;
 }
 
-const std::string User::name() {
+const std::string User::getName() {
     return _name;
 }
 
@@ -94,7 +94,7 @@ bool User::setPlaylist(Playlist thePlaylist) {
     return true; // Should this ever return false? :|
 }
 
-const Playlist User::playlist() {
+const Playlist User::getPlaylist() {
     return _userPlaylist;
 }
 

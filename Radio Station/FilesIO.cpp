@@ -183,13 +183,13 @@ bool FilesIO::saveUser(User *theUser) {
     
     std::vector<std::string> vecToReplace;
     
-    vecToReplace.push_back(std::to_string(theUser->userId()));
-    vecToReplace.push_back(theUser->name());
-    vecToReplace.push_back(std::to_string(theUser->age()));
-    vecToReplace.push_back(std::to_string(theUser->gender()));
+    vecToReplace.push_back(std::to_string(theUser->getId()));
+    vecToReplace.push_back(theUser->getName());
+    vecToReplace.push_back(std::to_string(theUser->getAge()));
+    vecToReplace.push_back(std::to_string(theUser->getGender()));
     
     for (int i = 0; i < userList.size(); i++)
-        if (atoi(userList[i][0].c_str()) == theUser->userId()) {
+        if (atoi(userList[i][0].c_str()) == theUser->getId()) {
             userList[i] = vecToReplace;
             
             foundRow = true;
@@ -243,11 +243,11 @@ Playlist FilesIO::playlistForUser(int userId) {
 }
 
 Playlist FilesIO::playlistForUser(std::string userName) {
-    return playlistForUser(UserManager::Instance()->getUser(userName)->userId());
+    return playlistForUser(UserManager::Instance()->getUser(userName)->getId());
 }
 
 bool FilesIO::storePlaylistForUser(int userId) {
-    Playlist userPlaylist = UserManager::Instance()->getUser(userId)->playlist();
+    Playlist userPlaylist = UserManager::Instance()->getUser(userId)->getPlaylist();
     
     std::vector<Music *> result = userPlaylist.search(0, "", 0, "", "", "", 0);
     
