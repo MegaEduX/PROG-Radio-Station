@@ -16,35 +16,79 @@ Playlist::~Playlist() {
     
 }
 
-void Playlist::addSong(Music *theSong, int playcount) {
+bool Playlist::addSong(Music *theSong) {
+    for (int i = 0; i < _thePlaylist.size(); i++)
+        if (_thePlaylist[i] -> getId() == theSong -> getId())
+            return false;
     
+    _thePlaylist.push_back(theSong);
+    
+    return true;
 }
 
-void Playlist::removeSong(Music *theSong){
+bool Playlist::removeSong(Music *theSong){
+    for (int i = 0; i < _thePlaylist.size(); i++)
+        if (_thePlaylist[i] -> getId() == theSong -> getId()) {
+            _thePlaylist.erase(_thePlaylist.begin() + i);
+            
+            return true;
+        }
     
+    return false;
+}
+
+const std::vector<Music *> Playlist::getAllTracks() {
+    return _thePlaylist;
 }
 
 const std::vector<Music *> Playlist::search(int musicId, std::string title,  std::string artist, std::string author, std::string album, std::string music_genre, int year) {
     std::vector<Music *> returnVec;
     
-    // If everything is null, return the full song list.
+    if (musicId != -1) // Do NOT search by music id
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getId() == musicId) {
+                returnVec.push_back(_thePlaylist[i]);
+                
+                break;
+            }
     
-    if (!musicId && !title.compare("") && !artist.compare("") && !album.compare("") && !music_genre.compare("") && !year)
-        return _thePlaylist;
+    if (!title.compare(""))
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getTitle().compare(title))
+                returnVec.push_back(_thePlaylist[i]);
     
-    for (int i = 0; i < _thePlaylist.size(); i++) {
-        Music *aMusic = _thePlaylist[i];
-        
-        if (aMusic->getId() == musicId) {
-            
-        }
-    }
+    if (!artist.compare(""))
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getArtist().compare(artist))
+                returnVec.push_back(_thePlaylist[i]);
+    
+    if (!author.compare(""))
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getAuthor().compare(author))
+                returnVec.push_back(_thePlaylist[i]);
+    
+    if (!album.compare(""))
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getAlbum().compare(album))
+                returnVec.push_back(_thePlaylist[i]);
+    
+    if (!music_genre.compare(""))
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getMusicGenre().compare(music_genre))
+                returnVec.push_back(_thePlaylist[i]);
+    
+    if (year != -1)
+        for (int i = 0; i < _thePlaylist.size(); i++)
+            if (_thePlaylist[i] -> getYear() == year)
+                returnVec.push_back(_thePlaylist[i]);
+    
+    return returnVec;
 }
 
 void Playlist::shuffle(){
-    
+    std::random_shuffle(_thePlaylist.begin(), _thePlaylist.end());
 }
 
-unsigned int Playlist::count() {
-    
+const unsigned int Playlist::count() {
+    return (const unsigned int) _thePlaylist.size();
 }

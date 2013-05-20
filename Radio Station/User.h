@@ -34,6 +34,8 @@ private:
 	
 	Playlist _userPlaylist;
     
+    int _trackHits;
+    
 public:
     
     User(int userId, int age, kSex gender, std::string name, Playlist playlist);
@@ -57,6 +59,8 @@ public:
     
     bool setPlaylist(Playlist thePlaylist);
     const Playlist playlist();
+    
+    void trackPlayed();
     
 };
 

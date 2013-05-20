@@ -29,8 +29,8 @@ public:
     // Add and remove songs to the playlist, nothing major here.
     //
     
-	void addSong(Music *theSong, int playCount);
-	void removeSong(Music *theSong);
+	bool addSong(Music *theSong);
+	bool removeSong(Music *theSong);
     
     //
     // As we are using the Music objects by reference, and using
@@ -48,7 +48,9 @@ public:
 
 	const std::vector<Music *> search(int musicId, std::string title,  std::string artist, std::string author , std::string album, std::string music_genre, int year);
     
-    unsigned int count(); // Adicionado por razoes obvias
+    const unsigned int count(); // Adicionado por razoes obvias
+    
+    const std::vector<Music *> getAllTracks();
     
     void shuffle();
 };

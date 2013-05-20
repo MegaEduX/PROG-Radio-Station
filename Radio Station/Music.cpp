@@ -56,7 +56,7 @@ bool Music::setTitle (std::string title) {
     return true;
 }
 
-std::string Music::getTitle (){
+const std::string Music::getTitle (){
 	return _title;
 }
 
@@ -69,7 +69,7 @@ bool Music::setArtist (std::string artist) {
     return true;
 }
 
-std::string Music::getArtist(){
+const std::string Music::getArtist(){
 	return _artist;
 }
 
@@ -82,7 +82,7 @@ bool Music::setAuthor (std::string author) {
     return true;
 }
 
-std::string Music::getAuthor(){
+const std::string Music::getAuthor(){
 	return _author;
 }
 
@@ -95,7 +95,7 @@ bool Music::setMusicGenre (std::string music_genre) {
     return true;
 }
 
-std::string Music::getMusicGenre(){
+const std::string Music::getMusicGenre(){
 	return _music_genre;
 }
 
@@ -117,6 +117,14 @@ const unsigned int Music::playCount() {
 
 const unsigned int Music::getId() {
     return _musicId;
+}
+
+const unsigned int Music::getYear() {
+    return _year;
+}
+
+const std::string Music::getAlbum() {
+    return _album;
 }
 
 void Music::setAvailable (bool availability) {

@@ -52,19 +52,19 @@ public:
     const unsigned int getYear();
 
 	bool setTitle(std::string title);
-	std::string getTitle();
+	const std::string getTitle();
 	
 	bool setArtist(std::string artist);
-	std::string getArtist();
+	const std::string getArtist();
     
 	bool setAuthor(std::string author);
-	std::string getAuthor();
+	const std::string getAuthor();
     
 	bool setAlbum(std::string album);
-	std::string getAlbum();
+	const std::string getAlbum();
     
 	bool setMusicGenre(std::string music_genre);
-	std::string getMusicGenre();
+	const std::string getMusicGenre();
     
 	const unsigned int likes();
     const unsigned int dislikes();

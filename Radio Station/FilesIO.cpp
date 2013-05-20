@@ -128,7 +128,7 @@ bool FilesIO::loadTopTen() {
         std::vector<Music *> search = RadioStation::Instance()->allTracks().search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "", "", 0);
         
         if (search.size() > 0) {
-            topTenPlaylist.addSong(search[0], atoi(parsedCsv[i][1].c_str()));
+            topTenPlaylist.addSong(search[0]/*, atoi(parsedCsv[i][1].c_str())*/);
         } else {
             std::cout << "Couldn't find song with ID " << parsedCsv[i][0] << ". Maybe the database is corrupt? Proceeding anyway..." << std::endl;
             
@@ -236,7 +236,7 @@ Playlist FilesIO::playlistForUser(int userId) {
         if (searchResult.size() != 1) {
             std::cout << "A music track wasn't found for ID " << rows[i][0] << ", or the result was ambiguous. Please look into this!" << std::endl;
         } else
-            returnPlaylist.addSong(searchResult[0], atoi(rows[i][1].c_str()));
+            returnPlaylist.addSong(searchResult[0]/*, atoi(rows[i][1].c_str())*/);
     }
     
     return returnPlaylist;

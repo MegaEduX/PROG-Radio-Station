@@ -16,9 +16,14 @@ User::User(int userId, int age, kSex gender, std::string name, Playlist playlist
     _gender = gender;
     _name = name;
     _userPlaylist = playlist;
+    _trackHits = 0;
     
     if (!_userId) // If user id == 0
         _isAdministrator = true;
+}
+
+User::~User() {
+    
 }
 
 bool User::setUserId(unsigned int theId) {
@@ -91,4 +96,8 @@ bool User::setPlaylist(Playlist thePlaylist) {
 
 const Playlist User::playlist() {
     return _userPlaylist;
+}
+
+void User::trackPlayed() {
+    _trackHits++;
 }
