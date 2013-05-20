@@ -21,6 +21,11 @@ namespace Additions {
     std::string get_file_contents(const char *filename);
     
     void clearConsole();
+    
+#ifndef WIN32
+    int getch()
+#endif
+    
 }
 
 #endif
