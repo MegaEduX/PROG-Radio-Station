@@ -170,6 +170,17 @@ User* FilesIO::loadUser(int userId) {
     return aUser;
 }
 
+int FilesIO::_userCount() {
+    CSVParser parser(usersFile);
+    
+    return (int) parser.tableRows(true).size();
+}
+
+void FilesIO::loadAllUsers() {
+    for (int i = 0; i < _userCount(); i++)
+        UserManager::Instance() -> addUser(loadUser(i));
+}
+
 bool FilesIO::saveUser(User *theUser) {
     // Load the whole user list
     
@@ -198,23 +209,23 @@ bool FilesIO::saveUser(User *theUser) {
     if (!foundRow)
         userList.push_back(vecToReplace);
     
-    if (userList[0][0].compare("id")) {
-        std::vector<std::vector<std::string>> newVec;
-        
-        std::vector<std::string> headerVec;
-        
-        headerVec.push_back("id");
-        headerVec.push_back("name");
-        headerVec.push_back("age");
-        headerVec.push_back("gender");
-        
-        newVec.push_back(headerVec);
-        
-        for (int i = 0; i < userList.size(); i++)
-            newVec.push_back(userList[i]);
-        
-        userList = newVec;
-    }
+    //if (userList[0][0].compare("id")) {
+    std::vector<std::vector<std::string>> newVec;
+    
+    std::vector<std::string> headerVec;
+    
+    headerVec.push_back("id");
+    headerVec.push_back("name");
+    headerVec.push_back("age");
+    headerVec.push_back("gender");
+    
+    newVec.push_back(headerVec);
+    
+    for (int i = 0; i < userList.size(); i++)
+        newVec.push_back(userList[i]);
+    
+    userList = newVec;
+    //}
     
     // Re-convert back to CSV
     
@@ -226,11 +237,54 @@ bool FilesIO::saveUser(User *theUser) {
 }
 
 bool FilesIO::removeUser(User *theUser) {
-    /*std::ifstream thefile(usersFile);
+    std::ifstream thefile(usersFile);
     
-    std::vector<std::vector<std::string>> parsedCsv;
+    if (!thefile.is_open())
+        return false;
     
-    if (thefile.is_open()) {*/
+    thefile.close();
+    
+    CSVParser parser(usersFile.c_str());
+    
+    std::vector<std::vector<std::string>> userList = parser.tableRows(true);
+    
+    bool found = false;
+    
+    for (int i = 0; i < userList.size(); i++)
+        if (userList[i][0].compare(std::to_string(theUser->getId()))) {
+            userList[i].erase(userList[i].begin() + i);
+            
+            found = true;
+            
+            break;
+        }
+    
+    if (!found)
+        return false;
+    
+    std::vector<std::vector<std::string>> newVec;
+    
+    std::vector<std::string> headerVec;
+    
+    headerVec.push_back("id");
+    headerVec.push_back("name");
+    headerVec.push_back("age");
+    headerVec.push_back("gender");
+    
+    newVec.push_back(headerVec);
+    
+    for (int i = 0; i < userList.size(); i++)
+        newVec.push_back(userList[i]);
+    
+    userList = newVec;
+    
+    // Re-convert back to CSV
+    
+    std::string outCsv = parser.encodeCSV(userList);
+    
+    // Save the changes back to the file
+    
+    return _writeToFile(usersFile, outCsv, true);
 }
 
 //

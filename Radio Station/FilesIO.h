@@ -29,6 +29,8 @@ private:
 	static FilesIO *fio_pInstance;
     
     bool _writeToFile(std::string filePath, std::string contents, bool replace);
+    
+    int _userCount();
 
 public:
     
@@ -72,6 +74,8 @@ public:
     User* loadUser(int userId);
     bool saveUser(User *theUser);
     bool removeUser(User *theUser);
+    
+    void loadAllUsers();
 
 };
 
