@@ -71,17 +71,12 @@ void login() {
         if (!theUser)
             std::cout << "ID/Name not found! Try again! You may also cancel with '-1'." << std::endl;
         else {
-            std::cout << "Your account with name " << theUser -> getName() << " and ID " << theUser->getId() << " was successfully created. You may now login." << std::endl;
-            
-            char dummy;
-            
-            while (!dummy)
-                dummy = getch();
+            std::cout << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl;
         }
     } while (!theUser);
   
   
-    if (theUser -> isAdmin()) //if (User::isAdmin()->theUser)
+    if (theUser -> isAdmin())
 		adminMenu();
 	else
 		userMenu();
@@ -132,6 +127,10 @@ void newUser() {
         std::cout << "You were registered. You may now login!" << std::endl << std::endl;
     else
         std::cout << "There was a problem. Please try again." << std::endl << std::endl;
+    
+    getch(); // Clean the keyboard buffer from the "Return" above.
+    
+    waitForReturn();
 }
 
 void start() {

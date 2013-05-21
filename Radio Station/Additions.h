@@ -17,7 +17,10 @@
 
 #ifndef WIN32
 int getch();
+int kbhit();
 #endif
+
+void waitForReturn();
 
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
