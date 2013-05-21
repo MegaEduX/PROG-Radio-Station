@@ -60,9 +60,9 @@ int kbhit() {
 
 void waitForReturn() {
     while(1) { // Wait till Keyboard hit ...
-        ch = getch();
+        int ch = getch();
         
-        if (ch == 10 || ch == 10)
+        if (ch == 13 || ch == 10)
             break;
     }
 }

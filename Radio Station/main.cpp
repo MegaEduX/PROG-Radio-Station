@@ -74,8 +74,7 @@ void login() {
             std::cout << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl;
         }
     } while (!theUser);
-  
-  
+    
     if (theUser -> isAdmin())
 		adminMenu();
 	else
@@ -192,7 +191,6 @@ void start() {
             
            break;
 	}
-
 }
 
 int main() {
