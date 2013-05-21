@@ -17,6 +17,7 @@ static const std::string userBase = "playListUser";
 static const std::string usersFile = "users.csv";
 static const std::string globalsFile = "globals.csv";
 static const std::string topTenFile = "topTen.csv";
+static const std::string musicStoreFile = "musics.csv";
 
 FilesIO *FilesIO::fio_pInstance = NULL;
 
@@ -362,4 +363,39 @@ bool FilesIO::storePlaylistForUser(int userId) {
     userFileName.append(".csv");
     
     return _writeToFile(userFileName, outCsv, true);
+}
+
+//
+//  All Songs File Format: (prone to change!)
+//
+//  musicId,title,artist,album,author,genre,year,likes,dislikes,cpc,available
+//
+//  cpc means comulative play count
+//
+
+bool FilesIO::loadAllSongs() {
+    CSVParser parser(musicStoreFile);
+    
+    std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
+    
+    // Playlist topTenPlaylist;
+    
+    if (parsedCsv.size() < 1)
+        return false;
+    
+    bool allWentGood = true;
+    
+    for (int i = 0; i < parsedCsv.size(); i++) {
+        std::vector<std::string> musicData = parsedCsv[i];
+        
+        Music *newSong = new Music(atoi(musicData[0].c_str()), atoi(musicData[6].c_str()), musicData[1], musicData[2], musicData[4], musicData[3], musicData[5], atoi(musicData[7].c_str()), atoi(musicData[8].c_str()), atoi(musicData[9].c_str()), (atoi(musicData[10].c_str()) ? true : false));
+        
+        if (!RadioStation::Instance() -> allTracks().addSong(newSong)) {
+            std::cout << "An error was occoured while loading the track with ID " << newSong -> getId() << "." << std::endl;
+            
+            allWentGood = false;
+        }
+    }
+    
+    return allWentGood;
 }

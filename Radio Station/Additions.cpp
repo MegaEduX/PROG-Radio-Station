@@ -8,11 +8,10 @@
 
 #include "Additions.h"
 
-#ifdef WIN32
+#ifdef WIN32 // Windows includes
 #include <windows.h>
-#endif
-
-#ifndef WIN32
+#include <conio.h>
+#else // Non-Windows  (POSIX) includes
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -59,7 +58,7 @@ int kbhit() {
 #endif
 
 void waitForReturn() {
-    while(1) { // Wait till Keyboard hit ...
+    while(1) { // Wait 'till Keyboard hit ...
         int ch = getch();
         
         if (ch == 13 || ch == 10)

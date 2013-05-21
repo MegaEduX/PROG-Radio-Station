@@ -68,6 +68,13 @@ public:
     bool storePlaylistForUser(int userId);
     
     //
+    // Music I/O Related
+    //
+    
+    bool loadAllSongs();
+    bool saveAllSongs();
+    
+    //
     // Load / Save user details
     //
     

@@ -37,7 +37,7 @@ public:
 	// Doing this with constructors and deconstructors is much better as we can
 	// automatically fill the song id by accessing the radio music database.
     
-	Music(unsigned int musicId , unsigned int year , std::string title, std::string artist, std::string author, std::string album, std::string music_genre, unsigned int _likes , unsigned int _dislikes , unsigned int playCount, bool available); 
+	Music(unsigned int musicId, unsigned int year, std::string title, std::string artist, std::string author, std::string album, std::string music_genre, unsigned int _likes, unsigned int _dislikes, unsigned int playCount, bool available); 
 	// Adicionado por questoes obvias
 	~Music();
     
