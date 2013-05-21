@@ -70,10 +70,14 @@ void login() {
         
         if (!theUser)
             std::cout << "ID/Name not found! Try again! You may also cancel with '-1'." << std::endl;
-        else
-            std::cout << "You are now logged-in as " << theUser -> getName() << std::endl;
-        
-        
+        else {
+            std::cout << "Your account with name " << theUser -> getName() << " and ID " << theUser->getId() << " was successfully created. You may now login." << std::endl;
+            
+            char dummy;
+            
+            while (!dummy)
+                dummy = getch();
+        }
     } while (!theUser);
   
   
@@ -87,6 +91,7 @@ void newUser() {
 	int age = 0;
     
 	std::string name;
+    std::string age_str;
     std::string sex;
     
     do {
@@ -99,7 +104,10 @@ void newUser() {
     
     do {
         std::cout << "Age: ";
-		std::cin >> age;
+		std::cin >> age_str;
+        
+        if (atoi(age_str.c_str()))
+            age = atoi(age_str.c_str());
         
 		std::cout << std::endl;
     } while (!age);
