@@ -79,8 +79,7 @@ namespace Additions {
     
     void clearConsole() {
 #ifndef WIN32
-        std::cout << "\033[2J";
-        std::cout.flush();
+        write(1,"\E[H\E[2J",7);
 #else
         COORD upperLeftCorner = {0,0};
         DWORD charsWritten;

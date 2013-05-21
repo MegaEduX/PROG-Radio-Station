@@ -87,7 +87,6 @@ void newUser() {
 	int age = 0;
     
 	std::string name;
-    //std::string username;
     std::string sex;
     
     do {
@@ -97,11 +96,6 @@ void newUser() {
         
 		std::cout << std::endl;
     } while (atoi(name.c_str()));
-
-    /*std::cout << "Username: ";
-    std::cin >> username;
-    
-    std::cout << std::endl;*/
     
     do {
         std::cout << "Age: ";
@@ -121,8 +115,6 @@ void newUser() {
 	} while ( sex.size() > 1 );
 
 	char sexChar = sex[0];
-    
-    
     
     Playlist newPlaylist;
     
@@ -158,15 +150,17 @@ void start() {
 
         case 49:
             
+            Additions::clearConsole();
+            
             login();
 			
             break;
             
         case 50:
             
-            newUser();
+            Additions::clearConsole();
             
-            Additions::clearConsole();  // nao é melhor meter isto tambem antes do newUser() ? para limpar a consola antes de seguir com o newuser?
+            newUser();
             
             start();
             
