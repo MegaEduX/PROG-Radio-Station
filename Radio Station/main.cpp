@@ -108,7 +108,7 @@ void newUser() {
     User *theUser = new User(UserManager::Instance()->userCount(), age, (sexChar == 'F' ? kSexFemale : kSexMale), name, newPlaylist);
     
     if (UserManager::Instance() -> addUser(theUser))
-        std::cout << "You were registeried. You may now login!" << std::endl << std::endl;
+        std::cout << "You were registered. You may now login!" << std::endl << std::endl;
     else
         std::cout << "There was a problem. Please try again." << std::endl << std::endl;
 }
@@ -145,7 +145,7 @@ void start() {
             
             newUser();
             
-            Additions::clearConsole();
+            Additions::clearConsole();  // nao é melhor meter isto tambem antes do newUser() ? para limpar a consola antes de seguir com o newuser?
             
             start();
             
