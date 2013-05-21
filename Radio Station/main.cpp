@@ -29,10 +29,25 @@
 void start();
 void login();
 void newUser();
+void adminMenu();
+void userMenu();
 
 //
 // Code Start
 //
+
+
+void adminMenu(){
+
+
+}
+
+
+void userMenu(){
+
+
+
+}
 
 void login() {
 	User *theUser = NULL;
@@ -60,6 +75,15 @@ void login() {
         
         
     } while (!theUser);
+  
+  
+  if (User::isAdmin()->theUser)
+		adminMenu();
+	
+	else
+		userMenu();//é facil perceber o sentido disto. corrige pf
+  
+  
 }
 		
 void newUser() {
