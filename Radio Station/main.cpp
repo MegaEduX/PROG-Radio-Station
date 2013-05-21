@@ -77,13 +77,10 @@ void login() {
     } while (!theUser);
   
   
-  if (User::isAdmin()->theUser)
+    if (theUser -> isAdmin()) //if (User::isAdmin()->theUser)
 		adminMenu();
-	
 	else
-		userMenu();//é facil perceber o sentido disto. corrige pf
-  
-  
+		userMenu();
 }
 		
 void newUser() {
