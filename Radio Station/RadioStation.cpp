@@ -42,8 +42,8 @@ void RadioStation::generateSet() {
 	_currentPlaySet.shuffle();
 }
 
-Playlist RadioStation::allTracks() {
-    return _allTracks;
+Playlist* RadioStation::allTracks() {
+    return &_allTracks;
 }
 
 Playlist RadioStation::topTen() {

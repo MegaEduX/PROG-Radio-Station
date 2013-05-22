@@ -32,16 +32,16 @@ int getch() {
 }
 #endif
 
-void waitForReturn() {
-    while(1) { // Wait 'till Keyboard hit ...
-        int ch = getch();
-        
-        if (ch == 13 || ch == 10)
-            break;
-    }
-}
-
 namespace Additions {
+    void waitForReturn() {
+        while(1) { // Wait 'till Keyboard hit ...
+            int ch = getch();
+            
+            if (ch == 13 || ch == 10)
+                break;
+        }
+    }
+    
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str) {
         std::vector<std::string> arr;
         

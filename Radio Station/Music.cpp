@@ -30,7 +30,7 @@ Music::~Music() {
 }
 
 bool Music::setMusicId(unsigned int TheId) {
-	if (TheId > RadioStation::Instance()->allTracks().count())
+	if (TheId > RadioStation::Instance()->allTracks()->count())
 		return false;
 
 	_musicId = TheId;
@@ -78,6 +78,15 @@ bool Music::setAuthor(std::string author) {
 		return false;
     
 	_author = author;
+    
+    return true;
+}
+
+bool Music::setAlbum(std::string album) {
+	if (album.size() <= 0)
+		return false;
+    
+	_album = album;
     
     return true;
 }

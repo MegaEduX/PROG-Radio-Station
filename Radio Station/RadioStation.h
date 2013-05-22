@@ -44,7 +44,7 @@ public:
 
 	void generateSet(); // Generates a set randomly
 
-	Playlist allTracks(); // Adicionado por razoes obvias
+	Playlist* allTracks(); // Adicionado por razoes obvias
     
     Playlist topTen();
     

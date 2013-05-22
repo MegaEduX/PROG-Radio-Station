@@ -19,8 +19,6 @@
 int getch();
 #endif
 
-void waitForReturn();
-
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
     
@@ -31,6 +29,8 @@ namespace Additions {
     bool checkForOnlyNumeric(std::string str);
     
     void clearConsole();
+    
+    void waitForReturn();
 }
 
 #endif

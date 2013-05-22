@@ -38,6 +38,7 @@ User *loggedInUser = NULL;
 void start();
 void login();
 void newUser();
+void addMusic();
 void adminPanel();
 void loggedInMenu();
 void editMusic(Music *theMusic);
@@ -47,7 +48,6 @@ void editMusic(Music *theMusic);
 //
 
 void editMusic(Music *theMusic){
-
 	std::cout << "Song Title: [" << theMusic->getTitle() << "]: ";
 
 	std::string newTitle = Additions::ask_for_str_or_return();
@@ -56,8 +56,7 @@ void editMusic(Music *theMusic){
 		theMusic -> setTitle(newTitle); //changes title
 
 	std::cout << std::endl;
-
-	
+    
 	std::cout << "Song Album: [" << theMusic->getAlbum() << "]: " << std::endl;
 
 	std::string newAlbum = Additions::ask_for_str_or_return();
@@ -66,7 +65,6 @@ void editMusic(Music *theMusic){
 		theMusic -> setAlbum(newAlbum); //changes Album
 
 	std::cout << std::endl;
-
 
 	std::cout << "Song Artist: [" << theMusic->getArtist() << "]: " << std::endl;
 
@@ -77,37 +75,200 @@ void editMusic(Music *theMusic){
 
 	std::cout << std::endl;
 
-
-	do{
-
-		std::cout << "Song Year: [" << theMusic->getYear() << "]: " << std::endl;
-
-		std::string newYear = Additions::ask_for_str_or_return();
+    std::string newYear;
     
-		if (newYear.compare("")){
+	do {
+        
+        std::cout << "Song Year: [" << theMusic->getYear() << "]: " << std::endl;
+
+		newYear = Additions::ask_for_str_or_return();
+    
+		if (newYear.compare(""))
 			if (atoi(newYear.c_str()))
 				theMusic -> setYear (atoi(newYear.c_str()));
-		}
+        
 	} while (!atoi(newYear.c_str()));
     
-
 	std::cout << std::endl;
-
 
 	std::cout << "Song Genre: [" << theMusic->getGenre() << "]: " << std::endl;
 
-	std::string newTitle = Additions::ask_for_str_or_return();
+	std::string newGenre = Additions::ask_for_str_or_return();
 
-	if (newTitle.compare(""))
+	if (newGenre.compare(""))
 		theMusic -> setGenre(newGenre); //changes Genre
 
 	std::cout << std::endl;
-
 }
 
+void editMusicMenu() {
+    std::cout << "Music Manager :: Edit Music" << std::endl;
+    
+    std::cout << std::endl;
+    
+    Playlist *allTracks = RadioStation::Instance() -> allTracks();
+    
+    std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
+    
+    for (int i = 0 ; i < allTracksVec.size() ; i++)
+        std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << " - " << (allTracksVec[i]->getAvailable() ? "(Available)" : "(Unavailable)") <<  std::endl;
+    
+    while (true) {
+        std::cout << std::endl << std::endl;
+        
+        std::cout << "Choose the music track you want to make changes to ('-1' to go back): ";
+        
+        int songId = 0;
+        
+        std::cin >> songId;
+        
+        if (songId == -1) {
+            Additions::clearConsole();
+            adminPanel();
+            break;
+        } else 
+            editMusic(allTracksVec[songId]);
+    }
+}
+
+void musicManager() {
+    std::cout << "Music Manager :: Administrative Panel" << std::endl;
+    std::cout << std::endl;
+    std::cout << "1. Add New Song" << std::endl;
+    std::cout << "2. Modify Existing Song" << std::endl;
+    std::cout << std::endl;
+    std::cout << "0. Go Back" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Please choose an option.";
+    
+    while (true) {
+        
+        int opc = getch();
+        
+        switch (opc) {
+            case (baseASCIINumber + 1):
+                
+                Additions::clearConsole();
+                
+                addMusic();
+                
+                break;
+                
+            case (baseASCIINumber + 2):
+                
+                Additions::clearConsole();
+                
+                editMusicMenu();
+                
+                break;
+                
+            case baseASCIINumber:
+                
+                Additions::clearConsole();
+                
+                adminPanel();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+        
+    }
+}
+
+void addMusic() {
+    std::cout << "Music Manager :: New Music" << std::endl;
+    std::cout << std::endl;
+    
+    std::string title;
+    std::cout << "Title: ";
+    std::getline(std::cin, title);
+    
+    std::string artist;
+    std::cout << "Artist: ";
+    std::getline(std::cin, artist);
+    
+    std::string author;
+    std::cout << "Author: ";
+    std::getline(std::cin, author);
+    
+    std::string album;
+    std::cout << "Album: ";
+    std::getline(std::cin, album);
+    
+    std::string genre;
+    std::cout << "Genre: ";
+    std::getline(std::cin, genre);
+    
+    int year = 0;
+    
+    while (!year) {
+        std::string yearStr;
+        std::cout << "Year: ";
+        std::cin >> yearStr;
+        
+        if (atoi(yearStr.c_str()) > 0)
+            year = atoi(yearStr.c_str());
+    }
+    
+    bool available = false;
+    
+    std::cout << "Available? (y/n): ";
+    
+    while (true) {
+        int ch = getch();
+        
+        bool shouldBreak = false;
+        
+        switch (ch) {
+            case 121:   // y
+            case 89:    // Y
+                
+                available = true;
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 110:   // n
+            case 78:    // N
+                
+                available = false;
+                
+                shouldBreak = true;
+                
+            default:
+                
+                break;
+        }
+        
+        if (shouldBreak) {
+            std::cout << (char) ch;
+            break;
+        }
+    }
+    
+    std::cout << std::endl << std::endl;
+    
+    Music *newMusic = new Music(RadioStation::Instance()->allTracks()->count(), year, title, artist, author, album, genre, 0, 0, 0, available);
+    
+    if (RadioStation::Instance()->allTracks()->addSong(newMusic))
+        std::cout << "The track was successfully added!";
+    else
+        std::cout << "There was an error adding your track.";
+    
+    std::cout << " Please press return to continue.";
+    
+    Additions::waitForReturn();
+    
+    Additions::clearConsole();
+    
+    musicManager();
+}
 
 void adminPanel() {
-
     std::cout << "Welcome to the administrative panel!" << std::endl << std::endl;
     
     std::cout << "1. Manage the Music Library" << std::endl;
@@ -124,41 +285,15 @@ void adminPanel() {
         
         switch (opc) {
                 
-            case (baseASCIINumber + 1):
+            case (baseASCIINumber + 1): {
                 
                 Additions::clearConsole();
                 
-                Playlist allTracks = RadioStation::Instance() -> allTracks();
-				
-				std::vector<Music *> allTracksVec = allTracks.getAllTracks();
-
-				for( int i = 0 ; i < allTracksVec.size() ; i++){
-
-					std::cout << i++ << ". " << allTracksVec[i]->getTitle << " by " << allTracksVec[i]->getArtist << ( allTracksVec[i]->getAvailable == true ? " Available!" : " Disabled!" ) <<  std::endl;
-					
-				}
-
-				while (true) {
-
-					std::cout << std::endl << std::endl;
-
-					std::cout << " Choose the music track you want to make changes to ('-1' to go to Administrator Menu): ";
-					
-					int songId = 0;
-
-					std::cin << songId;
-
-					if (songId == -1){
-						Additions::clearConsole();
-						adminPanel();
-						break;
-					}
-					else 
-						editMusic(allTracksVec[songId-1]);
-
-
-				}
+                musicManager();
+                
                 break;
+            
+            }
                 
             case (baseASCIINumber + 2):
                 
@@ -188,9 +323,7 @@ void adminPanel() {
                 
                 Additions::clearConsole();
                 
-                loggedInUser = NULL;
-                
-                start();
+                loggedInMenu();
                 
                 break;
                 
@@ -246,7 +379,9 @@ void loggedInMenu() {
             case (baseASCIINumber + 4):
                 
                 if (loggedInUser -> isAdmin()) {
-                    // Jump to Admin Panel
+                    Additions::clearConsole();
+                    
+                    adminPanel();
                 }
                 
                 break;
@@ -331,15 +466,42 @@ void newUser() {
 		std::cout << std::endl;
     } while (!age);
     
-    do {
-		std::cout << "Gender(M/F): ";
-		std::cin >> sex;
-		
-		std::cout << std::endl;
-		
-        sex[0] = toupper(sex[0]);
-
-	} while ( sex.size() > 1 );
+    std::cout << "Gender(M/F): ";
+    
+    while (true) {
+        int ch = getch();
+        
+        bool shouldBreak = false;
+        
+        switch (ch) {
+            case 109:   // m
+            case 77:    // M
+                
+                sex = "M";
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 102:   // f
+            case 70:    // F
+                
+                sex = "F";
+                
+                shouldBreak = true;
+                
+            default:
+                
+                break;
+        }
+        
+        if (shouldBreak) {
+            std::cout << (char) ch;
+            break;
+        }
+    }
+    
+    std::cout << std::endl << std::endl;
 
 	char sexChar = sex[0];
     
@@ -352,9 +514,7 @@ void newUser() {
     else
         std::cout << "There was a problem. Please try again." << std::endl << "Press any key to go back to the main menu." << std::endl;
     
-    getch(); // Clean the keyboard buffer from the "Return" above.
-    
-    waitForReturn();
+    Additions::waitForReturn();
     
     Additions::clearConsole();
 }
