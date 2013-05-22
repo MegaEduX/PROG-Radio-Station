@@ -86,6 +86,25 @@ namespace Additions {
         throw(errno);
     }
     
+    std::string ask_for_str_or_return() {
+        char ch = getch();
+        
+        if ((int)ch == 13 || (int)ch == 10)
+            return "";
+        
+        std::string str(&ch);
+        
+        std::cout << str;
+        
+        std::string strToAppend;
+        
+        std::cin >> strToAppend;
+        
+        str += strToAppend;
+        
+        return str;
+    }
+    
     void clearConsole() {
 #ifndef WIN32
         write(1,"\E[H\E[2J",7);

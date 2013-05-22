@@ -26,6 +26,8 @@ namespace Additions {
     
     std::string get_file_contents(const char *filename);
     
+    std::string ask_for_str_or_return();
+    
     void clearConsole();
 }
 
