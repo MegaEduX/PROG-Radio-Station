@@ -74,7 +74,7 @@ const std::vector<Music *> Playlist::search(int musicId, std::string title,  std
     
     if (!music_genre.compare(""))
         for (int i = 0; i < _thePlaylist.size(); i++)
-            if (_thePlaylist[i] -> getMusicGenre().compare(music_genre))
+            if (_thePlaylist[i] -> getGenre().compare(music_genre))
                 returnVec.push_back(_thePlaylist[i]);
     
     if (year != -1)

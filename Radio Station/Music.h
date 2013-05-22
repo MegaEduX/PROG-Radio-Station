@@ -63,8 +63,8 @@ public:
 	bool setAlbum(std::string album);
 	const std::string getAlbum();
     
-	bool setMusicGenre(std::string music_genre);
-	const std::string getMusicGenre();
+	bool setGenre(std::string music_genre);
+	const std::string getGenre();
     
 	const unsigned int getLikes();
     const unsigned int getDislikes();
@@ -72,7 +72,7 @@ public:
     void addLike(); // Por razoes Obvias de bool para void
     void addDislike(); // Por razoes Obvias de bool para void
     
-    const unsigned int playCount();
+    const unsigned int getPlayCount();
     void addPlay(); // Por razoes Obvias de bool para void
     
     const bool getAvailable();

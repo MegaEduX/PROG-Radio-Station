@@ -347,7 +347,7 @@ bool FilesIO::storePlaylistForUser(int userId) {
         std::vector<std::string> songVec;
         
         songVec.push_back(std::to_string(song->getId()));
-        songVec.push_back(std::to_string(song->playCount()));
+        songVec.push_back(std::to_string(song->getPlayCount()));
         
         csvVec.push_back(songVec);
     }
@@ -378,8 +378,6 @@ bool FilesIO::loadAllSongs() {
     
     std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
     
-    // Playlist topTenPlaylist;
-    
     if (parsedCsv.size() < 1)
         return false;
     
@@ -398,4 +396,55 @@ bool FilesIO::loadAllSongs() {
     }
     
     return allWentGood;
+}
+
+bool FilesIO::saveAllSongs() {
+    Playlist playlist = RadioStation::Instance() -> allTracks();
+    
+    std::vector<Music *> result = playlist.search(0, "", 0, "", "", "", 0);
+    
+    std::vector<std::vector<std::string>> csvVec;
+    
+    std::vector<std::string> headerVec;
+    
+    //  musicId,title,artist,album,author,genre,year,likes,dislikes,cpc,available
+    
+    headerVec.push_back("musicId");
+    headerVec.push_back("title");
+    headerVec.push_back("artist");
+    headerVec.push_back("album");
+    headerVec.push_back("author");
+    headerVec.push_back("genre");
+    headerVec.push_back("year");
+    headerVec.push_back("likes");
+    headerVec.push_back("dislikes");
+    headerVec.push_back("cpc");
+    headerVec.push_back("available");
+    
+    csvVec.push_back(headerVec);
+    
+    for (int i = 0; i < result.size(); i++) {
+        Music *song = result[i];
+        
+        std::vector<std::string> songVec;
+        
+        songVec.push_back(std::to_string(song->getId()));
+        songVec.push_back(song->getTitle());
+        songVec.push_back(song->getArtist());
+        songVec.push_back(song->getAlbum());
+        songVec.push_back(song->getGenre());
+        songVec.push_back(std::to_string(song->getYear()));
+        songVec.push_back(std::to_string(song->getLikes()));
+        songVec.push_back(std::to_string(song->getDislikes()));
+        songVec.push_back(std::to_string(song->getPlayCount()));
+        songVec.push_back(song->getAvailable() ? "1" : "0");
+        
+        csvVec.push_back(songVec);
+    }
+    
+    CSVParser parser;
+    
+    std::string outCsv = parser.encodeCSV(csvVec);
+    
+    return _writeToFile(musicStoreFile, outCsv, true);
 }

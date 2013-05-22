@@ -29,7 +29,7 @@ Music::~Music() {
     
 }
 
-bool Music::setMusicId (unsigned int TheId){
+bool Music::setMusicId(unsigned int TheId) {
 	if (TheId > RadioStation::Instance()->allTracks().count())
 		return false;
 
@@ -38,7 +38,7 @@ bool Music::setMusicId (unsigned int TheId){
     return true;
 }
 
-bool Music::setYear (unsigned int TheYear) {
+bool Music::setYear(unsigned int TheYear) {
 	if ( (TheYear-1970) * 60 * 60 * 24 * 365 > time(NULL))
 		return false;
 
@@ -47,7 +47,7 @@ bool Music::setYear (unsigned int TheYear) {
     return true;
 }
 
-bool Music::setTitle (std::string title) {
+bool Music::setTitle(std::string title) {
 	if (title.size() <= 0)
 		return false;
 	
@@ -56,7 +56,7 @@ bool Music::setTitle (std::string title) {
     return true;
 }
 
-const std::string Music::getTitle (){
+const std::string Music::getTitle() {
 	return _title;
 }
 
@@ -69,11 +69,11 @@ bool Music::setArtist (std::string artist) {
     return true;
 }
 
-const std::string Music::getArtist(){
+const std::string Music::getArtist() {
 	return _artist;
 }
 
-bool Music::setAuthor (std::string author) {
+bool Music::setAuthor(std::string author) {
 	if (author.size() <= 0)
 		return false;
     
@@ -82,11 +82,11 @@ bool Music::setAuthor (std::string author) {
     return true;
 }
 
-const std::string Music::getAuthor(){
+const std::string Music::getAuthor() {
 	return _author;
 }
 
-bool Music::setMusicGenre (std::string music_genre) {
+bool Music::setGenre(std::string music_genre) {
 	if (music_genre.size() <= 0)
 		return false;
     
@@ -95,7 +95,7 @@ bool Music::setMusicGenre (std::string music_genre) {
     return true;
 }
 
-const std::string Music::getMusicGenre(){
+const std::string Music::getGenre() {
 	return _music_genre;
 }
 
@@ -119,7 +119,7 @@ const unsigned int Music::getDislikes() {
     return _dislikes;
 }
 
-const unsigned int Music::playCount() {
+const unsigned int Music::getPlayCount() {
     return _playCount;
 }
 
@@ -135,6 +135,10 @@ const std::string Music::getAlbum() {
     return _album;
 }
 
-void Music::setAvailable (bool availability) {
+void Music::setAvailable(bool availability) {
 	_available = availability;
+}
+
+const bool Music::getAvailable() {
+    return _available;
 }
