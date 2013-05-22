@@ -45,8 +45,19 @@ void loggedInMenu();
 //
 
 void adminPanel() {
-
-
+    std::cout << "Welcome to the administrative panel!" << std::endl << std::endl;
+    
+    std::cout << "1. Manage the Music Library" << std::endl;
+    std::cout << "2. Reinitialize the Set" << std::endl;
+    std::cout << "3. Change the Radio Station Name" << std::endl;
+    std::cout << std::endl;
+    std::cout << "0. Go Back" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Please choose an option.";
+    
+    while (true) {
+        // TBD
+    }
 }
 
 void loggedInMenu() {
