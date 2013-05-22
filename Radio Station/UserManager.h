@@ -36,6 +36,8 @@ public:
 	bool removeUser(User *aUser);
 	bool removeUser(int userId);
     
+    void removeAllUsers();
+    
     User* getUser(int userId);
     User* getUser(std::string userName);
     

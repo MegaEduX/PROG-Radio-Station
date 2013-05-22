@@ -178,6 +178,8 @@ int FilesIO::_userCount() {
 }
 
 void FilesIO::loadAllUsers() {
+    UserManager::Instance() -> removeAllUsers();
+    
     for (int i = 0; i < _userCount(); i++)
         UserManager::Instance() -> addUser(loadUser(i));
 }
@@ -401,7 +403,7 @@ bool FilesIO::loadAllSongs() {
 bool FilesIO::saveAllSongs() {
     Playlist *playlist = RadioStation::Instance() -> allTracks();
     
-    std::vector<Music *> result = playlist -> search(0, "", 0, "", "", "", 0);
+    std::vector<Music *> result = playlist -> getAllTracks();
     
     std::vector<std::vector<std::string>> csvVec;
     

@@ -47,7 +47,7 @@ void editMusic(Music *theMusic);
 // Code Start
 //
 
-void editMusic(Music *theMusic){
+void editMusic(Music *theMusic) {
 	std::cout << "Song Title: [" << theMusic->getTitle() << "]: ";
 
 	std::string newTitle = Additions::ask_for_str_or_return();
@@ -84,8 +84,11 @@ void editMusic(Music *theMusic){
 		newYear = Additions::ask_for_str_or_return();
     
 		if (newYear.compare(""))
-			if (atoi(newYear.c_str()))
+			if (atoi(newYear.c_str())) {
 				theMusic -> setYear (atoi(newYear.c_str()));
+                
+                break;
+            }
         
 	} while (!atoi(newYear.c_str()));
     
@@ -126,8 +129,11 @@ void editMusicMenu() {
             Additions::clearConsole();
             adminPanel();
             break;
-        } else 
+        } else {
+            getch(); // We need to clean the buffer. :|
+            
             editMusic(allTracksVec[songId]);
+        }
     }
 }
 
@@ -258,6 +264,8 @@ void addMusic() {
         std::cout << "The track was successfully added!";
     else
         std::cout << "There was an error adding your track.";
+    
+    FilesIO::Instance() -> saveAllSongs();
     
     std::cout << " Please press return to continue.";
     
@@ -442,6 +450,11 @@ void login() {
 }
 		
 void newUser() {
+    std::cout << "Radio Station :: New User" << std::endl << std::endl;
+    
+    if (UserManager::Instance() -> userCount() == 0)
+        std::cout << "There are currently no registeried users. This will be the admin user." << std::endl << std::endl;
+    
 	int age = 0;
     
 	std::string name;
@@ -575,6 +588,8 @@ void start() {
 }
 
 int main() {
+    FilesIO::Instance() -> loadAllSongs();
+    
 	start();
 
 	return 0;

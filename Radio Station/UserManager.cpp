@@ -57,6 +57,10 @@ bool UserManager::removeUser(int userId) {
     return false;
 }
 
+void UserManager::removeAllUsers() {
+    _userVector.clear();
+}
+
 User* UserManager::getUser(int userId) {
     for (int i = 0; i < _userVector.size(); i++)
         if (_userVector[i] -> getId() == userId)
