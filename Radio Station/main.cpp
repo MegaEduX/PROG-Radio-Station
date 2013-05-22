@@ -48,6 +48,8 @@ void editMusic(Music *theMusic);
 //
 
 void editMusic(Music *theMusic) {
+    std::cout << "Music Manager :: Editing Song " << theMusic -> getId() << std::endl << std::endl;
+    
 	std::cout << "Song Title: [" << theMusic->getTitle() << "]: ";
 
 	std::string newTitle = Additions::ask_for_str_or_return();
@@ -131,6 +133,8 @@ void editMusicMenu() {
             break;
         } else {
             getch(); // We need to clean the buffer. :|
+            
+            Additions::clearConsole();
             
             editMusic(allTracksVec[songId]);
         }
