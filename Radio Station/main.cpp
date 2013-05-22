@@ -19,6 +19,7 @@
 #include "FilesIO.h"
 #include "RadioStation.h"
 #include "Playlist.h"
+#include "Music.h"
 
 #include "Additions.h"
 
@@ -39,12 +40,74 @@ void login();
 void newUser();
 void adminPanel();
 void loggedInMenu();
+void editMusic(Music *theMusic);
 
 //
 // Code Start
 //
 
+void editMusic(Music *theMusic){
+
+	std::cout << "Song Title: [" << theMusic->getTitle() << "]: ";
+
+	std::string newTitle = Additions::ask_for_str_or_return();
+
+	if (newTitle.compare(""))
+		theMusic -> setTitle(newTitle); //changes title
+
+	std::cout << std::endl;
+
+	
+	std::cout << "Song Album: [" << theMusic->getAlbum() << "]: " << std::endl;
+
+	std::string newAlbum = Additions::ask_for_str_or_return();
+
+	if (newAlbum.compare(""))
+		theMusic -> setAlbum(newAlbum); //changes Album
+
+	std::cout << std::endl;
+
+
+	std::cout << "Song Artist: [" << theMusic->getArtist() << "]: " << std::endl;
+
+	std::string newArtist = Additions::ask_for_str_or_return();
+
+	if (newArtist.compare(""))
+		theMusic -> setArtist(newArtist); //changes Artist
+
+	std::cout << std::endl;
+
+
+	do{
+
+		std::cout << "Song Year: [" << theMusic->getYear() << "]: " << std::endl;
+
+		std::string newYear = Additions::ask_for_str_or_return();
+    
+		if (newYear.compare("")){
+			if (atoi(newYear.c_str()))
+				theMusic -> setYear (atoi(newYear.c_str()));
+		}
+	} while (!atoi(newYear.c_str()));
+    
+
+	std::cout << std::endl;
+
+
+	std::cout << "Song Genre: [" << theMusic->getGenre() << "]: " << std::endl;
+
+	std::string newTitle = Additions::ask_for_str_or_return();
+
+	if (newTitle.compare(""))
+		theMusic -> setGenre(newGenre); //changes Genre
+
+	std::cout << std::endl;
+
+}
+
+
 void adminPanel() {
+
     std::cout << "Welcome to the administrative panel!" << std::endl << std::endl;
     
     std::cout << "1. Manage the Music Library" << std::endl;
@@ -56,9 +119,88 @@ void adminPanel() {
     std::cout << "Please choose an option.";
     
     while (true) {
-        // TBD
+		
+		int opc = getch();
+        
+        switch (opc) {
+                
+            case (baseASCIINumber + 1):
+                
+                Additions::clearConsole();
+                
+                Playlist allTracks = RadioStation::Instance() -> allTracks();
+				
+				std::vector<Music *> allTracksVec = allTracks.getAllTracks();
+
+				for( int i = 0 ; i < allTracksVec.size() ; i++){
+
+					std::cout << i++ << ". " << allTracksVec[i]->getTitle << " by " << allTracksVec[i]->getArtist << ( allTracksVec[i]->getAvailable == true ? " Available!" : " Disabled!" ) <<  std::endl;
+					
+				}
+
+				while (true) {
+
+					std::cout << std::endl << std::endl;
+
+					std::cout << " Choose the music track you want to make changes to ('-1' to go to Administrator Menu): ";
+					
+					int songId = 0;
+
+					std::cin << songId;
+
+					if (songId == -1){
+						Additions::clearConsole();
+						adminPanel();
+						break;
+					}
+					else 
+						editMusic(allTracksVec[songId-1]);
+
+
+				}
+                break;
+                
+            case (baseASCIINumber + 2):
+                
+                Additions::clearConsole();
+                
+                // Jump to Library
+                
+                break;
+                
+            case (baseASCIINumber + 3):
+                
+                Additions::clearConsole();
+                
+                // Jump to Playlist
+                
+                break;
+                
+            case (baseASCIINumber + 4):
+                
+                if (loggedInUser -> isAdmin()) {
+                    // Jump to Admin Panel
+                }
+                
+                break;
+                
+            case baseASCIINumber:
+                
+                Additions::clearConsole();
+                
+                loggedInUser = NULL;
+                
+                start();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
     }
 }
+
 
 void loggedInMenu() {
     std::cout << "Welcome to " << (RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << "!" << std::endl << std::endl;
@@ -218,8 +360,6 @@ void newUser() {
 }
 
 void start() {
-    std::cout << Additions::ask_for_str_or_return();
-    
 	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") != 0 ? RadioStation::Instance() -> name() : "our radio station!") << std::endl << std::endl;
     
 	std::cout << "1. Existing Users: Login!" << std::endl;
