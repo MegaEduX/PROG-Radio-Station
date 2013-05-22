@@ -122,6 +122,12 @@ namespace Additions {
         return str;
     }
     
+    bool checkForOnlyNumeric(std::string str) {
+        std::string::const_iterator it = str.begin();
+        while (it != str.end() && std::isdigit(*it)) ++it;
+        return !str.empty() && it == str.end();
+    }
+    
     void clearConsole() {
 #ifndef WIN32
         write(1,"\E[H\E[2J",7);

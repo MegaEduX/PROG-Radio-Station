@@ -28,6 +28,8 @@ namespace Additions {
     
     std::string ask_for_str_or_return();
     
+    bool checkForOnlyNumeric(std::string str);
+    
     void clearConsole();
 }
 
