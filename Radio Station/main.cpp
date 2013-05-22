@@ -16,11 +16,19 @@
 
 #include "UserManager.h"
 #include "User.h"
-
+#include "FilesIO.h"
 #include "RadioStation.h"
-
 #include "Playlist.h"
+
 #include "Additions.h"
+
+//
+// Instance Variables
+//
+
+static const int baseASCIINumber = 48;
+
+User *loggedInUser = NULL;
 
 //
 // Function Definitions
@@ -29,29 +37,89 @@
 void start();
 void login();
 void newUser();
-void adminMenu();
-void userMenu();
+void adminPanel();
+void loggedInMenu();
 
 //
 // Code Start
 //
 
-
-void adminMenu(){
+void adminPanel() {
 
 
 }
 
-
-void userMenu(){
-
-
-
+void loggedInMenu() {
+    std::cout << "Welcome to " << (RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << "!" << std::endl << std::endl;
+    
+    std::cout << "1. Top 10 Songs" << std::endl;
+    std::cout << "2. Search our Music Library" << std::endl;
+    std::cout << "3. Manage your Personal Playlist" << std::endl;
+    if (loggedInUser -> isAdmin())  std::cout << "4. Administration Panel" << std::endl;
+    std::cout << std::endl;
+    std::cout << "0. Log Out" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Please choose an option.";
+    
+    while (true) {
+        int opc = getch();
+        
+        switch (opc) {
+                
+            case (baseASCIINumber + 1):
+                
+                Additions::clearConsole();
+                
+                // Jump to Top 10
+                
+                break;
+                
+            case (baseASCIINumber + 2):
+                
+                Additions::clearConsole();
+                
+                // Jump to Library
+                
+                break;
+                
+            case (baseASCIINumber + 3):
+                
+                Additions::clearConsole();
+                
+                // Jump to Playlist
+                
+                break;
+                
+            case (baseASCIINumber + 4):
+                
+                if (loggedInUser -> isAdmin()) {
+                    // Jump to Admin Panel
+                }
+                
+                break;
+                
+            case baseASCIINumber:
+                
+                Additions::clearConsole();
+                
+                loggedInUser = NULL;
+                
+                start();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+    }
 }
 
 void login() {
 	User *theUser = NULL;
-
+    
+    FilesIO::Instance() -> loadAllUsers();
+    
     do {
         std::string username;
         
@@ -60,6 +128,9 @@ void login() {
         
         if (!username.compare("-1")) {
             std::cout << "Operation Canceled." << std::endl << std::endl;
+            
+            Additions::clearConsole();
+            
             start();
         }
         
@@ -75,10 +146,11 @@ void login() {
         }
     } while (!theUser);
     
-    if (theUser -> isAdmin())
-		adminMenu();
-	else
-		userMenu();
+    loggedInUser = theUser;
+    
+    Additions::clearConsole();
+    
+    loggedInMenu();
 }
 		
 void newUser() {
@@ -130,13 +202,11 @@ void newUser() {
     getch(); // Clean the keyboard buffer from the "Return" above.
     
     waitForReturn();
+    
+    Additions::clearConsole();
 }
 
 void start() {
-	int opc = 0;
-	
-	std::string username;
-
 	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") != 0 ? RadioStation::Instance() -> name() : "our radio station!") << std::endl << std::endl;
     
 	std::cout << "1. Existing Users: Login!" << std::endl;
@@ -151,11 +221,11 @@ void start() {
     std::cout << "Please Select an Option." << std::endl << std::endl;
     
     while (true) {
-        opc = getch();
+        int opc = getch();
         
         switch (opc) {
                 
-            case 49:
+            case (baseASCIINumber + 1):
                 
                 Additions::clearConsole();
                 
@@ -163,7 +233,7 @@ void start() {
                 
                 break;
                 
-            case 50:
+            case (baseASCIINumber + 2):
                 
                 Additions::clearConsole();
                 
@@ -173,7 +243,7 @@ void start() {
                 
                 break;
                 
-            case 48:
+            case baseASCIINumber:
                 
                 Additions::clearConsole();
                 
