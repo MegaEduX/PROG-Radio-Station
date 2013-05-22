@@ -39,8 +39,8 @@ bool Music::setMusicId(unsigned int TheId) {
 }
 
 bool Music::setYear(unsigned int TheYear) {
-	if ( (TheYear-1970) * 60 * 60 * 24 * 365 > time(NULL))
-		return false;
+	if ((TheYear - 1970) * 60 * 60 * 24 * 365 > time(NULL))
+		return false; // Hey, the song wasn't even released yet!!!
 
 	_year = TheYear;
     

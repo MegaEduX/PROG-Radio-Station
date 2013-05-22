@@ -17,7 +17,6 @@
 
 #ifndef WIN32
 int getch();
-int kbhit();
 #endif
 
 void waitForReturn();
