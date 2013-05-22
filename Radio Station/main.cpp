@@ -41,10 +41,28 @@ void newUser();
 void addMusic();
 void adminPanel();
 void loggedInMenu();
+void editMusicMenu();
 void editMusic(Music *theMusic);
 
 //
 // Code Start
+//
+
+//
+//                                  READ THIS
+//                                      READ THIS
+//                                          READ THIS
+//                                              READ THIS
+//
+//                                              THIS THING BELOW:
+//
+
+//
+// EDIT MUSIC NOW HAS A NEW METHOD OF GATHERING INPUT.
+// THIS NEW METHOD ALLOWS YOU TO CATCH THE ESC KEY, SO
+// YOU CAN CANCEL THE OPERATION EASILY.
+//
+// PLEASE IMPLEMENT THIS ON THE REST OF THE CODE.
 //
 
 void editMusic(Music *theMusic) {
@@ -52,7 +70,16 @@ void editMusic(Music *theMusic) {
     
 	std::cout << "Song Title: [" << theMusic->getTitle() << "]: ";
 
-	std::string newTitle = Additions::ask_for_str_or_return();
+	std::string newTitle = Additions::getline();
+    
+    if (Additions::gotESC(newTitle)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
 
 	if (newTitle.compare(""))
 		theMusic -> setTitle(newTitle); //changes title
@@ -61,7 +88,16 @@ void editMusic(Music *theMusic) {
     
 	std::cout << "Song Album: [" << theMusic->getAlbum() << "]: " << std::endl;
 
-	std::string newAlbum = Additions::ask_for_str_or_return();
+	std::string newAlbum = Additions::getline();
+    
+    if (Additions::gotESC(newAlbum)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
 
 	if (newAlbum.compare(""))
 		theMusic -> setAlbum(newAlbum); //changes Album
@@ -70,7 +106,16 @@ void editMusic(Music *theMusic) {
 
 	std::cout << "Song Artist: [" << theMusic->getArtist() << "]: " << std::endl;
 
-	std::string newArtist = Additions::ask_for_str_or_return();
+	std::string newArtist = Additions::getline();
+    
+    if (Additions::gotESC(newArtist)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
 
 	if (newArtist.compare(""))
 		theMusic -> setArtist(newArtist); //changes Artist
@@ -83,7 +128,10 @@ void editMusic(Music *theMusic) {
         
         std::cout << "Song Year: [" << theMusic->getYear() << "]: " << std::endl;
 
-		newYear = Additions::ask_for_str_or_return();
+		newYear = Additions::getline();
+        
+        if (Additions::gotESC(newYear))
+            editMusicMenu();
     
 		if (newYear.compare(""))
 			if (atoi(newYear.c_str())) {
@@ -98,7 +146,16 @@ void editMusic(Music *theMusic) {
 
 	std::cout << "Song Genre: [" << theMusic->getGenre() << "]: " << std::endl;
 
-	std::string newGenre = Additions::ask_for_str_or_return();
+	std::string newGenre = Additions::getline();
+    
+    if (Additions::gotESC(newGenre)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
 
 	if (newGenre.compare(""))
 		theMusic -> setGenre(newGenre); //changes Genre
@@ -119,9 +176,9 @@ void editMusicMenu() {
         std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << " - " << (allTracksVec[i]->getAvailable() ? "(Available)" : "(Unavailable)") <<  std::endl;
     
     while (true) {
-        std::cout << std::endl << std::endl;
+        std::cout << std::endl;
         
-        std::cout << "Choose the music track you want to make changes to ('-1' to go back): ";
+        std::cout << "Choose the music track you want to make changes to (or type '-1' to go back): ";
         
         int songId = 0;
         

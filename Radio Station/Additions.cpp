@@ -34,7 +34,7 @@ int getch() {
 
 namespace Additions {
     void waitForReturn() {
-        while(1) { // Wait 'till Keyboard hit ...
+        while (1) { // Wait 'till Keyboard hit ...
             int ch = getch();
             
             if (ch == 13 || ch == 10)
@@ -74,6 +74,7 @@ namespace Additions {
     
     std::string get_file_contents(const char *filename) {
         std::ifstream in (filename, std::ios::in | std::ios::binary);
+        
         if (in) {
             std::string contents;
             in.seekg(0, std::ios::end);
@@ -83,6 +84,7 @@ namespace Additions {
             in.close();
             return(contents);
         }
+        
         throw(errno);
     }
     
@@ -91,7 +93,11 @@ namespace Additions {
     // return in order to accept the default value.
     //
     
-    std::string ask_for_str_or_return() {
+    bool gotESC(std::string str) {
+        return !str.compare(esc);
+    }
+    
+    std::string getline() {
         char ch = getch();
         
         if ((int)ch == 13 || (int)ch == 10)
@@ -100,6 +106,9 @@ namespace Additions {
         std::string str;
         
         while ((int)ch != 13 && (int)ch != 10) {
+            if ((int) ch == 27)   // The ESC key was pressed.
+                return esc;
+            
             if ((int)ch == 127) {
                 if (str.size() > 0) {
                     str = str.erase(str.size() - 1);

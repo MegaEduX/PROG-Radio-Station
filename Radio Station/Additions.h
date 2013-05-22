@@ -19,14 +19,18 @@
 int getch();
 #endif
 
+static const std::string esc = "__esc_key_pressed__";
+
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
     
     std::string get_file_contents(const char *filename);
     
-    std::string ask_for_str_or_return();
+    std::string getline();
     
     bool checkForOnlyNumeric(std::string str);
+    
+    bool gotESC(std::string str);
     
     void clearConsole();
     
