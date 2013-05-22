@@ -218,6 +218,8 @@ void newUser() {
 }
 
 void start() {
+    std::cout << Additions::ask_for_str_or_return();
+    
 	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") != 0 ? RadioStation::Instance() -> name() : "our radio station!") << std::endl << std::endl;
     
 	std::cout << "1. Existing Users: Login!" << std::endl;

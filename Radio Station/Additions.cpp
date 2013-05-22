@@ -86,21 +86,38 @@ namespace Additions {
         throw(errno);
     }
     
+    //
+    // Asks for a string, but allows the user to simply press
+    // return in order to accept the default value.
+    //
+    
     std::string ask_for_str_or_return() {
         char ch = getch();
         
         if ((int)ch == 13 || (int)ch == 10)
             return "";
         
-        std::string str(&ch);
+        std::string str;
         
-        std::cout << str;
-        
-        std::string strToAppend;
-        
-        std::cin >> strToAppend;
-        
-        str += strToAppend;
+        while ((int)ch != 13 && (int)ch != 10) {
+            if ((int)ch == 127) {
+                if (str.size() > 0) {
+                    str = str.erase(str.size() - 1);
+                    
+                    std::cout << '\b';
+                    std::cout << " ";
+                    std::cout << '\b';
+                }
+            } else {
+                std::string strToAppend(&ch);
+                
+                str += strToAppend;
+            }
+            
+            std::cout << &ch;
+            
+            ch = getch();
+        }
         
         return str;
     }
