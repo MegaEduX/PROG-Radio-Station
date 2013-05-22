@@ -123,9 +123,9 @@ void newUser() {
     User *theUser = new User(UserManager::Instance()->userCount(), age, (sexChar == 'F' ? kSexFemale : kSexMale), name, newPlaylist);
     
     if (UserManager::Instance() -> addUser(theUser))
-        std::cout << "You were registered. You may now login!" << std::endl << std::endl;
+        std::cout << "You were registered. You may now login!" << std::endl << "Press any key to go back to the main menu." << std::endl;
     else
-        std::cout << "There was a problem. Please try again." << std::endl << std::endl;
+        std::cout << "There was a problem. Please try again." << std::endl << "Press any key to go back to the main menu." << std::endl;
     
     getch(); // Clean the keyboard buffer from the "Return" above.
     
@@ -150,47 +150,45 @@ void start() {
     
     std::cout << "Please Select an Option." << std::endl << std::endl;
     
-	opc = getch();
-    
-	switch (opc) {
-
-        case 49:
-            
-            Additions::clearConsole();
-            
-            login();
-			
-            break;
-            
-        case 50:
-            
-            Additions::clearConsole();
-            
-            newUser();
-            
-            start();
-            
-            break;
-
-		case 48:
-      
-      		Additions::clearConsole();
-
-			std::cout << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
-            
-            exit(0);
-            
-            break;
-
-			            
-        default:
-            
-           Additions::clearConsole();
-            
-           start();
-            
-           break;
-	}
+    while (true) {
+        opc = getch();
+        
+        switch (opc) {
+                
+            case 49:
+                
+                Additions::clearConsole();
+                
+                login();
+                
+                break;
+                
+            case 50:
+                
+                Additions::clearConsole();
+                
+                newUser();
+                
+                start();
+                
+                break;
+                
+            case 48:
+                
+                Additions::clearConsole();
+                
+                std::cout << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
+                
+                exit(0);
+                
+                break;
+                
+                
+            default:
+                
+                break;
+        }
+    }
 }
 
 int main() {
