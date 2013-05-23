@@ -117,13 +117,10 @@ namespace Additions {
                     std::cout << " ";
                     std::cout << '\b';
                 }
-            } else {
-                std::string strToAppend(&ch);
-                
-                str += strToAppend;
-            }
+            } else
+                str += std::string(&ch)[0];
             
-            std::cout << &ch;
+            std::cout << std::string(&ch)[0];
             
             ch = getch();
         }

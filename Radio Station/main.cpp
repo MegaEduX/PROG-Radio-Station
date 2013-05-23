@@ -134,12 +134,14 @@ void editMusic(Music *theMusic) {
         if (Additions::gotESC(newYear))
             editMusicMenu();
     
-		if (newYear.compare(""))
+		if (newYear.compare("")) {
 			if (atoi(newYear.c_str())) {
 				theMusic -> setYear (atoi(newYear.c_str()));
                 
                 break;
             }
+        } else
+            break;
         
 	} while (!atoi(newYear.c_str()));
     
@@ -161,7 +163,11 @@ void editMusic(Music *theMusic) {
 	if (newGenre.compare(""))
 		theMusic -> setGenre(newGenre); //changes Genre
 
-	std::cout << std::endl;
+	std::cout << std::endl << "Done! Please press Return to go back.";
+    
+    Additions::waitForReturn();
+    
+    editMusicMenu();
 }
 
 void editMusicMenu() {
@@ -493,7 +499,7 @@ void adminPanel() {
 
 
 void loggedInMenu() {
-    std::cout << "Welcome to " << (RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << "!" << std::endl << std::endl;
+    std::cout << "Welcome to " << (!RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << "!" << std::endl << std::endl;
     
     std::cout << "1. Top 10 Songs" << std::endl;
     std::cout << "2. Search our Music Library" << std::endl;
@@ -581,12 +587,12 @@ void login() {
             start();
         }
         
-        std::cin >> username;
-        
         if (atoi(username.c_str()))
             theUser = UserManager::Instance()->getUser(atoi(username.c_str()));
         else
             theUser = UserManager::Instance()->getUser(username);
+        
+        std::cout << std::endl;
         
         if (!theUser)
             std::cout << "ID/Name not found! Please try again!" << std::endl;
@@ -685,7 +691,7 @@ void newUser() {
 }
 
 void start() {
-	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") != 0 ? RadioStation::Instance() -> name() : "our radio station!") << std::endl << std::endl;
+	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") ? RadioStation::Instance() -> name() : "our radio station!") << std::endl << std::endl;
     
 	std::cout << "1. Existing Users: Login!" << std::endl;
 	std::cout << "2. New Users: Register!" << std::endl;
