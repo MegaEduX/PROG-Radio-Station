@@ -603,6 +603,24 @@ void adminPanel() {
     }
 }
 
+void searchLibrary() {
+    std::cout << "Radio Station :: Library Search" << std::endl << std::endl;
+    
+    //
+    // Let's use bitwise operations here? :D
+    // int&0x1 translates to the last digit
+    // ((int&0x3) >> 1) translates to the last 2 digits, but then we shift it, so...
+    //
+    // AOCO/MPCP FTW!
+    //
+    
+    std::cout << "Search by..." << std::endl;
+    std::cout << " - 1. Name" << std::endl;
+    std::cout << " - 2. Artist" << std::endl;
+    std::cout << " - 4. Author" << std::endl;
+    // std::cout << "
+}
+
 void loggedInMenu() {
     std::cout << "Welcome to " << (!RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << ", " << loggedInUser -> getName() << "!" << std::endl << std::endl;
     
@@ -841,7 +859,6 @@ void start() {
                 exit(0);
                 
                 break;
-                
                 
             default:
                 
