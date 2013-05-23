@@ -49,23 +49,6 @@ void musicManager();
 // Code Start
 //
 
-//
-//                                  READ THIS
-//                                      READ THIS
-//                                          READ THIS
-//                                              READ THIS
-//
-//                                              THIS THING BELOW:
-//
-
-//
-//  EDIT MUSIC NOW HAS A NEW METHOD OF GATHERING INPUT.
-//  THIS NEW METHOD ALLOWS YOU TO CATCH THE ESC KEY, SO
-//  YOU CAN CANCEL THE OPERATION EASILY.
-//
-//  PLEASE IMPLEMENT THIS ON THE REST OF THE CODE.
-//
-
 void editMusic(Music *theMusic) {
     std::cout << "Music Manager :: Editing Song " << theMusic -> getId() << std::endl << std::endl;
     
@@ -182,6 +165,14 @@ void editMusicMenu() {
     
     std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
     
+    if (allTracksVec.size() == 0) {
+        std::cout << "There are currently no tracks! Please press Return to go back.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        musicManager();
+    }
+        
     for (int i = 0 ; i < allTracksVec.size() ; i++)
         std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << " - " << (allTracksVec[i]->getAvailable() ? "(Available)" : "(Unavailable)") <<  std::endl;
     
@@ -446,6 +437,42 @@ void addMusic() {
     musicManager();
 }
 
+void changeName() {
+    std::cout << "Radio Station :: Name Changer" << std::endl << std::endl;
+    
+    std::cout << "Current Name: " << (RadioStation::Instance() -> name().compare("") ? RadioStation::Instance() -> name() : "None!") << std::endl;
+    std::cout << "New Name (press ESC to cancel): ";
+    
+    std::string newName = Additions::getline();
+    
+    if (Additions::gotESC(newName)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        adminPanel();
+    }
+    
+    RadioStation::Instance() -> setName(newName);
+    
+    FilesIO::Instance() -> storeGlobals();
+    
+    std::cout << std::endl << std::endl;
+    
+    if (!newName.compare("")) {
+        std::cout << "The name has been deleted.";
+    } else
+        std::cout << "The Radio Station is now called " << RadioStation::Instance() -> name();
+    
+    std::cout << std::endl << std::endl << "Please press Return to proceed.";
+    
+    Additions::waitForReturn();
+    Additions::clearConsole();
+    
+    adminPanel();
+}
+
 void adminPanel() {
     std::cout << "Welcome to the administrative panel!" << std::endl << std::endl;
     
@@ -485,7 +512,7 @@ void adminPanel() {
                 
                 Additions::clearConsole();
                 
-                // Jump to Playlist
+                changeName();
                 
                 break;
                 
@@ -706,7 +733,7 @@ void newUser() {
 }
 
 void start() {
-	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") ? RadioStation::Instance() -> name() : "our radio station!") << std::endl << std::endl;
+	std::cout << "Welcome to " << (RadioStation::Instance() -> name().compare("") ? RadioStation::Instance() -> name() : "our radio station") << "!" << std::endl << std::endl;
     
 	std::cout << "1. Existing Users: Login!" << std::endl;
 	std::cout << "2. New Users: Register!" << std::endl;
@@ -762,6 +789,8 @@ void start() {
 
 int main() {
     FilesIO::Instance() -> loadAllSongs();
+    
+    FilesIO::Instance() -> loadGlobals();
     
 	start();
 
