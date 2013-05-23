@@ -43,6 +43,7 @@ void adminPanel();
 void loggedInMenu();
 void editMusicMenu();
 void editMusic(Music *theMusic);
+void musicManager();
 
 //
 // Code Start
@@ -86,7 +87,7 @@ void editMusic(Music *theMusic) {
 
 	std::cout << std::endl;
     
-	std::cout << "Song Album: [" << theMusic->getAlbum() << "]: " << std::endl;
+	std::cout << "Song Album: [" << theMusic->getAlbum() << "]: ";
 
 	std::string newAlbum = Additions::getline();
     
@@ -104,7 +105,7 @@ void editMusic(Music *theMusic) {
 
 	std::cout << std::endl;
 
-	std::cout << "Song Artist: [" << theMusic->getArtist() << "]: " << std::endl;
+	std::cout << "Song Artist: [" << theMusic->getArtist() << "]: ";
 
 	std::string newArtist = Additions::getline();
     
@@ -126,7 +127,7 @@ void editMusic(Music *theMusic) {
     
 	do {
         
-        std::cout << "Song Year: [" << theMusic->getYear() << "]: " << std::endl;
+        std::cout << "Song Year: [" << theMusic->getYear() << "]: ";
 
 		newYear = Additions::getline();
         
@@ -144,7 +145,7 @@ void editMusic(Music *theMusic) {
     
 	std::cout << std::endl;
 
-	std::cout << "Song Genre: [" << theMusic->getGenre() << "]: " << std::endl;
+	std::cout << "Song Genre: [" << theMusic->getGenre() << "]: ";
 
 	std::string newGenre = Additions::getline();
     
@@ -178,19 +179,43 @@ void editMusicMenu() {
     while (true) {
         std::cout << std::endl;
         
-        std::cout << "Choose the music track you want to make changes to (or type '-1' to go back): ";
+        std::cout << "Choose the music track you want to make changes to: ";
         
-        int songId = 0;
+        std::string songIdStr = Additions::getline();
         
-        std::cin >> songId;
+        if (Additions::gotESC(songIdStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            musicManager();
+        }
+        
+        int songId = atoi(songIdStr.c_str());
+        
+        while (!(RadioStation::Instance()->allTracks()->count() > songId)) {
+            std::cout << "Invalid track. Please type another id: ";
+            
+            songIdStr = Additions::getline();
+            
+            if (Additions::gotESC(songIdStr)) {
+                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                Additions::clearConsole();
+                
+                musicManager();
+            }
+            
+            songId = atoi(songIdStr.c_str());
+        }
         
         if (songId == -1) {
             Additions::clearConsole();
             adminPanel();
             break;
         } else {
-            getch(); // We need to clean the buffer. :|
-            
             Additions::clearConsole();
             
             editMusic(allTracksVec[songId]);
@@ -249,32 +274,86 @@ void addMusic() {
     std::cout << "Music Manager :: New Music" << std::endl;
     std::cout << std::endl;
     
-    std::string title;
     std::cout << "Title: ";
-    std::getline(std::cin, title);
     
-    std::string artist;
+    std::string title = Additions::getline();
+    
+    if (Additions::gotESC(title)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
+    
     std::cout << "Artist: ";
-    std::getline(std::cin, artist);
     
-    std::string author;
+    std::string artist = Additions::getline();
+    
+    if (Additions::gotESC(artist)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
+    
     std::cout << "Author: ";
-    std::getline(std::cin, author);
     
-    std::string album;
+    std::string author = Additions::getline();
+    
+    if (Additions::gotESC(author)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
+    
     std::cout << "Album: ";
-    std::getline(std::cin, album);
     
-    std::string genre;
+    std::string album = Additions::getline();
+    
+    if (Additions::gotESC(album)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
+    
     std::cout << "Genre: ";
-    std::getline(std::cin, genre);
+    
+    std::string genre = Additions::getline();
+    
+    if (Additions::gotESC(genre)) {
+        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+        
+        Additions::waitForReturn();
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
     
     int year = 0;
     
     while (!year) {
-        std::string yearStr;
         std::cout << "Year: ";
-        std::cin >> yearStr;
+        
+        std::string yearStr = Additions::getline();
+        
+        if (Additions::gotESC(yearStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            editMusicMenu();
+        }
         
         if (atoi(yearStr.c_str()) > 0)
             year = atoi(yearStr.c_str());
@@ -305,6 +384,15 @@ void addMusic() {
                 available = false;
                 
                 shouldBreak = true;
+                
+            case 27:    // esc
+                
+                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                Additions::clearConsole();
+                
+                editMusicMenu();
                 
             default:
                 
@@ -477,19 +565,23 @@ void login() {
     
     FilesIO::Instance() -> loadAllUsers();
     
+    std::cout << "Radio Station :: Login" << std::endl << std::endl;
+    
     do {
-        std::string username;
-        
         std::cout << "Enter ID or Name: ";
-        std::cin >> username;
         
-        if (!username.compare("-1")) {
-            std::cout << "Operation Canceled." << std::endl << std::endl;
+        std::string username = Additions::getline();
+        
+        if (Additions::gotESC(username)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
             
+            Additions::waitForReturn();
             Additions::clearConsole();
             
             start();
         }
+        
+        std::cin >> username;
         
         if (atoi(username.c_str()))
             theUser = UserManager::Instance()->getUser(atoi(username.c_str()));
@@ -497,10 +589,9 @@ void login() {
             theUser = UserManager::Instance()->getUser(username);
         
         if (!theUser)
-            std::cout << "ID/Name not found! Try again! You may also cancel with '-1'." << std::endl;
-        else {
+            std::cout << "ID/Name not found! Please try again!" << std::endl;
+        else
             std::cout << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl;
-        }
     } while (!theUser);
     
     loggedInUser = theUser;
