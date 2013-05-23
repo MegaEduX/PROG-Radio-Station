@@ -34,7 +34,7 @@ int getch() {
 
 namespace Additions {
     void waitForReturn() {
-        while (1) { // Wait 'till Keyboard hit ...
+        while (true) { // Wait 'till Keyboard hit ...
             int ch = getch();
             
             if (ch == 13 || ch == 10)
@@ -68,7 +68,7 @@ namespace Additions {
             }
         }
         
-        arr.push_back(  str.substr(k, i-k) );
+        arr.push_back(str.substr(k, i-k));
         return arr;
     }
     

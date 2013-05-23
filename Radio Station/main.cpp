@@ -69,7 +69,7 @@ void musicManager();
 void editMusic(Music *theMusic) {
     std::cout << "Music Manager :: Editing Song " << theMusic -> getId() << std::endl << std::endl;
     
-	std::cout << "Song Title: [" << theMusic->getTitle() << "]: ";
+	std::cout << "Song Title [" << theMusic->getTitle() << "]: ";
 
 	std::string newTitle = Additions::getline();
     
@@ -87,7 +87,7 @@ void editMusic(Music *theMusic) {
 
 	std::cout << std::endl;
     
-	std::cout << "Song Album: [" << theMusic->getAlbum() << "]: ";
+	std::cout << "Song Album [" << theMusic->getAlbum() << "]: ";
 
 	std::string newAlbum = Additions::getline();
     
@@ -105,7 +105,7 @@ void editMusic(Music *theMusic) {
 
 	std::cout << std::endl;
 
-	std::cout << "Song Artist: [" << theMusic->getArtist() << "]: ";
+	std::cout << "Song Artist [" << theMusic->getArtist() << "]: ";
 
 	std::string newArtist = Additions::getline();
     
@@ -127,7 +127,7 @@ void editMusic(Music *theMusic) {
     
 	do {
         
-        std::cout << "Song Year: [" << theMusic->getYear() << "]: ";
+        std::cout << "Song Year [" << theMusic->getYear() << "]: ";
 
 		newYear = Additions::getline();
         
@@ -147,7 +147,7 @@ void editMusic(Music *theMusic) {
     
 	std::cout << std::endl;
 
-	std::cout << "Song Genre: [" << theMusic->getGenre() << "]: ";
+	std::cout << "Song Genre [" << theMusic->getGenre() << "]: ";
 
 	std::string newGenre = Additions::getline();
     
@@ -163,9 +163,12 @@ void editMusic(Music *theMusic) {
 	if (newGenre.compare(""))
 		theMusic -> setGenre(newGenre); //changes Genre
 
-	std::cout << std::endl << "Done! Please press Return to go back.";
+	std::cout << std::endl << std::endl << "Done! Please press Return to go back.";
     
     Additions::waitForReturn();
+    Additions::clearConsole();
+    
+    FilesIO::Instance() -> saveAllSongs();
     
     editMusicMenu();
 }
@@ -201,7 +204,7 @@ void editMusicMenu() {
         int songId = atoi(songIdStr.c_str());
         
         while (!(RadioStation::Instance()->allTracks()->count() > songId)) {
-            std::cout << "Invalid track. Please type another id: ";
+            std::cout << std::endl << "Invalid track. Please type another id: ";
             
             songIdStr = Additions::getline();
             
@@ -293,6 +296,8 @@ void addMusic() {
         editMusicMenu();
     }
     
+    std::cout << std::endl;
+    
     std::cout << "Artist: ";
     
     std::string artist = Additions::getline();
@@ -305,6 +310,8 @@ void addMusic() {
         
         editMusicMenu();
     }
+    
+    std::cout << std::endl;
     
     std::cout << "Author: ";
     
@@ -319,6 +326,8 @@ void addMusic() {
         editMusicMenu();
     }
     
+    std::cout << std::endl;
+    
     std::cout << "Album: ";
     
     std::string album = Additions::getline();
@@ -331,6 +340,8 @@ void addMusic() {
         
         editMusicMenu();
     }
+    
+    std::cout << std::endl;
     
     std::cout << "Genre: ";
     
@@ -348,6 +359,8 @@ void addMusic() {
     int year = 0;
     
     while (!year) {
+        std::cout << std::endl;
+        
         std::cout << "Year: ";
         
         std::string yearStr = Additions::getline();
@@ -366,6 +379,8 @@ void addMusic() {
     }
     
     bool available = false;
+    
+    std::cout << std::endl;
     
     std::cout << "Available? (y/n): ";
     

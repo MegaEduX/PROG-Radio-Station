@@ -212,7 +212,6 @@ bool FilesIO::saveUser(User *theUser) {
     if (!foundRow)
         userList.push_back(vecToReplace);
     
-    //if (userList[0][0].compare("id")) {
     std::vector<std::vector<std::string>> newVec;
     
     std::vector<std::string> headerVec;
@@ -228,7 +227,6 @@ bool FilesIO::saveUser(User *theUser) {
         newVec.push_back(userList[i]);
     
     userList = newVec;
-    //}
     
     // Re-convert back to CSV
     
@@ -434,6 +432,7 @@ bool FilesIO::saveAllSongs() {
         songVec.push_back(song->getTitle());
         songVec.push_back(song->getArtist());
         songVec.push_back(song->getAlbum());
+        songVec.push_back(song->getAuthor());
         songVec.push_back(song->getGenre());
         songVec.push_back(std::to_string(song->getYear()));
         songVec.push_back(std::to_string(song->getLikes()));
