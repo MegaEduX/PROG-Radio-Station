@@ -44,6 +44,7 @@ void loggedInMenu();
 void editMusicMenu();
 void editMusic(Music *theMusic);
 void musicManager();
+void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year);
 
 //
 // Code Start
@@ -604,10 +605,10 @@ void adminPanel() {
 }
 
 void searchLibrary() {
-    bool name = false, artist = false, author = false, album = false, genre = false;
+    bool name = false, artist = false, author = false, album = false, genre = false, year = false;
     
     while (true) {
-        std::cout << "Radio Station :: Library Search" << std::endl << std::endl;
+        std::cout << "Radio Station :: Library Search :: (Step 1 of 2)" << std::endl << std::endl;
         
         std::cout << "Search by..." << std::endl;
         std::cout << (name ? " - 1. Name (Selected)" : " - 1. Name") << std::endl;
@@ -615,8 +616,10 @@ void searchLibrary() {
         std::cout << (author ? " - 3. Author (Selected)" : " - 3. Author") << std::endl;
         std::cout << (album ? " - 4. Album (Selected)" : " - 4. Album") << std::endl;
         std::cout << (genre ? " - 5. Genre (Selected)" : " - 5. Genre") << std::endl;
+        std::cout << (year ? " - 6. Year (Selected)" : " - 6. Year") << std::endl;
         std::cout << " - 9. Next Step" << std::endl;
         std::cout << " - 0. Go Back" << std::endl;
+        std::cout << std::endl << "Please choose a value option to select/unselect or 9 / 0 to proceed.";
         
         int ch = getch();
         
@@ -651,15 +654,25 @@ void searchLibrary() {
                 
                 break;
                 
+            case (baseASCIINumber + 6):
+                
+                year = (year ? false : true);
+                
+                break;
+                
             case (baseASCIINumber + 9):
                 
-                // Jump to next step;
+                Additions::clearConsole();
+                
+                searchLibraryStepTwo(name, artist, author, album, genre, year);
                 
                 break;
                 
             case baseASCIINumber:
                 
-                // Go back
+                Additions::clearConsole();
+                
+                loggedInMenu();
                 
                 break;
             
@@ -670,7 +683,141 @@ void searchLibrary() {
         
         Additions::clearConsole();
     }
+}
+
+void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year) {
+    std::cout << "Radio Station :: Library Search :: (Step 2 of 2)" << std::endl << std::endl;
     
+    std::string nameStr, artistStr, authorStr, albumStr, genreStr;
+    
+    int yearInt = 0;
+    
+    if (name) {
+        std::cout << "Name: ";
+        
+        nameStr = Additions::getline();
+        
+        std::cout << std::endl;
+        
+        if (Additions::gotESC(nameStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+    }
+    
+    if (artist) {
+        std::cout << "Artist: ";
+        
+        artistStr = Additions::getline();
+        
+        std::cout << std::endl;
+        
+        if (Additions::gotESC(artistStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+    }
+    
+    if (author) {
+        std::cout << "Author: ";
+        
+        authorStr = Additions::getline();
+        
+        std::cout << std::endl;
+        
+        if (Additions::gotESC(authorStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+    }
+    
+    if (album) {
+        std::cout << "Album: ";
+        
+        albumStr = Additions::getline();
+        
+        std::cout << std::endl;
+        
+        if (Additions::gotESC(albumStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+    }
+    
+    if (genre) {
+        std::cout << "Genre: ";
+        
+        genreStr = Additions::getline();
+        
+        std::cout << std::endl;
+        
+        if (Additions::gotESC(genreStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+    }
+    
+    if (year) {
+        std::string yearStr;
+        
+        while (!atoi(yearStr.c_str())) {
+            std::cout << "Year: ";
+            
+            yearStr = Additions::getline();
+            
+            if (Additions::gotESC(yearStr)) {
+                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                Additions::clearConsole();
+                
+                loggedInMenu();
+            }
+            
+            if (atoi(yearStr.c_str()))
+                yearInt = atoi(yearStr.c_str());
+            
+            std::cout << std::endl;
+        }
+    }
+    
+    std::cout << std::endl << "Search Results:" << std::endl << std::endl;
+    
+    std::vector<Music *> searchResult = RadioStation::Instance() -> allTracks() -> search(-1, nameStr, artistStr, authorStr, albumStr, genreStr, (yearInt == 0 ? -1 : yearInt));
+    
+    for (int i = 0; i < searchResult.size(); i++) {
+        std::cout << "[" << searchResult[i] -> getId() << "] " << searchResult[i] -> getTitle() << " by " << searchResult[i] -> getArtist() << " " << (searchResult[i] -> getAvailable() ? "(Available)" : "(Unavailable)") << std::endl;
+    }
+    
+    std::cout << std::endl << "Type a song ID to select it (or ESC to cancel): ";
+    
+    Additions::waitForReturn();
+    
+    // searchSongSelected(-> theMusic <-);
+}
+
+void searchSongSelected(Music *theMusic) {
+    // This allows the user to add (and remove) a track.
 }
 
 void loggedInMenu() {
