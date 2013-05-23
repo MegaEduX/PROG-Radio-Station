@@ -604,21 +604,73 @@ void adminPanel() {
 }
 
 void searchLibrary() {
-    std::cout << "Radio Station :: Library Search" << std::endl << std::endl;
+    bool name = false, artist = false, author = false, album = false, genre = false;
     
-    //
-    // Let's use bitwise operations here? :D
-    // int&0x1 translates to the last digit
-    // ((int&0x3) >> 1) translates to the last 2 digits, but then we shift it, so...
-    //
-    // AOCO/MPCP FTW!
-    //
+    while (true) {
+        std::cout << "Radio Station :: Library Search" << std::endl << std::endl;
+        
+        std::cout << "Search by..." << std::endl;
+        std::cout << (name ? " - 1. Name (Selected)" : " - 1. Name") << std::endl;
+        std::cout << (artist ? " - 2. Artist (Selected)" : " - 2. Artist") << std::endl;
+        std::cout << (author ? " - 3. Author (Selected)" : " - 3. Author") << std::endl;
+        std::cout << (album ? " - 4. Album (Selected)" : " - 4. Album") << std::endl;
+        std::cout << (genre ? " - 5. Genre (Selected)" : " - 5. Genre") << std::endl;
+        std::cout << " - 9. Next Step" << std::endl;
+        std::cout << " - 0. Go Back" << std::endl;
+        
+        int ch = getch();
+        
+        switch (ch) {
+            case (baseASCIINumber + 1):
+            
+                name = (name ? false : true);
+            
+                break;
+            
+            case (baseASCIINumber + 2):
+            
+                artist = (artist ? false : true);
+                
+                break;
+                
+            case (baseASCIINumber + 3):
+                
+                author = (author ? false : true);
+                
+                break;
+                
+            case (baseASCIINumber + 4):
+                
+                album = (album ? false : true);
+                
+                break;
+                
+            case (baseASCIINumber + 5):
+                
+                genre = (genre ? false : true);
+                
+                break;
+                
+            case (baseASCIINumber + 9):
+                
+                // Jump to next step;
+                
+                break;
+                
+            case baseASCIINumber:
+                
+                // Go back
+                
+                break;
+            
+            default:
+                
+                break;
+        }
+        
+        Additions::clearConsole();
+    }
     
-    std::cout << "Search by..." << std::endl;
-    std::cout << " - 1. Name" << std::endl;
-    std::cout << " - 2. Artist" << std::endl;
-    std::cout << " - 4. Author" << std::endl;
-    // std::cout << "
 }
 
 void loggedInMenu() {
@@ -649,6 +701,8 @@ void loggedInMenu() {
             case (baseASCIINumber + 2):
                 
                 Additions::clearConsole();
+                
+                searchLibrary();
                 
                 // Jump to Library
                 
