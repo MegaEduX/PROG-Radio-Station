@@ -397,6 +397,8 @@ void addMusic() {
                 
                 shouldBreak = true;
                 
+                break;
+                
             case 27:    // esc
                 
                 std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
@@ -405,6 +407,8 @@ void addMusic() {
                 Additions::clearConsole();
                 
                 editMusicMenu();
+                
+                break;
                 
             default:
                 
@@ -435,6 +439,76 @@ void addMusic() {
     Additions::clearConsole();
     
     musicManager();
+}
+
+void reinitializeSet() {
+    std::cout << "Radio Station :: Set Control Panel" << std::endl << std::endl;
+    
+    std::cout << "Are you sure you want to reinitialize the station set? (y/n): ";
+    
+    bool reinitialize = false;
+    
+    while (true) {
+        int ch = getch();
+        
+        bool shouldBreak = false;
+        
+        switch (ch) {
+            case 121:   // y
+            case 89:    // Y
+                
+                reinitialize = true;
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 110:   // n
+            case 78:    // N
+                
+                reinitialize = false;
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 27:    // esc
+                
+                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                Additions::clearConsole();
+                
+                adminPanel();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+        
+        if (shouldBreak) {
+            std::cout << (char) ch;
+            break;
+        }
+    }
+    
+    std::cout << std::endl << std::endl;
+    
+    if (reinitialize) {
+        RadioStation::Instance() -> generateSet();
+        
+        std::cout << "The set was reinitialized! ";
+    } else
+        std::cout << "The set wasn't reinitialized. ";
+    
+    std::cout << "Please press Return to continue.";
+    
+    Additions::waitForReturn();
+    Additions::clearConsole();
+    
+    adminPanel();
 }
 
 void changeName() {
@@ -490,21 +564,19 @@ void adminPanel() {
         
         switch (opc) {
                 
-            case (baseASCIINumber + 1): {
+            case (baseASCIINumber + 1):
                 
                 Additions::clearConsole();
                 
                 musicManager();
                 
                 break;
-            
-            }
                 
             case (baseASCIINumber + 2):
                 
                 Additions::clearConsole();
                 
-                // Jump to Library
+                reinitializeSet();
                 
                 break;
                 
@@ -513,14 +585,6 @@ void adminPanel() {
                 Additions::clearConsole();
                 
                 changeName();
-                
-                break;
-                
-            case (baseASCIINumber + 4):
-                
-                if (loggedInUser -> isAdmin()) {
-                    // Jump to Admin Panel
-                }
                 
                 break;
                 
@@ -539,9 +603,8 @@ void adminPanel() {
     }
 }
 
-
 void loggedInMenu() {
-    std::cout << "Welcome to " << (!RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << "!" << std::endl << std::endl;
+    std::cout << "Welcome to " << (!RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << ", " << loggedInUser -> getName() << "!" << std::endl << std::endl;
     
     std::cout << "1. Top 10 Songs" << std::endl;
     std::cout << "2. Search our Music Library" << std::endl;
