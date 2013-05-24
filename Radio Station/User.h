@@ -58,7 +58,7 @@ public:
     const bool isAdmin();
     
     bool setPlaylist(Playlist thePlaylist);
-    const Playlist getPlaylist();
+    Playlist* getPlaylist();
     
     void trackPlayed();
     

@@ -816,8 +816,28 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
     // searchSongSelected(-> theMusic <-);
 }
 
-void searchSongSelected(Music *theMusic) {
+void userWorkWithSong(Music *theMusic) {
     // This allows the user to add (and remove) a track.
+    
+    std::cout << "Radio Station :: Song Details (" << theMusic -> getId() << ")" << std::endl << std::endl;
+    
+    std::cout << "ID: " << theMusic -> getId() << std::endl;
+    std::cout << "Title: " << theMusic -> getTitle() << std::endl;
+    std::cout << "Artist: " << theMusic -> getArtist() << std::endl;
+    std::cout << "Author: " << theMusic -> getAuthor() << std::endl;
+    std::cout << "Album: " << theMusic -> getAlbum() << std::endl;
+    std::cout << "Genre: " << theMusic -> getGenre() << std::endl;
+    std::cout << std::endl;
+    std::cout << "Likes: " << theMusic -> getLikes() << std::endl;
+    std::cout << "Dislikes: " << theMusic -> getDislikes() << std::endl;
+    std::cout << std::endl;
+    std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
+    std::cout << std::endl << std::endl;
+    std::cout << "1. Like this track" << std::endl;
+    std::cout << "2. Dislike this track" << std::endl;
+    std::cout << "3. " << (loggedInUser -> getPlaylist() -> search(theMusic->getId(), "", "", "", "", "", -1).size() ? "Remove from" : "Add to") << " Playlist" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Please choose your option.";
 }
 
 void loggedInMenu() {

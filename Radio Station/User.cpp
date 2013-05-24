@@ -94,8 +94,8 @@ bool User::setPlaylist(Playlist thePlaylist) {
     return true; // Should this ever return false? :|
 }
 
-const Playlist User::getPlaylist() {
-    return _userPlaylist;
+Playlist* User::getPlaylist() {
+    return &_userPlaylist;
 }
 
 void User::trackPlayed() {
