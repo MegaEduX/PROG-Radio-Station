@@ -80,10 +80,10 @@ bool FilesIO::storeGlobals() {
     if (thefile.is_open()) {
         thefile.close();
         
-        parsedCsv = parser.tableRows(true);
+        parsedCsv = parser.parseCSV();
         
         if (strcmp(parsedCsv[0][0].c_str(), "name") == 0)
-            parsedCsv[0][1] = RadioStation::Instance()->name();
+            parsedCsv[1][1] = RadioStation::Instance()->name();
         else
             return false;
     } else {
@@ -328,9 +328,9 @@ Playlist FilesIO::playlistForUser(std::string userName) {
 }
 
 bool FilesIO::storePlaylistForUser(int userId) {
-    Playlist userPlaylist = UserManager::Instance()->getUser(userId)->getPlaylist();
+    Playlist *userPlaylist = UserManager::Instance()->getUser(userId)->getPlaylist();
     
-    std::vector<Music *> result = userPlaylist.search(0, "", 0, "", "", "", 0);
+    std::vector<Music *> result = userPlaylist -> search(0, "", 0, "", "", "", 0);
     
     std::vector<std::vector<std::string>> csvVec;
     
