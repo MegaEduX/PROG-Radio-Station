@@ -43,6 +43,7 @@ void adminPanel();
 void loggedInMenu();
 void editMusicMenu();
 void editMusic(Music *theMusic);
+void userWorkWithSong(Music *theMusic);
 void musicManager();
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year);
 
@@ -146,6 +147,69 @@ void editMusic(Music *theMusic) {
 
 	if (newGenre.compare(""))
 		theMusic -> setGenre(newGenre); //changes Genre
+    
+    bool available = false;
+    
+    std::cout << std::endl;
+    
+    std::cout << "Available? " << (theMusic -> getAvailable() ? "[Y]" : "[N]") << " (y/n): ";
+    
+    while (true) {
+        int ch = getch();
+        
+        bool shouldBreak = false;
+        
+        switch (ch) {
+            case 121:   // y
+            case 89:    // Y
+                
+                available = true;
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 110:   // n
+            case 78:    // N
+                
+                available = false;
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 13:    // Return (POSIX)
+            case 10:    // Return (Windows)
+                
+                available = theMusic -> getAvailable();
+                
+                shouldBreak = true;
+                
+                break;
+                
+            case 27:    // esc
+                
+                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                Additions::clearConsole();
+                
+                editMusicMenu();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+        
+        if (shouldBreak) {
+            std::cout << (char) ch;
+            break;
+        }
+    }
+    
+    theMusic -> setAvailable(available);
 
 	std::cout << std::endl << std::endl << "Done! Please press Return to go back.";
     
@@ -617,9 +681,8 @@ void searchLibrary() {
         std::cout << (album ? " - 4. Album (Selected)" : " - 4. Album") << std::endl;
         std::cout << (genre ? " - 5. Genre (Selected)" : " - 5. Genre") << std::endl;
         std::cout << (year ? " - 6. Year (Selected)" : " - 6. Year") << std::endl;
-        std::cout << " - 9. Next Step" << std::endl;
-        std::cout << " - 0. Go Back" << std::endl;
-        std::cout << std::endl << "Please choose a value option to select/unselect or 9 / 0 to proceed.";
+        std::cout << std::endl;
+        std::cout << std::endl << "Please choose a value option to select/unselect or return to proceed.";
         
         int ch = getch();
         
@@ -660,7 +723,8 @@ void searchLibrary() {
                 
                 break;
                 
-            case (baseASCIINumber + 9):
+            case 13: // Return (POSIX)
+            case 10: // Return (Windows)
                 
                 Additions::clearConsole();
                 
@@ -668,7 +732,11 @@ void searchLibrary() {
                 
                 break;
                 
-            case baseASCIINumber:
+            case 27: // ESC
+                
+                std::cout << std::endl << std::endl << "Operation Canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
                 
                 Additions::clearConsole();
                 
@@ -811,14 +879,44 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
     
     std::cout << std::endl << "Type a song ID to select it (or ESC to cancel): ";
     
-    Additions::waitForReturn();
-    
-    // searchSongSelected(-> theMusic <-);
+    while (true) {
+        std::string songIdStr = Additions::getline();
+        
+        std::cout << std::endl;
+        
+        if (Additions::gotESC(songIdStr)) {
+            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+            Additions::waitForReturn();
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+        
+        int songId = atoi(songIdStr.c_str());
+        
+        bool found = false;
+        
+        for (int i = 0; i < searchResult.size(); i++) {
+            if (searchResult[i] -> getId() == songId) {
+                Additions::clearConsole();
+                
+                userWorkWithSong(searchResult[i]);
+                
+                found = true;
+                
+                break;
+            }
+        }
+        
+        if (found)
+            break;
+        
+        std::cout << "Song not found. Please try again: ";
+    }
 }
 
 void userWorkWithSong(Music *theMusic) {
-    // This allows the user to add (and remove) a track.
-    
     std::cout << "Radio Station :: Song Details (" << theMusic -> getId() << ")" << std::endl << std::endl;
     
     std::cout << "ID: " << theMusic -> getId() << std::endl;
@@ -827,17 +925,27 @@ void userWorkWithSong(Music *theMusic) {
     std::cout << "Author: " << theMusic -> getAuthor() << std::endl;
     std::cout << "Album: " << theMusic -> getAlbum() << std::endl;
     std::cout << "Genre: " << theMusic -> getGenre() << std::endl;
+    
     std::cout << std::endl;
+    
     std::cout << "Likes: " << theMusic -> getLikes() << std::endl;
     std::cout << "Dislikes: " << theMusic -> getDislikes() << std::endl;
+    
     std::cout << std::endl;
+    
     std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
+    
     std::cout << std::endl << std::endl;
+    
     std::cout << "1. Like this track" << std::endl;
     std::cout << "2. Dislike this track" << std::endl;
     std::cout << "3. " << (loggedInUser -> getPlaylist() -> search(theMusic->getId(), "", "", "", "", "", -1).size() ? "Remove from" : "Add to") << " Playlist" << std::endl;
+    
     std::cout << std::endl;
+    
     std::cout << "Please choose your option.";
+    
+    Additions::waitForReturn();
 }
 
 void loggedInMenu() {
@@ -1075,7 +1183,7 @@ void start() {
                 
                 Additions::clearConsole();
                 
-                std::cout << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
+                std::cout << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
                 
                 exit(0);
                 
