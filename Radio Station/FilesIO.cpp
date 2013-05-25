@@ -317,7 +317,7 @@ Playlist FilesIO::playlistForUser(int userId) {
         if (searchResult.size() != 1) {
             std::cout << "A music track wasn't found for ID " << rows[i][0] << ", or the result was ambiguous. Please look into this!" << std::endl;
         } else
-            returnPlaylist.addSong(searchResult[0]/*, atoi(rows[i][1].c_str())*/);
+            returnPlaylist.addSong(searchResult[0]);
     }
     
     return returnPlaylist;

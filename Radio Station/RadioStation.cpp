@@ -10,6 +10,8 @@
 #include "Music.h"
 #include "Playlist.h"
 
+const int setDivisor = 4;
+
 RadioStation *RadioStation::rs_pInstance = NULL;
 
 RadioStation* RadioStation::Instance() {
@@ -37,8 +39,23 @@ std::string RadioStation::name() {
 }
 
 void RadioStation::generateSet() {
-	_currentPlaySet = _allTracks;
-
+	Playlist newPlaylist;
+    
+    _currentPlaySet = newPlaylist;
+    
+    int setCount = (int)(_allTracks.count() / setDivisor);
+    
+    if (!setCount && _allTracks.count() > 0)
+        setCount = 1; // This prevents rounding to 0 when x/y < 0.5.
+    
+    for (int i = 0; i < setCount; i++) {
+        Music *track = _allTracks.getAllTracks()[i];
+        
+        _currentPlaySet.addSong(track);
+        
+        track -> addPlay();
+    }
+    
 	_currentPlaySet.shuffle();
 }
 
