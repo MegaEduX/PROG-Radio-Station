@@ -835,7 +835,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
 
 void userWorkWithSong(Music *theMusic) {
     while (true) {
-        std::cout << "Radio Station :: Song Details (" << theMusic -> getId() << ")" << std::endl << std::endl;
+        std::cout << "Radio Station :: Song Details" << std::endl << std::endl;
         
         std::vector<Music *> songSearch = loggedInUser -> getPlaylist() -> search(theMusic->getId(), "", "", "", "", "", -1);
         
