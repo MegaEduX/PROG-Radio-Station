@@ -615,8 +615,17 @@ void topTenSongs() {
     std::cout << "Radio Station :: Top Ten" << std::endl << std::endl;
     
     for (int i = 0; i < RadioStation::Instance() -> getTopTen().count(); i++) {
-        
+        Music *theTrack = RadioStation::Instance() -> getTopTen().getAllTracks()[i];
+        std::cout << "[" << theTrack -> getId() << "] " << theTrack -> getTitle() << " by " << theTrack -> getArtist() << " (" << theTrack -> getPlayCount() << " plays)" << std::endl;
     }
+    
+    std::cout << std::endl << "Press Return to go back.";
+    
+    Additions::waitForReturn();
+    
+    Additions::clearConsole();
+    
+    loggedInMenu();
 }
 
 void searchLibrary() {
@@ -1023,7 +1032,7 @@ void loggedInMenu() {
                 
                 Additions::clearConsole();
                 
-                // Jump to Top 10
+                topTenSongs();
                 
                 break;
                 
@@ -1033,8 +1042,6 @@ void loggedInMenu() {
                 
                 searchLibrary();
                 
-                // Jump to Library
-                
                 break;
                 
             case (baseASCIINumber + 3):
@@ -1042,8 +1049,6 @@ void loggedInMenu() {
                 Additions::clearConsole();
                 
 				playlistManager();
-                
-                // Jump to Playlist
                 
                 break;
                 
