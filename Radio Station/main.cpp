@@ -789,9 +789,21 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         }
     }
     
-    std::cout << std::endl << "Search Results:" << std::endl << std::endl;
+    std::cout << "Search Results:" << std::endl << std::endl;
     
     std::vector<Music *> searchResult = RadioStation::Instance() -> allTracks() -> search(-1, nameStr, artistStr, authorStr, albumStr, genreStr, (yearInt == 0 ? -1 : yearInt));
+    
+    if (searchResult.size() == 0) {
+        std::cout << "Your search returned no results. Please press Return to retry.";
+        
+        Additions::waitForReturn();
+        
+        Additions::clearConsole();
+        
+        searchLibrary();
+    }
+    
+    std::cout << std::endl;
     
     for (int i = 0; i < searchResult.size(); i++) {
         std::cout << "[" << searchResult[i] -> getId() << "] " << searchResult[i] -> getTitle() << " by " << searchResult[i] -> getArtist() << " " << (searchResult[i] -> getAvailable() ? "(Available)" : "(Unavailable)") << std::endl;
@@ -910,7 +922,7 @@ void userWorkWithSong(Music *theMusic) {
                 
                 Additions::clearConsole();
                 
-                searchLibrary();
+                loggedInMenu();
                 
                 break;
                 
@@ -923,104 +935,64 @@ void userWorkWithSong(Music *theMusic) {
     }
 }
 
-void playlistManager(){
-	std::cout << "Playlist Manager" << std::endl;
-    std::cout << std::endl;
-    std::cout << "1. Add New Song" << std::endl;
-    std::cout << "2. Delete Song" << std::endl;
-	std::cout << "3. Display My Playlist" << std::endl;
-    std::cout << std::endl;
-    std::cout << "Please choose an option." ;
-
-	Playlist *allTracks = RadioStation::Instance() -> allTracks();
+void playlistManager() {
+	std::cout << "Radio Station :: Playlist Manager" << std::endl;
+    
+    Playlist *allTracks = RadioStation::Instance() -> allTracks();
+    
+    std::vector<Music *> userTracks = loggedInUser -> getPlaylist() -> getAllTracks();
 	
 	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
-
-
-	while (true) {
-        int opc = getch();
+    
+    std::cout << std::endl;
+    
+    if (!userTracks.size()) {
+        std::cout << "Your playlist currently has no tracks. Please add some first! Press Return to continue.";
         
-        switch (opc) {
-
-			case baseASCIINumber:
-                
-                Additions::clearConsole();
-                
-                loggedInMenu();
-                
-                break;
-                
-            case (baseASCIINumber + 1): {
-                
-				Additions::clearConsole();
-				
-				if (allTracksVec.size() == 0) {
-					std::cout << "There are currently no songs on the radio station. Please press Return to go back.";
-                    Additions::waitForReturn();
-					Additions::clearConsole();
-					loggedInMenu();
-				}
-                
-				for (int i = 0 ; i < allTracksVec.size() ; i++)
-					std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() <<  std::endl;
-                
-                std::cout << std::endl << "Please select the ID of the song you want to add to your Playlist" << std::endl;
-
-				std::string songIdStr = Additions::getline();
-
-				if (Additions::gotESC(songIdStr)) {
-					std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-					Additions::waitForReturn();
-					Additions::clearConsole();
-					start();
-                }
-                
-                int songId = atoi(songIdStr.c_str());
-                
-                while (!(songId > RadioStation::Instance()->allTracks()->count() - 1 && songId < 0 ) && atoi(songIdStr.c_str())) {
-                    std::cout << std::endl << "Invalid track. Please type another id: " << std::endl;
-                    
-                    songIdStr = Additions::getline();
-                }
-                
-                loggedInUser->getPlaylist()->addSong(allTracksVec[songId]);
-                
-                std::cout << "Music ' " << allTracksVec[songId]->getTitle() << " ' has been sucessfuly added to your playlist" << std::endl;
-                
-                Additions::waitForReturn();
-                Additions::clearConsole();
-                playlistManager();
-					
-				break;
-            }
-
-				
-            case (baseASCIINumber + 2):
-                
-                Additions::clearConsole();
-                
-                searchLibrary();
-                
-                // Jump to Library
-                
-                break;
-                
-            case (baseASCIINumber + 3):
-                
-                Additions::clearConsole();
-                
-                // Jump to Playlist
-                
-                break;
-                
-            case escKey:
-                
-                // Go back. ESC key pressed.
-                
-                break;
-		}
+        Additions::waitForReturn();
+        
+        Additions::clearConsole();
+        
+        loggedInMenu();
     }
+    
+    for (int i = 0 ; i < userTracks.size(); i++)
+        std::cout << "[" << i << "] " << userTracks[i]->getTitle() << " by " << userTracks[i]->getArtist() <<  std::endl;
+    
+    std::cout << std::endl << "Please type the song ID you want to see details of: ";
+    
+    std::string selectedSong = Additions::getline();
+    
+    if (Additions::gotESC(selectedSong)) {
+        Additions::clearConsole();
+        
+        loggedInMenu();
+    }
+    
+    Music *selTrack = NULL;
+    
+    while (!selTrack) {
+        for (int i = 0; i < userTracks.size(); i++)
+            if (userTracks[i]->getId() == atoi(selectedSong.c_str()))
+                selTrack = userTracks[i];
+        
+        if (selTrack)
+            break;
+        
+        std::cout << std::endl << "Invalid Track ID. Please type the song ID you want to see details of: ";
+        
+        selectedSong = Additions::getline();
+        
+        if (Additions::gotESC(selectedSong)) {
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+    }
+    
+    Additions::clearConsole();
+    
+    userWorkWithSong(selTrack);
 }
 
 void loggedInMenu() {
@@ -1059,6 +1031,7 @@ void loggedInMenu() {
             case (baseASCIINumber + 3):
                 
                 Additions::clearConsole();
+                
 				playlistManager();
                 
                 // Jump to Playlist
