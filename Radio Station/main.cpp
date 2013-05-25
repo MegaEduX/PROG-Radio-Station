@@ -979,52 +979,49 @@ void PlaylistManager(){
                 break;
                 
             case (baseASCIINumber + 1): {
-				
+                
 				Additions::clearConsole();
 				
-				if(allTracksVec.size() == 0){
-					std::cout << " There are no musics in the RadioStation ";
-					Additions::clearConsole;
+				if (allTracksVec.size() == 0) {
+					std::cout << "There are currently no songs on the radio station. Please press Return to go back.";
+                    Additions::waitForReturn();
+					Additions::clearConsole();
 					loggedInMenu();
 				}
+                
 				for (int i = 0 ; i < allTracksVec.size() ; i++)
 					std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() <<  std::endl;
-					std::cout << "Please select the ID of the song you want to add to your Playlist" << std::endl;
+                
+                std::cout << std::endl << "Please select the ID of the song you want to add to your Playlist" << std::endl;
 
 				std::string songIdStr = Additions::getline();
 
 				if (Additions::gotESC(songIdStr)) {
-				
 					std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
             
 					Additions::waitForReturn();
 					Additions::clearConsole();
 					start();
-									}
-
-					int songId = atoi(songIdStr.c_str());
-
-				
-					while (!(songId > RadioStation::Instance()->allTracks()->count() - 1 && songId < 0 ) && atoi(songIdStr.c_str() ) {
+                }
+                
+                int songId = atoi(songIdStr.c_str());
+                
+                while (!(songId > RadioStation::Instance()->allTracks()->count() - 1 && songId < 0 ) && atoi(songIdStr.c_str())) {
+                    std::cout << std::endl << "Invalid track. Please type another id: " << std::endl;
+                    
+                    songIdStr = Additions::getline();
+                }
+                
+                loggedInUser->getPlaylist()->addSong(allTracksVec[songId]);
+                
+                std::cout << "Music ' " << allTracksVec[songId]->getTitle() << " ' has been sucessfuly added to your playlist" << std::endl;
+                
+                Additions::waitForReturn();
+                Additions::clearConsole();
+                PlaylistManager();
 					
-						std::cout << std::endl << "Invalid track. Please type another id: " << std::endl;
-
-						songIdStr = Additions::getline();
-
-
-					}
-
-					loggedInUser->getPlaylist()->addSong(allTracksVec[songId]);
-
-					std::cout << "Music ' " << allTracksVec[songId]->getTitle() << " ' has been sucessfuly added to your playlist" << std::endl;
-					
-					Additions::waitForReturn();
-					Additions::clearConsole();
-					PlaylistManager();
-					
-				
 				break;
-										}
+            }
 
 				
             case (baseASCIINumber + 2):
@@ -1044,7 +1041,9 @@ void PlaylistManager(){
                 // Jump to Playlist
                 
                 break;
-		}}}
+		}
+    }
+}
 
 void loggedInMenu() {
     std::cout << "Welcome to " << (!RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << ", " << loggedInUser -> getName() << "!" << std::endl << std::endl;
@@ -1176,6 +1175,12 @@ void newUser() {
         std::cin >> name;
         
 		std::cout << std::endl;
+        
+        if (UserManager::Instance() -> getUser(name)) {
+            name = "1";
+            
+            std::cout << "An user with this name already exists. Please choose another name." << std::endl;
+        }
     } while (atoi(name.c_str()));
     
     do {
