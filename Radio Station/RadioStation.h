@@ -40,13 +40,13 @@ public:
     
     bool setName(std::string name);
     
-    std::string name();
+    std::string getName();
 
 	void generateSet(); // Generates a set randomly
 
-	Playlist* allTracks(); // Adicionado por razoes obvias
+	Playlist* getAllTracks(); // Adicionado por razoes obvias
     
-    Playlist topTen();
+    Playlist getTopTen(); // Noone should be able to edit it, so let's not pass it by reference.
     
     bool updateTopTen(Playlist thePlaylist);
 	

@@ -34,7 +34,7 @@ bool RadioStation::setName(std::string name) {
 	return true;
 }
 
-std::string RadioStation::name() {
+std::string RadioStation::getName() {
     return _name;
 }
 
@@ -59,11 +59,11 @@ void RadioStation::generateSet() {
 	_currentPlaySet.shuffle();
 }
 
-Playlist* RadioStation::allTracks() {
+Playlist* RadioStation::getAllTracks() {
     return &_allTracks;
 }
 
-Playlist RadioStation::topTen() {
+Playlist RadioStation::getTopTen() {
     return _topTen;
 }
 

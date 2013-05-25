@@ -30,7 +30,7 @@ Music::~Music() {
 }
 
 bool Music::setMusicId(unsigned int TheId) {
-	if (TheId > RadioStation::Instance()->allTracks()->count())
+	if (TheId > RadioStation::Instance()->getAllTracks()->count())
 		return false;
 
 	_musicId = TheId;

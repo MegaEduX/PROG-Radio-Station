@@ -83,7 +83,7 @@ bool FilesIO::storeGlobals() {
         parsedCsv = parser.parseCSV();
         
         if (strcmp(parsedCsv[0][0].c_str(), "name") == 0)
-            parsedCsv[1][1] = RadioStation::Instance()->name();
+            parsedCsv[1][1] = RadioStation::Instance()->getName();
         else
             return false;
     } else {
@@ -97,7 +97,7 @@ bool FilesIO::storeGlobals() {
         std::vector<std::string> kvVec;
         
         kvVec.push_back("name");
-        kvVec.push_back(RadioStation::Instance()->name());
+        kvVec.push_back(RadioStation::Instance()->getName());
         
         parsedCsv.push_back(kvVec);
     }
@@ -126,7 +126,7 @@ bool FilesIO::loadTopTen() {
     bool foundErrors = false;
     
     for (int i = 0; i < parsedCsv.size(); i++) {
-        std::vector<Music *> search = RadioStation::Instance()->allTracks()->search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "", "", 0);
+        std::vector<Music *> search = RadioStation::Instance()->getAllTracks()->search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "", "", 0);
         
         if (search.size() > 0) {
             topTenPlaylist.addSong(search[0]/*, atoi(parsedCsv[i][1].c_str())*/);
@@ -312,7 +312,7 @@ Playlist FilesIO::playlistForUser(int userId) {
     std::vector<std::vector<std::string>> rows = parser.tableRows(true);
     
     for (int i = 0; i < rows.size(); i++) {
-        std::vector<Music *> searchResult = RadioStation::Instance()->allTracks()->getAllTracks();
+        std::vector<Music *> searchResult = RadioStation::Instance()->getAllTracks()->getAllTracks();
         
         if (searchResult.size() != 1) {
             std::cout << "A music track wasn't found for ID " << rows[i][0] << ", or the result was ambiguous. Please look into this!" << std::endl;
@@ -388,7 +388,7 @@ bool FilesIO::loadAllSongs() {
         
         Music *newSong = new Music(atoi(musicData[0].c_str()), atoi(musicData[6].c_str()), musicData[1], musicData[2], musicData[4], musicData[3], musicData[5], atoi(musicData[7].c_str()), atoi(musicData[8].c_str()), atoi(musicData[9].c_str()), (atoi(musicData[10].c_str()) ? true : false));
         
-        if (!RadioStation::Instance() -> allTracks()->addSong(newSong)) {
+        if (!RadioStation::Instance() ->getAllTracks() -> addSong(newSong)) {
             std::cout << "An error was occoured while loading the track with ID " << newSong -> getId() << "." << std::endl;
             
             allWentGood = false;
@@ -399,7 +399,7 @@ bool FilesIO::loadAllSongs() {
 }
 
 bool FilesIO::saveAllSongs() {
-    Playlist *playlist = RadioStation::Instance() -> allTracks();
+    Playlist *playlist = RadioStation::Instance() -> getAllTracks();
     
     std::vector<Music *> result = playlist -> getAllTracks();
     

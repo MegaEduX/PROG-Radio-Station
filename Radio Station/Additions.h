@@ -19,7 +19,7 @@
 int getch();
 #endif
 
-static const std::string esc = "__esc_key_pressed__";
+static const std::string esc = "__\\esc_key_pressed\\__"; // I seriously doubt that anyone will type this into a field.
 
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
