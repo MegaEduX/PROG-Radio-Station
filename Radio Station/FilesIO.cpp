@@ -330,7 +330,7 @@ Playlist FilesIO::playlistForUser(std::string userName) {
 bool FilesIO::storePlaylistForUser(int userId) {
     Playlist *userPlaylist = UserManager::Instance()->getUser(userId)->getPlaylist();
     
-    std::vector<Music *> result = userPlaylist -> search(0, "", 0, "", "", "", 0);
+    std::vector<Music *> result = userPlaylist -> getAllTracks();
     
     std::vector<std::vector<std::string>> csvVec;
     

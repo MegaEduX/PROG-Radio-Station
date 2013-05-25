@@ -918,53 +918,75 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
 }
 
 void userWorkWithSong(Music *theMusic) {
-    std::cout << "Radio Station :: Song Details (" << theMusic -> getId() << ")" << std::endl << std::endl;
-    
-    std::cout << "ID: " << theMusic -> getId() << std::endl;
-    std::cout << "Title: " << theMusic -> getTitle() << std::endl;
-    std::cout << "Artist: " << theMusic -> getArtist() << std::endl;
-    std::cout << "Author: " << theMusic -> getAuthor() << std::endl;
-    std::cout << "Album: " << theMusic -> getAlbum() << std::endl;
-    std::cout << "Genre: " << theMusic -> getGenre() << std::endl;
-    
-    std::cout << std::endl;
-    
-    std::cout << "Likes: " << theMusic -> getLikes() << std::endl;
-    std::cout << "Dislikes: " << theMusic -> getDislikes() << std::endl;
-    
-    std::cout << std::endl;
-    
-    std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
-    
-    std::cout << std::endl << std::endl;
-    
-    std::cout << "1. Like this track" << std::endl;
-    std::cout << "2. Dislike this track" << std::endl;
-    std::cout << "3. " << (loggedInUser -> getPlaylist() -> search(theMusic->getId(), "", "", "", "", "", -1).size() ? "Remove from" : "Add to") << " Playlist" << std::endl;
-    
-    std::cout << std::endl;
-    
-    std::cout << "Please choose your option.";
-    
     while (true) {
+        std::cout << "Radio Station :: Song Details (" << theMusic -> getId() << ")" << std::endl << std::endl;
+        
+        std::vector<Music *> songSearch = loggedInUser -> getPlaylist() -> search(theMusic->getId(), "", "", "", "", "", -1);
+        
+        std::cout << "ID: " << theMusic -> getId() << std::endl;
+        std::cout << "Title: " << theMusic -> getTitle() << std::endl;
+        std::cout << "Artist: " << theMusic -> getArtist() << std::endl;
+        std::cout << "Author: " << theMusic -> getAuthor() << std::endl;
+        std::cout << "Album: " << theMusic -> getAlbum() << std::endl;
+        std::cout << "Genre: " << theMusic -> getGenre() << std::endl;
+        
+        std::cout << std::endl;
+        
+        std::cout << "Likes: " << theMusic -> getLikes() << std::endl;
+        std::cout << "Dislikes: " << theMusic -> getDislikes() << std::endl;
+        
+        std::cout << std::endl;
+        
+        std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
+        
+        std::cout << std::endl << std::endl;
+        
+        std::cout << "1. Like this track" << std::endl;
+        std::cout << "2. Dislike this track" << std::endl;
+        std::cout << "3. " << (songSearch.size() ? "Remove from" : "Add to") << " Playlist" << std::endl;
+        
+        std::cout << std::endl;
+        
+        std::cout << "Please choose your option.";
+        
         int ch = getch();
         
         switch (ch) {
             case (baseASCIINumber + 1):
                 
-                // Like the track
+                theMusic -> addLike();
+                
+                FilesIO::Instance() -> saveAllSongs();
                 
                 break;
                 
             case (baseASCIINumber + 2):
                 
-                // Dislike the track
+                theMusic -> addDislike();
+                
+                FilesIO::Instance() -> saveAllSongs();
                 
                 break;
                 
             case (baseASCIINumber + 3):
                 
-                // Add/remove from playlist
+                if (songSearch.size()) {
+                    if (!loggedInUser -> getPlaylist() -> removeSong(theMusic)) {
+                        std::cout << std::endl << std::endl << "An error has occoured. We could not remove the song from the playlist. Press Return to continue.";
+                        
+                        Additions::waitForReturn();
+                    }
+                } else {
+                    if (!loggedInUser -> getPlaylist() -> addSong(theMusic)) {
+                        std::cout << std::endl << std::endl << "An error has occoured. We could not add the song to the playlist. Press Return to continue.";
+                        
+                        Additions::waitForReturn();
+                    }
+                }
+                
+                FilesIO::Instance()->saveUser(loggedInUser);
+                
+                FilesIO::Instance()->storePlaylistForUser(loggedInUser->getId());
                 
                 break;
                 
@@ -984,6 +1006,8 @@ void userWorkWithSong(Music *theMusic) {
                 
                 break;
         }
+        
+        Additions::clearConsole();
     }
 }
 
