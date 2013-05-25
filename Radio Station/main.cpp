@@ -946,7 +946,45 @@ void userWorkWithSong(Music *theMusic) {
     
     std::cout << "Please choose your option.";
     
-    Additions::waitForReturn();
+    while (true) {
+        int ch = getch();
+        
+        switch (ch) {
+            case (baseASCIINumber + 1):
+                
+                // Like the track
+                
+                break;
+                
+            case (baseASCIINumber + 2):
+                
+                // Dislike the track
+                
+                break;
+                
+            case (baseASCIINumber + 3):
+                
+                // Add/remove from playlist
+                
+                break;
+                
+            case 27: // ESC
+                
+                std::cout << std::endl << std::endl << "Operation Canceled. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                
+                Additions::clearConsole();
+                
+                searchLibrary();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+    }
 }
 
 void PlaylistManager(){
