@@ -107,6 +107,8 @@ const std::vector<Music *> Playlist::topTenSongs() {
 }
 
 void Playlist::updateTopTen() {
+    // This needs testing.
+    
     std::vector<Music *> newTopTen;
     
     int topCount = 0;
