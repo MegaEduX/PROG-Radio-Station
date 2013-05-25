@@ -51,7 +51,7 @@ void editMusic(Music *theMusic);
 void userWorkWithSong(Music *theMusic);
 void musicManager();
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year);
-void PlaylistManager();
+void playlistManager();
 
 //
 // Code Start
@@ -923,7 +923,7 @@ void userWorkWithSong(Music *theMusic) {
     }
 }
 
-void PlaylistManager(){
+void playlistManager(){
 	std::cout << "Playlist Manager" << std::endl;
     std::cout << std::endl;
     std::cout << "1. Add New Song" << std::endl;
@@ -990,7 +990,7 @@ void PlaylistManager(){
                 
                 Additions::waitForReturn();
                 Additions::clearConsole();
-                PlaylistManager();
+                playlistManager();
 					
 				break;
             }
@@ -1059,7 +1059,7 @@ void loggedInMenu() {
             case (baseASCIINumber + 3):
                 
                 Additions::clearConsole();
-				PlaylistManager();
+				playlistManager();
                 
                 // Jump to Playlist
                 
