@@ -46,6 +46,7 @@ void editMusic(Music *theMusic);
 void userWorkWithSong(Music *theMusic);
 void musicManager();
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year);
+void PlaylistManager();
 
 //
 // Code Start
@@ -948,6 +949,103 @@ void userWorkWithSong(Music *theMusic) {
     Additions::waitForReturn();
 }
 
+void PlaylistManager(){
+	std::cout << "Playlist Manager" << std::endl;
+    std::cout << std::endl;
+    std::cout << "1. Add New Song" << std::endl;
+    std::cout << "2. Delete Song" << std::endl;
+	std::cout << "3. Get My Playlist" << std::endl;
+    std::cout << std::endl;
+    std::cout << "0. Go Back" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Please choose an option." ;
+
+	Playlist *allTracks = RadioStation::Instance() -> allTracks();
+	
+	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
+
+
+	while (true) {
+        int opc = getch();
+        
+        switch (opc) {
+
+			case baseASCIINumber:
+                
+                Additions::clearConsole();
+                
+                loggedInMenu();
+                
+                break;
+                
+            case (baseASCIINumber + 1): {
+				
+				Additions::clearConsole();
+				
+				if(allTracksVec.size() == 0){
+					std::cout << " There are no musics in the RadioStation ";
+					Additions::clearConsole;
+					loggedInMenu();
+				}
+				for (int i = 0 ; i < allTracksVec.size() ; i++)
+					std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() <<  std::endl;
+					std::cout << "Please select the ID of the song you want to add to your Playlist" << std::endl;
+
+				std::string songIdStr = Additions::getline();
+
+				if (Additions::gotESC(songIdStr)) {
+				
+					std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
+            
+					Additions::waitForReturn();
+					Additions::clearConsole();
+					start();
+									}
+
+					int songId = atoi(songIdStr.c_str());
+
+				
+					while (!(songId > RadioStation::Instance()->allTracks()->count() - 1 && songId < 0 ) && atoi(songIdStr.c_str() ) {
+					
+						std::cout << std::endl << "Invalid track. Please type another id: " << std::endl;
+
+						songIdStr = Additions::getline();
+
+
+					}
+
+					loggedInUser->getPlaylist()->addSong(allTracksVec[songId]);
+
+					std::cout << "Music ' " << allTracksVec[songId]->getTitle() << " ' has been sucessfuly added to your playlist" << std::endl;
+					
+					Additions::waitForReturn();
+					Additions::clearConsole();
+					PlaylistManager();
+					
+				
+				break;
+										}
+
+				
+            case (baseASCIINumber + 2):
+                
+                Additions::clearConsole();
+                
+                searchLibrary();
+                
+                // Jump to Library
+                
+                break;
+                
+            case (baseASCIINumber + 3):
+                
+                Additions::clearConsole();
+                
+                // Jump to Playlist
+                
+                break;
+		}}}
+
 void loggedInMenu() {
     std::cout << "Welcome to " << (!RadioStation::Instance()->name().compare("") ? "the radio station" : RadioStation::Instance()->name()) << ", " << loggedInUser -> getName() << "!" << std::endl << std::endl;
     
@@ -986,6 +1084,7 @@ void loggedInMenu() {
             case (baseASCIINumber + 3):
                 
                 Additions::clearConsole();
+				PlaylistManager();
                 
                 // Jump to Playlist
                 
@@ -1063,7 +1162,7 @@ void newUser() {
     std::cout << "Radio Station :: New User" << std::endl << std::endl;
     
     if (UserManager::Instance() -> userCount() == 0)
-        std::cout << "There are currently no registeried users. This will be the admin user." << std::endl << std::endl;
+        std::cout << "There are currently no registered users. This will be the admin user." << std::endl << std::endl;
     
 	int age = 0;
     
@@ -1133,7 +1232,7 @@ void newUser() {
     User *theUser = new User(UserManager::Instance()->userCount(), age, (sexChar == 'F' ? kSexFemale : kSexMale), name, newPlaylist);
     
     if (UserManager::Instance() -> addUser(theUser))
-        std::cout << "You were registered. You may now login!" << std::endl << "Press any key to go back to the main menu." << std::endl;
+        std::cout << "You are registered and may login now!" << std::endl << "Press any key to go back to the main menu." << std::endl;
     else
         std::cout << "There was a problem. Please try again." << std::endl << "Press any key to go back to the main menu." << std::endl;
     
