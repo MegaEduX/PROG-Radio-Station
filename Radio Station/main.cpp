@@ -29,6 +29,11 @@
 
 static const int baseASCIINumber = 48;
 
+static const int escKey = 27;
+
+static const int returnKeyPOSIX = 13;
+static const int returnKeyWindows = 10;
+
 User *loggedInUser = NULL;
 
 //
@@ -60,9 +65,6 @@ void editMusic(Music *theMusic) {
 	std::string newTitle = Additions::getline();
     
     if (Additions::gotESC(newTitle)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -78,9 +80,6 @@ void editMusic(Music *theMusic) {
 	std::string newAlbum = Additions::getline();
     
     if (Additions::gotESC(newAlbum)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -96,9 +95,6 @@ void editMusic(Music *theMusic) {
 	std::string newArtist = Additions::getline();
     
     if (Additions::gotESC(newArtist)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -117,8 +113,11 @@ void editMusic(Music *theMusic) {
 
 		newYear = Additions::getline();
         
-        if (Additions::gotESC(newYear))
+        if (Additions::gotESC(newYear)) {
+            Additions::clearConsole();
+            
             editMusicMenu();
+        }
     
 		if (newYear.compare("")) {
 			if (atoi(newYear.c_str())) {
@@ -138,9 +137,6 @@ void editMusic(Music *theMusic) {
 	std::string newGenre = Additions::getline();
     
     if (Additions::gotESC(newGenre)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -179,8 +175,8 @@ void editMusic(Music *theMusic) {
                 
                 break;
                 
-            case 13:    // Return (POSIX)
-            case 10:    // Return (Windows)
+            case returnKeyPOSIX:    // Return (POSIX)
+            case returnKeyWindows:    // Return (Windows)
                 
                 available = theMusic -> getAvailable();
                 
@@ -188,12 +184,7 @@ void editMusic(Music *theMusic) {
                 
                 break;
                 
-            case 27:    // esc
-                
-                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
-                Additions::clearConsole();
+            case escKey:    // ESC
                 
                 editMusicMenu();
                 
@@ -249,14 +240,8 @@ void editMusicMenu() {
         
         std::string songIdStr = Additions::getline();
         
-        if (Additions::gotESC(songIdStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
-            Additions::clearConsole();
-            
+        if (Additions::gotESC(songIdStr))
             musicManager();
-        }
         
         int songId = atoi(songIdStr.c_str());
         
@@ -265,14 +250,8 @@ void editMusicMenu() {
             
             songIdStr = Additions::getline();
             
-            if (Additions::gotESC(songIdStr)) {
-                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
-                Additions::clearConsole();
-                
+            if (Additions::gotESC(songIdStr))
                 musicManager();
-            }
             
             songId = atoi(songIdStr.c_str());
         }
@@ -294,8 +273,6 @@ void musicManager() {
     std::cout << std::endl;
     std::cout << "1. Add New Song" << std::endl;
     std::cout << "2. Modify Existing Song" << std::endl;
-    std::cout << std::endl;
-    std::cout << "0. Go Back" << std::endl;
     std::cout << std::endl;
     std::cout << "Please choose an option.";
     
@@ -320,7 +297,7 @@ void musicManager() {
                 
                 break;
                 
-            case baseASCIINumber:
+            case escKey:
                 
                 Additions::clearConsole();
                 
@@ -345,9 +322,6 @@ void addMusic() {
     std::string title = Additions::getline();
     
     if (Additions::gotESC(title)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -360,9 +334,6 @@ void addMusic() {
     std::string artist = Additions::getline();
     
     if (Additions::gotESC(artist)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -375,9 +346,6 @@ void addMusic() {
     std::string author = Additions::getline();
     
     if (Additions::gotESC(author)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -390,9 +358,6 @@ void addMusic() {
     std::string album = Additions::getline();
     
     if (Additions::gotESC(album)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -405,9 +370,6 @@ void addMusic() {
     std::string genre = Additions::getline();
     
     if (Additions::gotESC(genre)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         editMusicMenu();
@@ -423,9 +385,6 @@ void addMusic() {
         std::string yearStr = Additions::getline();
         
         if (Additions::gotESC(yearStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             editMusicMenu();
@@ -465,11 +424,8 @@ void addMusic() {
                 
                 break;
                 
-            case 27:    // esc
+            case escKey:    // esc
                 
-                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
                 Additions::clearConsole();
                 
                 editMusicMenu();
@@ -531,21 +487,11 @@ void reinitializeSet() {
                 
             case 110:   // n
             case 78:    // N
+            case escKey:
                 
                 reinitialize = false;
                 
                 shouldBreak = true;
-                
-                break;
-                
-            case 27:    // esc
-                
-                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
-                Additions::clearConsole();
-                
-                adminPanel();
                 
                 break;
                 
@@ -581,14 +527,11 @@ void changeName() {
     std::cout << "Radio Station :: Name Changer" << std::endl << std::endl;
     
     std::cout << "Current Name: " << (RadioStation::Instance() -> name().compare("") ? RadioStation::Instance() -> name() : "None!") << std::endl;
-    std::cout << "New Name (press ESC to cancel): ";
+    std::cout << "New Name: ";
     
     std::string newName = Additions::getline();
     
     if (Additions::gotESC(newName)) {
-        std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-        
-        Additions::waitForReturn();
         Additions::clearConsole();
         
         adminPanel();
@@ -619,8 +562,6 @@ void adminPanel() {
     std::cout << "1. Manage the Music Library" << std::endl;
     std::cout << "2. Reinitialize the Set" << std::endl;
     std::cout << "3. Change the Radio Station Name" << std::endl;
-    std::cout << std::endl;
-    std::cout << "0. Go Back" << std::endl;
     std::cout << std::endl;
     std::cout << "Please choose an option.";
     
@@ -654,7 +595,7 @@ void adminPanel() {
                 
                 break;
                 
-            case baseASCIINumber:
+            case escKey:
                 
                 Additions::clearConsole();
                 
@@ -724,8 +665,8 @@ void searchLibrary() {
                 
                 break;
                 
-            case 13: // Return (POSIX)
-            case 10: // Return (Windows)
+            case returnKeyPOSIX: // Return (POSIX)
+            case returnKeyWindows: // Return (Windows)
                 
                 Additions::clearConsole();
                 
@@ -733,11 +674,7 @@ void searchLibrary() {
                 
                 break;
                 
-            case 27: // ESC
-                
-                std::cout << std::endl << std::endl << "Operation Canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
+            case escKey: // ESC
                 
                 Additions::clearConsole();
                 
@@ -769,9 +706,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << std::endl;
         
         if (Additions::gotESC(nameStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             loggedInMenu();
@@ -786,9 +720,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << std::endl;
         
         if (Additions::gotESC(artistStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             loggedInMenu();
@@ -803,9 +734,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << std::endl;
         
         if (Additions::gotESC(authorStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             loggedInMenu();
@@ -820,9 +748,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << std::endl;
         
         if (Additions::gotESC(albumStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             loggedInMenu();
@@ -837,9 +762,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << std::endl;
         
         if (Additions::gotESC(genreStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             loggedInMenu();
@@ -855,9 +777,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
             yearStr = Additions::getline();
             
             if (Additions::gotESC(yearStr)) {
-                std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
                 Additions::clearConsole();
                 
                 loggedInMenu();
@@ -878,7 +797,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << "[" << searchResult[i] -> getId() << "] " << searchResult[i] -> getTitle() << " by " << searchResult[i] -> getArtist() << " " << (searchResult[i] -> getAvailable() ? "(Available)" : "(Unavailable)") << std::endl;
     }
     
-    std::cout << std::endl << "Type a song ID to select it (or ESC to cancel): ";
+    std::cout << std::endl << "Type a song ID to select it: ";
     
     while (true) {
         std::string songIdStr = Additions::getline();
@@ -886,9 +805,6 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         std::cout << std::endl;
         
         if (Additions::gotESC(songIdStr)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             loggedInMenu();
@@ -990,11 +906,7 @@ void userWorkWithSong(Music *theMusic) {
                 
                 break;
                 
-            case 27: // ESC
-                
-                std::cout << std::endl << std::endl << "Operation Canceled. Press Return to continue.";
-                
-                Additions::waitForReturn();
+            case escKey: // ESC
                 
                 Additions::clearConsole();
                 
@@ -1016,9 +928,7 @@ void PlaylistManager(){
     std::cout << std::endl;
     std::cout << "1. Add New Song" << std::endl;
     std::cout << "2. Delete Song" << std::endl;
-	std::cout << "3. Get My Playlist" << std::endl;
-    std::cout << std::endl;
-    std::cout << "0. Go Back" << std::endl;
+	std::cout << "3. Display My Playlist" << std::endl;
     std::cout << std::endl;
     std::cout << "Please choose an option." ;
 
@@ -1103,6 +1013,12 @@ void PlaylistManager(){
                 // Jump to Playlist
                 
                 break;
+                
+            case escKey:
+                
+                // Go back. ESC key pressed.
+                
+                break;
 		}
     }
 }
@@ -1114,8 +1030,6 @@ void loggedInMenu() {
     std::cout << "2. Search our Music Library" << std::endl;
     std::cout << "3. Manage your Personal Playlist" << std::endl;
     if (loggedInUser -> isAdmin())  std::cout << "4. Administration Panel" << std::endl;
-    std::cout << std::endl;
-    std::cout << "0. Log Out" << std::endl;
     std::cout << std::endl;
     std::cout << "Please choose an option.";
     
@@ -1161,7 +1075,7 @@ void loggedInMenu() {
                 
                 break;
                 
-            case baseASCIINumber:
+            case escKey:
                 
                 Additions::clearConsole();
                 
@@ -1191,9 +1105,6 @@ void login() {
         std::string username = Additions::getline();
         
         if (Additions::gotESC(username)) {
-            std::cout << std::endl << std::endl << "The operation was canceled. Press Return to continue.";
-            
-            Additions::waitForReturn();
             Additions::clearConsole();
             
             start();
@@ -1233,6 +1144,14 @@ void newUser() {
     
     do {
 		std::cout << "Name: ";
+        
+        name = Additions::getline();
+        
+        if (Additions::gotESC(name)) {
+            Additions::clearConsole();
+            
+            start();
+        }
 		
         std::cin >> name;
         
@@ -1247,7 +1166,14 @@ void newUser() {
     
     do {
         std::cout << "Age: ";
-		std::cin >> age_str;
+		
+        age_str = Additions::getline();
+        
+        if (Additions::gotESC(age_str)) {
+            Additions::clearConsole();
+            
+            start();
+        }
         
         if (atoi(age_str.c_str()))
             age = atoi(age_str.c_str());
@@ -1278,6 +1204,14 @@ void newUser() {
                 sex = "F";
                 
                 shouldBreak = true;
+                
+            case escKey:
+                
+                Additions::clearConsole();
+                
+                start();
+                
+                break;
                 
             default:
                 
@@ -1316,7 +1250,7 @@ void start() {
     
     std::cout << std::endl;
     
-    std::cout << "Press the zero key to quit." << std::endl;
+    std::cout << "The ESC key can be pressed at any time to go to the previous menu (or, in this case, to terminate the program)." << std::endl;
     
     std::cout << std::endl;
     
@@ -1345,11 +1279,11 @@ void start() {
                 
                 break;
                 
-            case baseASCIINumber:
+            case escKey:
                 
                 Additions::clearConsole();
                 
-                std::cout << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
+                std::cout << "Radio Station (1.0)" << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
                 
                 exit(0);
                 
