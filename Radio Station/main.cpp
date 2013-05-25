@@ -1199,7 +1199,7 @@ void login() {
             start();
         }
         
-        if (atoi(username.c_str()))
+        if (atoi(username.c_str()) || !username.compare("0")) // if (int)0, this would return false, so... yeah.
             theUser = UserManager::Instance()->getUser(atoi(username.c_str()));
         else
             theUser = UserManager::Instance()->getUser(username);
