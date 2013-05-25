@@ -53,6 +53,11 @@ void musicManager();
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year);
 void playlistManager();
 void topTenSongs();
+void getArtistMusics (std::string artist);
+void getAlbumMusics (std::string album);
+void getYearMusics (std::string year);
+
+
 
 //
 // Code Start
@@ -707,6 +712,49 @@ void searchLibrary() {
         
         Additions::clearConsole();
     }
+}
+
+void getArtistMusics (std::string artist) {
+	Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
+	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
+	// Ainda falta por muitos checks atrás mas vou dormir, amanhã termino xD Ainda tenho que melhorar a comparação das strings etc
+	for (int i = 0; i < allTracksVec.size(); i++)
+	{
+		if( allTracksVec[i]->getArtist == artist)
+			std::cout << "[" << i << "]" << " Music Name: " << allTracksVec[i]->getTitle << std::endl;
+
+
+
+	}
+}
+
+void getAuthorMusics (std::string author) {
+	Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
+	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
+	// Ainda falta por muitos checks atrás mas vou dormir, amanhã termino xD Ainda tenho que melhorar a comparação das strings etc
+	for (int i = 0; i < allTracksVec.size(); i++)
+	{
+		if( allTracksVec[i]->getAuthor == author)
+			std::cout << "[" << i << "]" << " Music Name: " << allTracksVec[i]->getTitle << std::endl;
+
+
+
+	}
+}
+
+void getYearMusics (std::string year) {
+	Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
+	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
+	// Ainda falta por muitos checks atrás mas vou dormir, amanhã termino xD Ainda tenho que melhorar a comparação das strings etc
+
+	for (int i = 0; i < allTracksVec.size(); i++)
+	{
+		if( allTracksVec[i]->getArtist == year)
+			std::cout << "[" << i << "]" << " Music Name: " << allTracksVec[i]->getTitle << std::endl;
+
+
+
+	}
 }
 
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year) {
