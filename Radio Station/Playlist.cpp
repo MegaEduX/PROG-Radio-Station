@@ -55,32 +55,38 @@ const std::vector<Music *> Playlist::search(int musicId, std::string title,  std
     if (title.compare(""))
         for (int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getTitle().compare(title)))
-                returnVec.push_back(_thePlaylist[i]);
+                if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
+                    returnVec.push_back(_thePlaylist[i]);
     
     if (artist.compare(""))
         for (int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getArtist().compare(artist)))
-                returnVec.push_back(_thePlaylist[i]);
+                if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
+                    returnVec.push_back(_thePlaylist[i]);
     
     if (author.compare(""))
         for (int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getAuthor().compare(author)))
-                returnVec.push_back(_thePlaylist[i]);
+                if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
+                    returnVec.push_back(_thePlaylist[i]);
     
     if (album.compare(""))
         for (int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getAlbum().compare(album)))
-                returnVec.push_back(_thePlaylist[i]);
+                if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
+                    returnVec.push_back(_thePlaylist[i]);
     
     if (music_genre.compare(""))
         for (int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getGenre().compare(music_genre)))
-                returnVec.push_back(_thePlaylist[i]);
+                if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
+                    returnVec.push_back(_thePlaylist[i]);
     
     if (year != -1)
         for (int i = 0; i < _thePlaylist.size(); i++)
             if (_thePlaylist[i] -> getYear() == year)
-                returnVec.push_back(_thePlaylist[i]);
+                if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
+                    returnVec.push_back(_thePlaylist[i]);
     
     return returnVec;
 }

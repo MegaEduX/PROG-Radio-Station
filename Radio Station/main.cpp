@@ -1283,7 +1283,7 @@ void start() {
                 
                 Additions::clearConsole();
                 
-                std::cout << "Radio Station (1.0)" << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << "Thanks for using this program. Please come back soon!";
+                std::cout << "Radio Station (1.0)" << std::endl << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << std::endl << "Thanks for using this program. Please come back soon!";
                 
                 exit(0);
                 
