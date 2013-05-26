@@ -1281,8 +1281,9 @@ void loggedInMenu() {
     
     std::cout << "1. Top 10 Songs" << std::endl;
     std::cout << "2. Search our Music Library" << std::endl;
-    std::cout << "3. Manage your Personal Playlist" << std::endl;
-    if (loggedInUser -> isAdmin())  std::cout << "4. Administration Panel" << std::endl;
+    std::cout << "3. List Songs by Author/Artist/Year" << std::endl;
+    std::cout << "4. Manage your Personal Playlist" << std::endl;
+    if (loggedInUser -> isAdmin())  std::cout << "5. Administration Panel" << std::endl;
     std::cout << std::endl;
     std::cout << "Please choose an option.";
     
@@ -1311,11 +1312,19 @@ void loggedInMenu() {
                 
                 Additions::clearConsole();
                 
-				playlistManager();
+                getSongsFromKey();
                 
                 break;
                 
             case (baseASCIINumber + 4):
+                
+                Additions::clearConsole();
+                
+				playlistManager();
+                
+                break;
+                
+            case (baseASCIINumber + 5):
                 
                 if (loggedInUser -> isAdmin()) {
                     Additions::clearConsole();
@@ -1402,8 +1411,6 @@ void newUser() {
             
             start();
         }
-		
-        std::cin >> name;
         
 		std::cout << std::endl;
         
