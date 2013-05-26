@@ -46,7 +46,7 @@ public:
     
 	// const std::map <Music *, int> topTenSongs();
     
-    const std::vector<Music *> topTenSongs();
+    const std::vector<Music *> getTopTen();
     
     void updateTopTen();
     

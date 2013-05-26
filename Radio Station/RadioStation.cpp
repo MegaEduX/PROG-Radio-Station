@@ -63,15 +63,6 @@ Playlist* RadioStation::getAllTracks() {
     return &_allTracks;
 }
 
-Playlist RadioStation::getTopTen() {
-    return _topTen;
-}
-
-bool RadioStation::updateTopTen(Playlist thePlaylist) {
-    if (thePlaylist.count() != 10)
-        return false;
-    
-    _topTen = thePlaylist;
-        
-    return true;
+std::vector<Music *> RadioStation::getTopTen() {
+    return _allTracks.getTopTen();
 }

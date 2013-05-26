@@ -617,8 +617,8 @@ void adminPanel() {
 void topTenSongs() {
     std::cout << "Radio Station :: Top Ten" << std::endl << std::endl;
     
-    for (int i = 0; i < RadioStation::Instance() -> getTopTen().count(); i++) {
-        Music *theTrack = RadioStation::Instance() -> getTopTen().getAllTracks()[i];
+    for (int i = 0; i < RadioStation::Instance() -> getTopTen().size(); i++) {
+        Music *theTrack = RadioStation::Instance() -> getTopTen()[i];
         std::cout << "[" << theTrack -> getId() << "] " << theTrack -> getTitle() << " by " << theTrack -> getArtist() << " (" << theTrack -> getPlayCount() << " plays)" << std::endl;
     }
     

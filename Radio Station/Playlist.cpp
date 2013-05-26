@@ -99,8 +99,8 @@ const unsigned int Playlist::count() {
     return (const unsigned int) _thePlaylist.size();
 }
 
-const std::vector<Music *> Playlist::topTenSongs() {
-    if (topTenSongs().size() == 0)
+const std::vector<Music *> Playlist::getTopTen() {
+    if (_topTen.size() == 0)
         updateTopTen();
     
     return _topTen;
@@ -111,13 +111,13 @@ void Playlist::updateTopTen() {
     
     std::vector<Music *> newTopTen;
     
-    int topCount = 0;
+    int topCount = 0; // The current top count of likes. Begins as 0, obviously, as we don't know yet the song that has the most likes.
     
-    for (int i = 0; i < 10; i++) {
-        int localTop = 0;
+    for (int i = 0; i < 10; i++) { // We run the loop 10 times, as we desire our top to have... 10 songs.
+        int localTop = 0; // The current /local/ top of likes. Same story as up there.
         
         for (int j = 0; j < _thePlaylist.size(); j++) {
-            int diff = _thePlaylist[i] -> getLikes() - _thePlaylist[i] -> getDislikes();
+            int diff = _thePlaylist[j] -> getLikes() - _thePlaylist[j] -> getDislikes();
         
             if (diff > localTop)
                 if (topCount == 0 || diff < topCount)
@@ -126,10 +126,10 @@ void Playlist::updateTopTen() {
         
         if (localTop != 0) {
             for (int j = 0; j < _thePlaylist.size(); j++) {
-                int diff = _thePlaylist[i] -> getLikes() - _thePlaylist[i] -> getDislikes();
+                int diff = _thePlaylist[j] -> getLikes() - _thePlaylist[j] -> getDislikes();
                 
                 if (localTop == diff)
-                    newTopTen.push_back(_thePlaylist[i]);
+                    newTopTen.push_back(_thePlaylist[j]);
             }
         }
         

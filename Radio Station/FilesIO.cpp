@@ -137,7 +137,7 @@ bool FilesIO::loadTopTen() {
         }
     }
     
-    if (RadioStation::Instance() -> updateTopTen(topTenPlaylist) && !foundErrors)
+    //if (RadioStation::Instance() -> updateTopTen(topTenPlaylist) && !foundErrors)
         return true;
     
     return false;
