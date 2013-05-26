@@ -715,46 +715,159 @@ void searchLibrary() {
 }
 
 void getArtistMusics (std::string artist) {
-	Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
-	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
-	// Ainda falta por muitos checks atrás mas vou dormir, amanhã termino xD Ainda tenho que melhorar a comparação das strings etc
+	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
+	
 	for (int i = 0; i < allTracksVec.size(); i++)
-	{
-		if( allTracksVec[i]->getArtist == artist)
-			std::cout << "[" << i << "]" << " Music Name: " << allTracksVec[i]->getTitle << std::endl;
-
-
-
-	}
+		if (allTracksVec[i]->getArtist().compare(artist))
+			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
+    
+    std::cout << std::endl << "Please type a song ID to view more info: ";
+    
+    std::string songID = Additions::getline();
+    
+    if (Additions::gotESC(songID)) {
+        Additions::clearConsole();
+        
+        loggedInMenu();
+    }
+    
+    bool foundSong = false;
+    
+    if (atoi(songID.c_str()) || songID.size() == 1)
+        for (int i = 0; i < allTracksVec.size(); i++)
+            if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
+                Additions::clearConsole();
+                
+                userWorkWithSong(allTracksVec[i]);
+                
+                foundSong = true;
+            }
+    
+    while (!foundSong) {
+        std::cout << std::endl << std::endl << "The requested song wasn't found. Please try again: ";
+        
+        std::string songID = Additions::getline();
+        
+        if (Additions::gotESC(songID)) {
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+        
+        if (atoi(songID.c_str()) || songID.size() == 1)
+            for (int i = 0; i < allTracksVec.size(); i++)
+                if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
+                    Additions::clearConsole();
+                    
+                    userWorkWithSong(allTracksVec[i]);
+                    
+                    foundSong = true;
+                }
+    }
 }
 
 void getAuthorMusics (std::string author) {
-	Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
-	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
-	// Ainda falta por muitos checks atrás mas vou dormir, amanhã termino xD Ainda tenho que melhorar a comparação das strings etc
+	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
+	
 	for (int i = 0; i < allTracksVec.size(); i++)
-	{
-		if( allTracksVec[i]->getAuthor == author)
-			std::cout << "[" << i << "]" << " Music Name: " << allTracksVec[i]->getTitle << std::endl;
-
-
-
-	}
+		if (allTracksVec[i]->getAuthor().compare(author))
+			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
+    
+    std::cout << std::endl << "Please type a song ID to view more info: ";
+    
+    std::string songID = Additions::getline();
+    
+    if (Additions::gotESC(songID)) {
+        Additions::clearConsole();
+        
+        loggedInMenu();
+    }
+    
+    bool foundSong = false;
+    
+    if (atoi(songID.c_str()) || songID.size() == 1)
+        for (int i = 0; i < allTracksVec.size(); i++)
+            if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
+                Additions::clearConsole();
+                
+                userWorkWithSong(allTracksVec[i]);
+                
+                foundSong = true;
+            }
+    
+    while (!foundSong) {
+        std::cout << std::endl << std::endl << "The requested song wasn't found. Please try again: ";
+        
+        std::string songID = Additions::getline();
+        
+        if (Additions::gotESC(songID)) {
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+        
+        if (atoi(songID.c_str()) || songID.size() == 1)
+            for (int i = 0; i < allTracksVec.size(); i++)
+                if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
+                    Additions::clearConsole();
+                    
+                    userWorkWithSong(allTracksVec[i]);
+                    
+                    foundSong = true;
+                }
+    }
 }
 
-void getYearMusics (std::string year) {
-	Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
-	std::vector<Music *> allTracksVec = allTracks -> getAllTracks();
-	// Ainda falta por muitos checks atrás mas vou dormir, amanhã termino xD Ainda tenho que melhorar a comparação das strings etc
-
+void getYearMusics (int year) {
+	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
+	
 	for (int i = 0; i < allTracksVec.size(); i++)
-	{
-		if( allTracksVec[i]->getArtist == year)
-			std::cout << "[" << i << "]" << " Music Name: " << allTracksVec[i]->getTitle << std::endl;
-
-
-
-	}
+		if (allTracksVec[i]->getYear() == year)
+			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
+    
+    std::cout << std::endl << "Please type a song ID to view more info: ";
+    
+    std::string songID = Additions::getline();
+    
+    if (Additions::gotESC(songID)) {
+        Additions::clearConsole();
+        
+        loggedInMenu();
+    }
+    
+    bool foundSong = false;
+    
+    if (atoi(songID.c_str()) || songID.size() == 1)
+        for (int i = 0; i < allTracksVec.size(); i++)
+            if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
+                Additions::clearConsole();
+                
+                userWorkWithSong(allTracksVec[i]);
+                
+                foundSong = true;
+            }
+    
+    while (!foundSong) {
+        std::cout << std::endl << std::endl << "The requested song wasn't found. Please try again: ";
+        
+        std::string songID = Additions::getline();
+        
+        if (Additions::gotESC(songID)) {
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
+        
+        if (atoi(songID.c_str()) || songID.size() == 1)
+            for (int i = 0; i < allTracksVec.size(); i++)
+                if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
+                    Additions::clearConsole();
+                    
+                    userWorkWithSong(allTracksVec[i]);
+                    
+                    foundSong = true;
+                }
+    }
 }
 
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year) {
