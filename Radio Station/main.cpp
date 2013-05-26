@@ -53,11 +53,9 @@ void musicManager();
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year);
 void playlistManager();
 void topTenSongs();
-void getArtistMusics (std::string artist);
-void getAlbumMusics (std::string album);
-void getYearMusics (std::string year);
-
-
+void getArtistMusics(std::string artist);
+void getAlbumMusics(std::string album);
+void getYearMusics(int year);
 
 //
 // Code Start
@@ -711,6 +709,110 @@ void searchLibrary() {
         }
         
         Additions::clearConsole();
+    }
+}
+
+void getSongsFromKey() {
+    std::cout << "Radio Station :: Get Tracks" << std::endl << std::endl;
+    
+    std::cout << "1. All songs from Artist..." << std::endl;
+    std::cout << "2. All songs from Author..." << std::endl;
+    std::cout << "3. All songs from Year..." << std::endl;
+    
+    std::cout << std::endl;
+    
+    std::cout << "Please choose an option.";
+    
+    while (true) {
+        int ch = getch();
+        
+        switch (ch) {
+            case (baseASCIINumber + 1): {
+                
+                std::cout << std::endl << std::endl << "Please type an artist name: ";
+                
+                std::string artistName = Additions::getline();
+                
+                Additions::clearConsole();
+                
+                if (Additions::gotESC(artistName)) {
+                    getSongsFromKey();
+                    
+                    break;
+                }
+                
+                getArtistMusics(artistName);
+                
+                break;
+                
+            }
+                
+            case (baseASCIINumber + 2): {
+                
+                std::cout << std::endl << std::endl << "Please type an author name: ";
+                
+                std::string authorName = Additions::getline();
+                
+                Additions::clearConsole();
+                
+                if (Additions::gotESC(authorName)) {
+                    getSongsFromKey();
+                    
+                    break;
+                }
+                
+                getArtistMusics(authorName);
+                
+                break;
+                
+            }
+                
+            case (baseASCIINumber + 3): {
+                
+                std::cout << std::endl << std::endl << "Please type an year: ";
+                
+                std::string yearStr = Additions::getline();
+                
+                if (Additions::gotESC(yearStr)) {
+                    Additions::clearConsole();
+                    
+                    getSongsFromKey();
+                    
+                    break;
+                }
+                
+                while (!atoi(yearStr.c_str())) {
+                    std::cout << std::endl << "You typed an invalid year. Please try again: ";
+                    
+                    yearStr = Additions::getline();
+                    
+                    if (Additions::gotESC(yearStr)) {
+                        Additions::clearConsole();
+                        
+                        getSongsFromKey();
+                        
+                        break;
+                    }
+                }
+                
+                getYearMusics(atoi(yearStr.c_str()));
+                
+                break;
+                
+            }
+                
+            case escKey: // ESC
+                
+                Additions::clearConsole();
+                
+                loggedInMenu();
+                
+                break;
+                
+            default:
+                
+                break;
+        }
     }
 }
 
