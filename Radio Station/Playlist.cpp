@@ -133,7 +133,8 @@ void Playlist::updateTopTen() {
             }
         }
         
-        topCount = localTop;
+        if (localTop)
+            topCount = localTop;
     }
     
     _topTen = newTopTen;

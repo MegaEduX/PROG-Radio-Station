@@ -617,9 +617,11 @@ void adminPanel() {
 void topTenSongs() {
     std::cout << "Radio Station :: Top Ten" << std::endl << std::endl;
     
-    for (int i = 0; i < RadioStation::Instance() -> getTopTen().size(); i++) {
-        Music *theTrack = RadioStation::Instance() -> getTopTen()[i];
-        std::cout << "[" << theTrack -> getId() << "] " << theTrack -> getTitle() << " by " << theTrack -> getArtist() << " (" << theTrack -> getPlayCount() << " plays)" << std::endl;
+    std::vector<Music *> topTen = RadioStation::Instance() -> getTopTen();
+    
+    for (int i = 0; i < topTen.size(); i++) {
+        Music *theTrack = topTen[i];
+        std::cout << "[" << theTrack -> getId() << "] " << theTrack -> getTitle() << " by " << theTrack -> getArtist() << " (" << theTrack -> getPlayCount() << " plays | " << theTrack -> getLikes() << " likes | " << theTrack -> getDislikes() << " dislikes)" << std::endl;
     }
     
     std::cout << std::endl << "Press Return to go back.";
