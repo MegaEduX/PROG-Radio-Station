@@ -731,7 +731,32 @@ void getSongsFromKey() {
         switch (ch) {
             case (baseASCIINumber + 1): {
                 
-                std::cout << std::endl << std::endl << "Please type an artist name: ";
+                Additions::clearConsole();
+                
+                std::cout << "Radio Station :: Artist List" << std::endl << std::endl;
+                
+                std::vector<std::string> artistList;
+                
+                for (int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
+                    std::string theArtist = RadioStation::Instance() -> getAllTracks() -> getAllTracks()[i] -> getArtist();
+                    
+                    bool foundArtist = false;
+                    
+                    for (int i = 0; i < artistList.size(); i++)
+                        if (!artistList[i].compare(theArtist)) {
+                            foundArtist = true;
+                            
+                            break;
+                        }
+                    
+                    if (!foundArtist) {
+                        artistList.push_back(theArtist);
+                        
+                        std::cout << "[" << artistList.size() - 1 << "] " << theArtist << std::endl;
+                    }
+                }
+                
+                std::cout << std::endl << "Please type the choosen artist name or number: ";
                 
                 std::string artistName = Additions::getline();
                 
@@ -743,7 +768,9 @@ void getSongsFromKey() {
                     break;
                 }
                 
-                getArtistMusics(artistName);
+                // getArtistMusics(artistName);
+                
+                // do something here!
                 
                 break;
                 
