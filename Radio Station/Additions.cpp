@@ -126,8 +126,12 @@ namespace Additions {
 #endif
                 }
             } else
-				if ((int) ch != 8)
+#ifdef WIN32 
+                if ((int) ch != 8)
+#endif
 					str += std::string(&ch)[0];
+            
+#ifdef WIN32
             
 			if ((int) ch != 8 || str.size() > 0)
 				std::cout << std::string(&ch)[0];
@@ -142,6 +146,10 @@ namespace Additions {
 				// em casa dou debug -.-
 				// i give up
 			}
+            
+#else
+            std::cout << std::string(&ch)[0];
+#endif
             
             ch = getch();
         }

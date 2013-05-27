@@ -765,6 +765,8 @@ void getSongsFromKey() {
                 std::string artistName = Additions::getline();
                 
                 if (Additions::gotESC(artistName)) {
+                    Additions::clearConsole();
+                    
                     getSongsFromKey();
                     
                     break;
@@ -859,10 +861,10 @@ void getSongsFromKey() {
                     
                     int result = atoi(authorName.c_str());
                     
-                    if (authorName.size() > result) {
+                    if (authorList.size() > result) {
                         Additions::clearConsole();
                         
-                        getArtistMusics(authorList[result]);
+                        getAuthorMusics(authorList[result]);
                         
                         break;
                     }
@@ -871,7 +873,7 @@ void getSongsFromKey() {
                     
                     Additions::clearConsole();
                     
-                    getArtistMusics(authorList[0]);
+                    getAuthorMusics(authorList[0]);
                     
                     break;
                 
@@ -881,7 +883,7 @@ void getSongsFromKey() {
                         if (!authorList[i].compare(authorName)) {
                             Additions::clearConsole();
                             
-                            getArtistMusics(authorList[i]);
+                            getAuthorMusics(authorList[i]);
                             
                             break;
                         }
@@ -1315,9 +1317,18 @@ void userWorkWithSong(Music *theMusic) {
         std::cout << std::endl;
         
         std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
-
         
         std::cout << std::endl << std::endl;
+        
+        if (!theMusic -> getAvailable() && !loggedInUser -> isAdmin()) {
+            std::cout << "This song is unavailable, so its data is read-only. Press Return to go back.";
+            
+            Additions::waitForReturn();
+            
+            Additions::clearConsole();
+            
+            loggedInMenu();
+        }
         
         std::cout << "1. Like this track" << std::endl;
         std::cout << "2. Dislike this track" << std::endl;
@@ -1332,20 +1343,18 @@ void userWorkWithSong(Music *theMusic) {
         switch (ch) {
             case (baseASCIINumber + 1):
                 
-				if (theMusic -> getAvailable()){
-					theMusic -> addLike();
-					FilesIO::Instance() -> saveAllSongs();
-					break;
-				}
+                theMusic -> addLike();
+                
+                FilesIO::Instance() -> saveAllSongs();
+                
 				break;
             case (baseASCIINumber + 2):
                 
-                	if (theMusic -> getAvailable()){
-					theMusic -> addDislike();
-					FilesIO::Instance() -> saveAllSongs();
-					break;
-				}
-					break;
+                theMusic -> addDislike();
+                
+                FilesIO::Instance() -> saveAllSongs();
+                
+                break;
                 
             case (baseASCIINumber + 3):
                 
@@ -1608,7 +1617,7 @@ void newUser() {
 		std::cout << std::endl;
     } while (!age);
     
-    std::cout << "Gender(M/F): ";
+    std::cout << "Gender (M/F): ";
     
     while (true) {
         int ch = getch();
@@ -1631,6 +1640,8 @@ void newUser() {
                 sex = "F";
                 
                 shouldBreak = true;
+                
+                break;
                 
             case escKey:
                 

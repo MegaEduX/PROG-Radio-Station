@@ -312,9 +312,7 @@ Playlist FilesIO::playlistForUser(int userId) {
     std::vector<std::vector<std::string>> rows = parser.tableRows(true);
     
     for (int i = 0; i < rows.size(); i++) {
-        std::vector<Music *> searchResult = RadioStation::Instance()->getAllTracks()->getAllTracks();
-        
-//warning This doesn't make /fucking/ sense /at all/. FIX THIS ASAP!
+        std::vector<Music *> searchResult = RadioStation::Instance() -> getAllTracks() -> search(atoi(rows[i][0].c_str()), "", "", "", "", "", -1);
         
         if (searchResult.size() != 1) {
             std::cout << "A music track wasn't found for ID " << rows[i][0] << ", or the result was ambiguous. Please look into this!" << std::endl;
