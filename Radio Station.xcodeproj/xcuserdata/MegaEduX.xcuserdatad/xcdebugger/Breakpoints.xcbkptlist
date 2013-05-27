@@ -185,5 +185,18 @@
          landmarkName = "Playlist::search(int musicId, std::string title, std::string artist, std::string author, std::string album, std::string music_genre, int year)"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Radio Station/main.cpp"
+         timestampString = "391386075.438835"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1473"
+         endingLineNumber = "1473"
+         landmarkName = "loggedInMenu()"
+         landmarkType = "7">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

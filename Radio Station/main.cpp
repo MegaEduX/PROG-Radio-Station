@@ -650,7 +650,6 @@ void searchLibrary() {
         std::cout << (album ? " - 4. Album (Selected)" : " - 4. Album") << std::endl;
         std::cout << (genre ? " - 5. Genre (Selected)" : " - 5. Genre") << std::endl;
         std::cout << (year ? " - 6. Year (Selected)" : " - 6. Year") << std::endl;
-        std::cout << std::endl;
         std::cout << std::endl << "Please choose a value option to select/unselect or return to proceed.";
         
         int ch = getch();
@@ -854,6 +853,8 @@ void getSongsFromKey() {
                 std::string authorName = Additions::getline();
                 
                 if (Additions::gotESC(authorName)) {
+                    Additions::clearConsole();
+                    
                     getSongsFromKey();
                     
                     break;
@@ -937,6 +938,8 @@ void getSongsFromKey() {
                 std::string yearStr = Additions::getline();
                 
                 if (Additions::gotESC(yearStr)) {
+                    Additions::clearConsole();
+                    
                     getSongsFromKey();
                     
                     break;
@@ -1324,9 +1327,9 @@ void userWorkWithSong(Music *theMusic) {
         
         std::cout << std::endl;
         
-        std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
+        std::cout << "Play Count: " << theMusic -> getPlayCount() << std::endl;
         
-        std::cout << std::endl << std::endl;
+        std::cout << std::endl;
         
         if (!theMusic -> getAvailable() && !loggedInUser -> isAdmin()) {
             std::cout << "This song is unavailable, so its data is read-only. Press Return to go back.";
@@ -1466,7 +1469,8 @@ void playlistManager() {
 void loggedInMenu() {
     std::cout << "Welcome to " << (!RadioStation::Instance()->getName().compare("") ? "the radio station" : RadioStation::Instance()->getName()) << ", " << loggedInUser -> getName() << "!" << std::endl << std::endl;
     
-    std::cout << "The current winner is " << UserManager::Instance() -> getPrizeWinner() -> getName() << ". Congratulations!" << std::endl << std::endl;
+    if (UserManager::Instance() -> getPrizeWinner() != NULL)
+        std::cout << "The current winner is " << UserManager::Instance() -> getPrizeWinner() -> getName() << ". Congratulations!" << std::endl << std::endl;
     
     std::cout << "1. Top 10 Songs" << std::endl;
     std::cout << "2. Search our Music Library" << std::endl;

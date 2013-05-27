@@ -19,6 +19,15 @@ static const std::string globalsFile = "globals.csv";
 static const std::string topTenFile = "topTen.csv";
 static const std::string musicStoreFile = "radioStationMusics.csv";
 
+//
+//  A system to load the play count from the files is in place.
+//
+//  It has been disabled, though, in order to conform with the project guidelines.
+//  Enabling it is as easy as setting the following flag (bool, in this case!) to true.
+//
+
+static const bool loadPlayCountFromFile = false;
+
 FilesIO *FilesIO::fio_pInstance = NULL;
 
 FilesIO* FilesIO::Instance() {
@@ -137,7 +146,7 @@ bool FilesIO::loadTopTen() {
         }
     }
     
-    //if (RadioStation::Instance() -> updateTopTen(topTenPlaylist) && !foundErrors)
+    if (!foundErrors)
         return true;
     
     return false;
@@ -386,10 +395,10 @@ bool FilesIO::loadAllSongs() {
     for (int i = 0; i < parsedCsv.size(); i++) {
         std::vector<std::string> musicData = parsedCsv[i];
         
-        Music *newSong = new Music(atoi(musicData[0].c_str()), atoi(musicData[6].c_str()), musicData[1], musicData[2], musicData[4], musicData[3], musicData[5], atoi(musicData[7].c_str()), atoi(musicData[8].c_str()), atoi(musicData[9].c_str()), (atoi(musicData[10].c_str()) ? true : false));
+        Music *newSong = new Music(atoi(musicData[0].c_str()), atoi(musicData[6].c_str()), musicData[1], musicData[2], musicData[4], musicData[3], musicData[5], atoi(musicData[7].c_str()), atoi(musicData[8].c_str()), (loadPlayCountFromFile ? atoi(musicData[9].c_str()) : 0), (atoi(musicData[10].c_str()) ? true : false));
         
         if (!RadioStation::Instance() ->getAllTracks() -> addSong(newSong)) {
-            std::cout << "An error was occoured while loading the track with ID " << newSong -> getId() << "." << std::endl;
+            std::cout << "An error has occoured while loading the track with ID " << newSong -> getId() << "." << std::endl;
             
             allWentGood = false;
         }

@@ -20,7 +20,7 @@ UserManager* UserManager::Instance() {
 }
 
 UserManager::UserManager() {
-    
+    _prizeWinner = NULL;
 }
 
 bool UserManager::addUser(User *aUser) {

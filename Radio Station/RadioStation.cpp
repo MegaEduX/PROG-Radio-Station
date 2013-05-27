@@ -41,10 +41,13 @@ std::string RadioStation::getName() {
 }
 
 void RadioStation::generateGame() {
-    srandom((unsigned)time(NULL));
+    srand((unsigned)time(NULL));
     
-    for (int i = 0; i < _allTracks.count(); i++)
+    for (int i = 0; i < _allTracks.count(); i++) {
         _allTracks.getAllTracks()[i] -> setPlayCount(rand() % maxPlaysPerSong);
+        
+        std::cout << "Set the play count of " << i << " to " << _allTracks.getAllTracks()[i] -> getPlayCount() << "." << std::endl;
+    }
 }
 
 Playlist* RadioStation::getAllTracks() {
