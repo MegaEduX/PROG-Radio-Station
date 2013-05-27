@@ -74,6 +74,7 @@ public:
     
     const unsigned int getPlayCount();
     void addPlay(); // Por razoes Obvias de bool para void
+    bool setPlayCount(int count); // In order to generate the set, as I am generating a random number.
     
     const bool getAvailable();
     void setAvailable(bool availability); // Por razoes Obvias de bool para void

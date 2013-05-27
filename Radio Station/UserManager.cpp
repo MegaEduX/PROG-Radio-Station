@@ -77,6 +77,27 @@ User* UserManager::getUser(std::string userName) {
     return NULL;
 }
 
+User* UserManager::getPrizeWinner() {
+    User *currentWinner = NULL;
+    int currentCount = 0;
+    
+    for (int i = 0; i < _userVector.size(); i++) {
+        std::vector<Music *> songVec = _userVector[i] -> getPlaylist() -> getAllTracks();
+        
+        int userCount = 0;
+        
+        for (int j = 0; j < songVec.size(); j++)
+            userCount += songVec[i] -> getPlayCount();
+        
+        if (userCount > currentCount) {
+            currentWinner = _userVector[i];
+            currentCount = userCount;
+        }
+    }
+    
+    return currentWinner;
+}
+
 const unsigned int UserManager::userCount() {
     return (const unsigned int) _userVector.size();
 }

@@ -43,6 +43,8 @@ public:
     
     const unsigned int userCount();
     
+    User *getPrizeWinner();
+    
     // const unsigned int adminCount(); - This is retarded.
 
 };

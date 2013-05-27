@@ -42,7 +42,7 @@ public:
     
     std::string getName();
 
-	void generateSet(); // Generates a set randomly
+	void generateGame(); // Generates the game.
 
 	Playlist* getAllTracks(); // Adicionado por razoes obvias
     

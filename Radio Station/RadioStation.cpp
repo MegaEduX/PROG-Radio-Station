@@ -12,6 +12,8 @@
 
 const int setDivisor = 4;
 
+const int maxPlaysPerSong = 15;
+
 RadioStation *RadioStation::rs_pInstance = NULL;
 
 RadioStation* RadioStation::Instance() {
@@ -38,25 +40,11 @@ std::string RadioStation::getName() {
     return _name;
 }
 
-void RadioStation::generateSet() {
-	Playlist newPlaylist;
+void RadioStation::generateGame() {
+    srandom((unsigned)time(NULL));
     
-    _currentPlaySet = newPlaylist;
-    
-    int setCount = (int)(_allTracks.count() / setDivisor);
-    
-    if (!setCount && _allTracks.count() > 0)
-        setCount = 1; // This prevents rounding to 0 when x/y < 0.5.
-    
-    for (int i = 0; i < setCount; i++) {
-        Music *track = _allTracks.getAllTracks()[i];
-        
-        _currentPlaySet.addSong(track);
-        
-        track -> addPlay();
-    }
-    
-	_currentPlaySet.shuffle();
+    for (int i = 0; i < _allTracks.count(); i++)
+        _allTracks.getAllTracks()[i] -> setPlayCount(rand() % maxPlaysPerSong);
 }
 
 Playlist* RadioStation::getAllTracks() {

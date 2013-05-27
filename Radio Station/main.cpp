@@ -1743,7 +1743,11 @@ void start() {
 int main() {
     FilesIO::Instance() -> loadAllSongs();
     
+    FilesIO::Instance() -> loadAllUsers();
+    
     FilesIO::Instance() -> loadGlobals();
+    
+    RadioStation::Instance() -> generateGame();
     
 	start();
 

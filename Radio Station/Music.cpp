@@ -120,6 +120,15 @@ void Music::addPlay() {
 	_playCount++;
 }
 
+bool Music::setPlayCount(int count) {
+    if (count < 0)
+        return false;
+        
+    _playCount = count;
+    
+    return true;
+}
+
 const unsigned int Music::getLikes() {
     return _likes;
 }
