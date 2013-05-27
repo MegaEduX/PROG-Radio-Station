@@ -109,24 +109,39 @@ namespace Additions {
         if ((int)ch == 13 || (int)ch == 10)
             return "";
         
-        std::string str;
+        std::string str = "";
         
         while ((int)ch != 13 && (int)ch != 10) {
             if ((int) ch == 27)   // The ESC key was pressed.
                 return esc;
             
-            if ((int)ch == 127) {
+            if ((int)ch == 127 || (int)ch == 8) {
                 if (str.size() > 0) {
                     str = str.erase(str.size() - 1);
                     
                     std::cout << '\b';
                     std::cout << " ";
+#ifndef WIN32
                     std::cout << '\b';
+#endif
                 }
             } else
-                str += std::string(&ch)[0];
+				if ((int) ch != 8)
+					str += std::string(&ch)[0];
             
-            std::cout << std::string(&ch)[0];
+			if ((int) ch != 8 || str.size() > 0)
+				std::cout << std::string(&ch)[0];
+
+			if ((int) ch == 8 && str.size() == 1) {
+				// std::cout << std::string(&ch)[0];
+				//std::cout << " ";
+				std::cout << '\b';
+				std::cout << "";
+				//std::cout << '\b';
+
+				// em casa dou debug -.-
+				// i give up
+			}
             
             ch = getch();
         }
