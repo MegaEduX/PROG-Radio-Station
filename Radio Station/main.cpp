@@ -855,14 +855,14 @@ void getSongsFromKey() {
                     break;
                 }
                 
-                if (atoi(authorName.c_str())) { // We got a number!
+                 if (atoi(authorName.c_str())) { // We got a number!
                     
                     int result = atoi(authorName.c_str());
                     
                     if (authorName.size() > result) {
                         Additions::clearConsole();
                         
-                        getAuthorMusics(authorList[result]);
+                        getArtistMusics(authorList[result]);
                         
                         break;
                     }
@@ -871,17 +871,17 @@ void getSongsFromKey() {
                     
                     Additions::clearConsole();
                     
-                    getAuthorMusics(authorList[0]);
+                    getArtistMusics(authorList[0]);
                     
                     break;
-                    
+                
                 } else { // We got a name.
                     
                     for (int i = 0; i < authorList.size(); i++) {
                         if (!authorList[i].compare(authorName)) {
                             Additions::clearConsole();
                             
-                            getAuthorMusics(authorList[i]);
+                            getArtistMusics(authorList[i]);
                             
                             break;
                         }
@@ -928,7 +928,7 @@ void getSongsFromKey() {
                 for (int i = 0; i < yearList.size(); i++)
                     std::cout << "[" << i << "] " << yearList[i] << std::endl;
                 
-                std::cout << std::endl << "Please type the choosen author name or number: ";
+                std::cout << std::endl << "Please type the year: ";
                 
                 std::string yearStr = Additions::getline();
                 
@@ -1041,7 +1041,7 @@ void getAuthorMusics (std::string author) {
 	
 	for (int i = 0; i < allTracksVec.size(); i++)
 		if (!allTracksVec[i]->getAuthor().compare(author))
-			std::cout << "[" << i << "] " << allTracksVec[i]->getAuthor() << " by " << allTracksVec[i]->getAuthor() << std::endl;
+			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getAuthor() << std::endl;
     
     std::cout << std::endl << "Please type a song ID to view more info: ";
     
@@ -1093,7 +1093,7 @@ void getYearMusics (int year) {
 	
 	for (int i = 0; i < allTracksVec.size(); i++)
 		if (allTracksVec[i]->getYear() == year)
-			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
+			std::cout << std::endl << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
     
     std::cout << std::endl << "Please type a song ID to view more info: ";
     
@@ -1315,6 +1315,7 @@ void userWorkWithSong(Music *theMusic) {
         std::cout << std::endl;
         
         std::cout << "Comulative Play Count: " << theMusic -> getPlayCount() << std::endl;
+
         
         std::cout << std::endl << std::endl;
         
@@ -1331,19 +1332,20 @@ void userWorkWithSong(Music *theMusic) {
         switch (ch) {
             case (baseASCIINumber + 1):
                 
-                theMusic -> addLike();
-                
-                FilesIO::Instance() -> saveAllSongs();
-                
-                break;
-                
+				if (theMusic -> getAvailable()){
+					theMusic -> addLike();
+					FilesIO::Instance() -> saveAllSongs();
+					break;
+				}
+				break;
             case (baseASCIINumber + 2):
                 
-                theMusic -> addDislike();
-                
-                FilesIO::Instance() -> saveAllSongs();
-                
-                break;
+                	if (theMusic -> getAvailable()){
+					theMusic -> addDislike();
+					FilesIO::Instance() -> saveAllSongs();
+					break;
+				}
+					break;
                 
             case (baseASCIINumber + 3):
                 
