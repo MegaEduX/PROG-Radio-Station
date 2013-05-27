@@ -134,7 +134,7 @@ bool FilesIO::loadTopTen() {
     
     bool foundErrors = false;
     
-    for (int i = 0; i < parsedCsv.size(); i++) {
+    for (unsigned int i = 0; i < parsedCsv.size(); i++) {
         std::vector<Music *> search = RadioStation::Instance()->getAllTracks()->search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "", "", 0);
         
         if (search.size() > 0) {
@@ -163,9 +163,9 @@ User* FilesIO::loadUser(int userId) {
     
     std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
     
-    User *aUser;
+    User *aUser = NULL;
     
-    for (int i = 0; i < parsedCsv.size(); i++) {
+    for (unsigned int i = 0; i < parsedCsv.size(); i++) {
         if (atoi(parsedCsv[i][0].c_str()) == userId) { // We found the record we want.
             std::vector<std::string> userRecord = parsedCsv[i];
             
@@ -211,7 +211,7 @@ bool FilesIO::saveUser(User *theUser) {
     vecToReplace.push_back(std::to_string(theUser->getAge()));
     vecToReplace.push_back(std::to_string(theUser->getGender()));
     
-    for (int i = 0; i < userList.size(); i++)
+    for (unsigned int i = 0; i < userList.size(); i++)
         if (atoi(userList[i][0].c_str()) == theUser->getId()) {
             userList[i] = vecToReplace;
             
@@ -232,7 +232,7 @@ bool FilesIO::saveUser(User *theUser) {
     
     newVec.push_back(headerVec);
     
-    for (int i = 0; i < userList.size(); i++)
+    for (unsigned int i = 0; i < userList.size(); i++)
         newVec.push_back(userList[i]);
     
     userList = newVec;
@@ -260,7 +260,7 @@ bool FilesIO::removeUser(User *theUser) {
     
     bool found = false;
     
-    for (int i = 0; i < userList.size(); i++)
+    for (unsigned int i = 0; i < userList.size(); i++)
         if (userList[i][0].compare(std::to_string(theUser->getId()))) {
             userList[i].erase(userList[i].begin() + i);
             
@@ -283,7 +283,7 @@ bool FilesIO::removeUser(User *theUser) {
     
     newVec.push_back(headerVec);
     
-    for (int i = 0; i < userList.size(); i++)
+    for (unsigned int i = 0; i < userList.size(); i++)
         newVec.push_back(userList[i]);
     
     userList = newVec;
@@ -320,7 +320,7 @@ Playlist FilesIO::playlistForUser(int userId) {
     
     std::vector<std::vector<std::string>> rows = parser.tableRows(true);
     
-    for (int i = 0; i < rows.size(); i++) {
+    for (unsigned int i = 0; i < rows.size(); i++) {
         std::vector<Music *> searchResult = RadioStation::Instance() -> getAllTracks() -> search(atoi(rows[i][0].c_str()), "", "", "", "", "", -1);
         
         if (searchResult.size() != 1) {
@@ -350,7 +350,7 @@ bool FilesIO::storePlaylistForUser(int userId) {
     
     csvVec.push_back(headerVec);
     
-    for (int i = 0; i < result.size(); i++) {
+    for (unsigned int i = 0; i < result.size(); i++) {
         Music *song = result[i];
         
         std::vector<std::string> songVec;
@@ -392,7 +392,7 @@ bool FilesIO::loadAllSongs() {
     
     bool allWentGood = true;
     
-    for (int i = 0; i < parsedCsv.size(); i++) {
+    for (unsigned int i = 0; i < parsedCsv.size(); i++) {
         std::vector<std::string> musicData = parsedCsv[i];
         
         Music *newSong = new Music(atoi(musicData[0].c_str()), atoi(musicData[6].c_str()), musicData[1], musicData[2], musicData[4], musicData[3], musicData[5], atoi(musicData[7].c_str()), atoi(musicData[8].c_str()), (loadPlayCountFromFile ? atoi(musicData[9].c_str()) : 0), (atoi(musicData[10].c_str()) ? true : false));
@@ -432,7 +432,7 @@ bool FilesIO::saveAllSongs() {
     
     csvVec.push_back(headerVec);
     
-    for (int i = 0; i < result.size(); i++) {
+    for (unsigned int i = 0; i < result.size(); i++) {
         Music *song = result[i];
         
         std::vector<std::string> songVec;

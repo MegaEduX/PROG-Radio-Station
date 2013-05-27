@@ -156,7 +156,7 @@ void editMusic(Music *theMusic) {
     std::cout << "Available? " << (theMusic -> getAvailable() ? "[Y]" : "[N]") << " (y/n): ";
     
     while (true) {
-        int ch = getch();
+        int ch = _getch();
         
         bool shouldBreak = false;
         
@@ -234,7 +234,7 @@ void editMusicMenu() {
         musicManager();
     }
         
-    for (int i = 0 ; i < allTracksVec.size() ; i++)
+    for (unsigned int i = 0 ; i < allTracksVec.size() ; i++)
         std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << " - " << (allTracksVec[i]->getAvailable() ? "(Available)" : "(Unavailable)") <<  std::endl;
     
     while (true) {
@@ -249,7 +249,7 @@ void editMusicMenu() {
         
         int songId = atoi(songIdStr.c_str());
         
-        while (!(RadioStation::Instance()->getAllTracks()->count() > songId)) {
+        while (!(RadioStation::Instance()->getAllTracks()->count() > (unsigned int)songId)) {
             std::cout << std::endl << "Invalid track. Please type another id: ";
             
             songIdStr = Additions::getline();
@@ -282,7 +282,7 @@ void musicManager() {
     
     while (true) {
         
-        int opc = getch();
+        int opc = _getch();
         
         switch (opc) {
             case (baseASCIINumber + 1):
@@ -405,7 +405,7 @@ void addMusic() {
     std::cout << "Available? (y/n): ";
     
     while (true) {
-        int ch = getch();
+        int ch = _getch();
         
         bool shouldBreak = false;
         
@@ -475,7 +475,7 @@ void reinitializeSet() {
     bool reinitialize = false;
     
     while (true) {
-        int ch = getch();
+        int ch = _getch();
         
         bool shouldBreak = false;
         
@@ -573,7 +573,7 @@ void adminPanel() {
     
     while (true) {
 		
-		int opc = getch();
+		int opc = _getch();
         
         switch (opc) {
                 
@@ -623,7 +623,7 @@ void topTenSongs() {
     
     std::vector<Music *> topTen = RadioStation::Instance() -> getTopTen();
     
-    for (int i = 0; i < topTen.size(); i++) {
+    for (unsigned int i = 0; i < topTen.size(); i++) {
         Music *theTrack = topTen[i];
         std::cout << "[" << theTrack -> getId() << "] " << theTrack -> getTitle() << " by " << theTrack -> getArtist() << " (" << theTrack -> getPlayCount() << " plays | " << theTrack -> getLikes() << " likes | " << theTrack -> getDislikes() << " dislikes)" << std::endl;
     }
@@ -652,7 +652,7 @@ void searchLibrary() {
         std::cout << (year ? " - 6. Year (Selected)" : " - 6. Year") << std::endl;
         std::cout << std::endl << "Please choose a value option to select/unselect or return to proceed.";
         
-        int ch = getch();
+        int ch = _getch();
         
         switch (ch) {
             case (baseASCIINumber + 1):
@@ -729,7 +729,7 @@ void getSongsFromKey() {
     std::cout << "Please choose an option.";
     
     while (true) {
-        int ch = getch();
+        int ch = _getch();
         
         switch (ch) {
             case (baseASCIINumber + 1): {
@@ -740,12 +740,12 @@ void getSongsFromKey() {
                 
                 std::vector<std::string> artistList;
                 
-                for (int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
+                for (unsigned int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
                     std::string theArtist = RadioStation::Instance() -> getAllTracks() -> getAllTracks()[i] -> getArtist();
                     
                     bool foundArtist = false;
                     
-                    for (int i = 0; i < artistList.size(); i++)
+                    for (unsigned int i = 0; i < artistList.size(); i++)
                         if (!artistList[i].compare(theArtist)) {
                             foundArtist = true;
                             
@@ -758,7 +758,7 @@ void getSongsFromKey() {
                 
                 std::sort(artistList.begin(), artistList.end());
                 
-                for (int i = 0; i < artistList.size(); i++)
+                for (unsigned int i = 0; i < artistList.size(); i++)
                     std::cout << "[" << i << "] " << artistList[i] << std::endl;
                 
                 std::cout << std::endl << "Please type the choosen artist name or number: ";
@@ -775,7 +775,7 @@ void getSongsFromKey() {
                 
                 if (atoi(artistName.c_str())) { // We got a number!
                     
-                    int result = atoi(artistName.c_str());
+                    unsigned int result = atoi(artistName.c_str());
                     
                     if (artistList.size() > result) {
                         Additions::clearConsole();
@@ -795,7 +795,7 @@ void getSongsFromKey() {
                 
                 } else { // We got a name.
                     
-                    for (int i = 0; i < artistList.size(); i++) {
+                    for (unsigned int i = 0; i < artistList.size(); i++) {
                         if (!artistList[i].compare(artistName)) {
                             Additions::clearConsole();
                             
@@ -827,12 +827,12 @@ void getSongsFromKey() {
                 
                 std::vector<std::string> authorList;
                 
-                for (int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
+                for (unsigned int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
                     std::string theAuthor = RadioStation::Instance() -> getAllTracks() -> getAllTracks()[i] -> getAuthor();
                     
                     bool foundAuthor = false;
                     
-                    for (int i = 0; i < authorList.size(); i++)
+                    for (unsigned int i = 0; i < authorList.size(); i++)
                         if (!authorList[i].compare(theAuthor)) {
                             foundAuthor = true;
                             
@@ -845,7 +845,7 @@ void getSongsFromKey() {
                 
                 std::sort(authorList.begin(), authorList.end());
                 
-                for (int i = 0; i < authorList.size(); i++)
+                for (unsigned int i = 0; i < authorList.size(); i++)
                     std::cout << "[" << i << "] " << authorList[i] << std::endl;
                 
                 std::cout << std::endl << "Please type the choosen author name or number: ";
@@ -862,7 +862,7 @@ void getSongsFromKey() {
                 
                  if (atoi(authorName.c_str())) { // We got a number!
                     
-                    int result = atoi(authorName.c_str());
+                    unsigned int result = atoi(authorName.c_str());
                     
                     if (authorList.size() > result) {
                         Additions::clearConsole();
@@ -882,7 +882,7 @@ void getSongsFromKey() {
                 
                 } else { // We got a name.
                     
-                    for (int i = 0; i < authorList.size(); i++) {
+                    for (unsigned int i = 0; i < authorList.size(); i++) {
                         if (!authorList[i].compare(authorName)) {
                             Additions::clearConsole();
                             
@@ -914,12 +914,12 @@ void getSongsFromKey() {
                 
                 std::vector<int> yearList;
                 
-                for (int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
+                for (unsigned int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
                     int theYear = RadioStation::Instance() -> getAllTracks() -> getAllTracks()[i] -> getYear();
                     
                     bool foundYear = false;
                     
-                    for (int i = 0; i < yearList.size(); i++)
+                    for (unsigned int i = 0; i < yearList.size(); i++)
                         if (yearList[i] == theYear) {
                             foundYear = true;
                             
@@ -930,7 +930,7 @@ void getSongsFromKey() {
                         yearList.push_back(theYear);
                 }
                 
-                for (int i = 0; i < yearList.size(); i++)
+                for (unsigned int i = 0; i < yearList.size(); i++)
                     std::cout << "[" << i << "] " << yearList[i] << std::endl;
                 
                 std::cout << std::endl << "Please type the year: ";
@@ -945,9 +945,9 @@ void getSongsFromKey() {
                     break;
                 }
                 
-                int result = atoi(yearStr.c_str());
+                unsigned int result = atoi(yearStr.c_str());
                 
-                for (int i = 0; i < yearList.size(); i++)
+                for (unsigned int i = 0; i < yearList.size(); i++)
                     if (yearList[i] == result) {
                         Additions::clearConsole();
                         
@@ -996,7 +996,7 @@ void getArtistMusics (std::string artist) {
     
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
-	for (int i = 0; i < allTracksVec.size(); i++)
+	for (unsigned int i = 0; i < allTracksVec.size(); i++)
 		if (!allTracksVec[i]->getArtist().compare(artist))
 			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
     
@@ -1013,7 +1013,7 @@ void getArtistMusics (std::string artist) {
     bool foundSong = false;
     
     if (atoi(songID.c_str()) || songID.size() == 1)
-        for (int i = 0; i < allTracksVec.size(); i++)
+        for (unsigned int i = 0; i < allTracksVec.size(); i++)
             if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
                 Additions::clearConsole();
                 
@@ -1034,7 +1034,7 @@ void getArtistMusics (std::string artist) {
         }
         
         if (atoi(songID.c_str()) || songID.size() == 1)
-            for (int i = 0; i < allTracksVec.size(); i++)
+            for (unsigned int i = 0; i < allTracksVec.size(); i++)
                 if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
                     Additions::clearConsole();
                     
@@ -1050,7 +1050,7 @@ void getAuthorMusics (std::string author) {
     
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
-	for (int i = 0; i < allTracksVec.size(); i++)
+	for (unsigned int i = 0; i < allTracksVec.size(); i++)
 		if (!allTracksVec[i]->getAuthor().compare(author))
 			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getAuthor() << std::endl;
     
@@ -1067,7 +1067,7 @@ void getAuthorMusics (std::string author) {
     bool foundSong = false;
     
     if (atoi(songID.c_str()) || songID.size() == 1)
-        for (int i = 0; i < allTracksVec.size(); i++)
+        for (unsigned int i = 0; i < allTracksVec.size(); i++)
             if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
                 Additions::clearConsole();
                 
@@ -1088,7 +1088,7 @@ void getAuthorMusics (std::string author) {
         }
         
         if (atoi(songID.c_str()) || songID.size() == 1)
-            for (int i = 0; i < allTracksVec.size(); i++)
+            for (unsigned int i = 0; i < allTracksVec.size(); i++)
                 if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
                     Additions::clearConsole();
                     
@@ -1104,7 +1104,7 @@ void getYearMusics (int year) {
     
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
-	for (int i = 0; i < allTracksVec.size(); i++)
+	for (unsigned int i = 0; i < allTracksVec.size(); i++)
 		if (allTracksVec[i]->getYear() == year)
 			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
     
@@ -1121,7 +1121,7 @@ void getYearMusics (int year) {
     bool foundSong = false;
     
     if (atoi(songID.c_str()) || songID.size() == 1)
-        for (int i = 0; i < allTracksVec.size(); i++)
+        for (unsigned int i = 0; i < allTracksVec.size(); i++)
             if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
                 Additions::clearConsole();
                 
@@ -1142,7 +1142,7 @@ void getYearMusics (int year) {
         }
         
         if (atoi(songID.c_str()) || songID.size() == 1)
-            for (int i = 0; i < allTracksVec.size(); i++)
+            for (unsigned int i = 0; i < allTracksVec.size(); i++)
                 if (allTracksVec[i] -> getId() == atoi(songID.c_str())) {
                     Additions::clearConsole();
                     
@@ -1267,9 +1267,8 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
     
     std::cout << std::endl;
     
-    for (int i = 0; i < searchResult.size(); i++) {
+    for (unsigned int i = 0; i < searchResult.size(); i++)
         std::cout << "[" << searchResult[i] -> getId() << "] " << searchResult[i] -> getTitle() << " by " << searchResult[i] -> getArtist() << " " << (searchResult[i] -> getAvailable() ? "(Available)" : "(Unavailable)") << std::endl;
-    }
     
     std::cout << std::endl << "Type a song ID to select it: ";
     
@@ -1288,7 +1287,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         
         bool found = false;
         
-        for (int i = 0; i < searchResult.size(); i++) {
+        for (unsigned int i = 0; i < searchResult.size(); i++) {
             if (searchResult[i] -> getId() == songId) {
                 Additions::clearConsole();
                 
@@ -1349,7 +1348,7 @@ void userWorkWithSong(Music *theMusic) {
         
         std::cout << "Please choose your option.";
         
-        int ch = getch();
+        int ch = _getch();
         
         switch (ch) {
             case (baseASCIINumber + 1):
@@ -1427,7 +1426,7 @@ void playlistManager() {
         loggedInMenu();
     }
     
-    for (int i = 0 ; i < userTracks.size(); i++)
+    for (unsigned int i = 0 ; i < userTracks.size(); i++)
         std::cout << "[" << i << "] " << userTracks[i]->getTitle() << " by " << userTracks[i]->getArtist() <<  std::endl;
     
     std::cout << std::endl << "Please type the song ID you want to see details of: ";
@@ -1443,7 +1442,7 @@ void playlistManager() {
     Music *selTrack = NULL;
     
     while (!selTrack) {
-        for (int i = 0; i < userTracks.size(); i++)
+        for (unsigned int i = 0; i < userTracks.size(); i++)
             if (userTracks[i]->getId() == atoi(selectedSong.c_str()))
                 selTrack = userTracks[i];
         
@@ -1481,7 +1480,7 @@ void loggedInMenu() {
     std::cout << "Please choose an option.";
     
     while (true) {
-        int opc = getch();
+        int opc = _getch();
         
         switch (opc) {
                 
@@ -1634,7 +1633,7 @@ void newUser() {
     std::cout << "Gender (M/F): ";
     
     while (true) {
-        int ch = getch();
+        int ch = _getch();
         
         bool shouldBreak = false;
         
@@ -1709,7 +1708,7 @@ void start() {
     std::cout << "Please Select an Option." << std::endl << std::endl;
     
     while (true) {
-        int opc = getch();
+        int opc = _getch();
         
         switch (opc) {
                 

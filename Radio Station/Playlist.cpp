@@ -17,7 +17,7 @@ Playlist::~Playlist() {
 }
 
 bool Playlist::addSong(Music *theSong) {
-    for (int i = 0; i < _thePlaylist.size(); i++)
+    for (unsigned int i = 0; i < _thePlaylist.size(); i++)
         if (_thePlaylist[i] -> getId() == theSong -> getId())
             return false;
     
@@ -27,7 +27,7 @@ bool Playlist::addSong(Music *theSong) {
 }
 
 bool Playlist::removeSong(Music *theSong){
-    for (int i = 0; i < _thePlaylist.size(); i++)
+    for (unsigned int i = 0; i < _thePlaylist.size(); i++)
         if (_thePlaylist[i] -> getId() == theSong -> getId()) {
             _thePlaylist.erase(_thePlaylist.begin() + i);
             
@@ -45,7 +45,7 @@ const std::vector<Music *> Playlist::search(int musicId, std::string title,  std
     std::vector<Music *> returnVec;
     
     if (musicId != -1) // Do NOT search by music id
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (_thePlaylist[i] -> getId() == musicId) {
                 returnVec.push_back(_thePlaylist[i]);
                 
@@ -53,37 +53,37 @@ const std::vector<Music *> Playlist::search(int musicId, std::string title,  std
             }
     
     if (title.compare(""))
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getTitle().compare(title)))
                 if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
                     returnVec.push_back(_thePlaylist[i]);
     
     if (artist.compare(""))
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getArtist().compare(artist)))
                 if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
                     returnVec.push_back(_thePlaylist[i]);
     
     if (author.compare(""))
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getAuthor().compare(author)))
                 if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
                     returnVec.push_back(_thePlaylist[i]);
     
     if (album.compare(""))
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getAlbum().compare(album)))
                 if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
                     returnVec.push_back(_thePlaylist[i]);
     
     if (music_genre.compare(""))
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (!(_thePlaylist[i] -> getGenre().compare(music_genre)))
                 if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
                     returnVec.push_back(_thePlaylist[i]);
     
     if (year != -1)
-        for (int i = 0; i < _thePlaylist.size(); i++)
+        for (unsigned int i = 0; i < _thePlaylist.size(); i++)
             if (_thePlaylist[i] -> getYear() == year)
                 if (std::find(returnVec.begin(), returnVec.end(), _thePlaylist[i]) == returnVec.end())
                     returnVec.push_back(_thePlaylist[i]);
@@ -113,10 +113,10 @@ void Playlist::updateTopTen() {
     
     int topCount = 0; // The current top count of likes. Begins as 0, obviously, as we don't know yet the song that has the most likes.
     
-    for (int i = 0; i < 10; i++) { // We run the loop 10 times, as we desire our top to have... 10 songs.
+    for (unsigned int i = 0; i < 10; i++) { // We run the loop 10 times, as we desire our top to have... 10 songs.
         int localTop = 0; // The current /local/ top of likes. Same story as up there.
         
-        for (int j = 0; j < _thePlaylist.size(); j++) {
+        for (unsigned int j = 0; j < _thePlaylist.size(); j++) {
             int diff = _thePlaylist[j] -> getLikes() - _thePlaylist[j] -> getDislikes();
         
             if (diff > localTop)
@@ -125,7 +125,7 @@ void Playlist::updateTopTen() {
         }
         
         if (localTop != 0) {
-            for (int j = 0; j < _thePlaylist.size(); j++) {
+            for (unsigned int j = 0; j < _thePlaylist.size(); j++) {
                 int diff = _thePlaylist[j] -> getLikes() - _thePlaylist[j] -> getDislikes();
                 
                 if (localTop == diff)

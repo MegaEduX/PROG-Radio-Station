@@ -16,10 +16,10 @@
 #include <vector>
 
 #ifndef WIN32
-int getch();
+int _getch();	// This is not an ISO function, so it's not available on POSIX-systems. Our solution? Let's make our own!
 #endif
 
-static const std::string esc = "__\\esc_key_pressed\\__"; // I seriously doubt that anyone will type this into a field.
+static const std::string esc = "__\\esc_key_pressed\\__";	// I seriously doubt that anyone will type this into a field.
 
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);

@@ -59,7 +59,7 @@ std::vector<std::vector<std::string>> CSVParser::tableRows(bool reparse) {
     
     std::vector<std::vector<std::string>> returnVec;
     
-    for (int i = 1; i < _cachedResult.size(); i++)
+    for (unsigned int i = 1; i < _cachedResult.size(); i++)
         returnVec.push_back(_cachedResult[i]);
     
     return returnVec;
@@ -68,8 +68,8 @@ std::vector<std::vector<std::string>> CSVParser::tableRows(bool reparse) {
 std::string CSVParser::encodeCSV(std::vector<std::vector<std::string>> vecToEncode) {
     std::string returnStr;
     
-    for (int i = 0; i < vecToEncode.size(); i++) {
-        for (int j = 0; j < vecToEncode[i].size(); j++) {
+    for (unsigned int i = 0; i < vecToEncode.size(); i++) {
+        for (unsigned int j = 0; j < vecToEncode[i].size(); j++) {
             returnStr.append(vecToEncode[i][j]);
             
             if (j + 1 != vecToEncode[i].size())

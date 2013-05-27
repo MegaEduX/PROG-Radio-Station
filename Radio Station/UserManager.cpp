@@ -24,7 +24,7 @@ UserManager::UserManager() {
 }
 
 bool UserManager::addUser(User *aUser) {
-    for (int i = 0; i < _userVector.size(); i++)
+    for (unsigned int i = 0; i < _userVector.size(); i++)
         if (_userVector[i] -> getId() == aUser -> getId())
             return false;
     
@@ -36,7 +36,7 @@ bool UserManager::addUser(User *aUser) {
 }
 
 bool UserManager::removeUser(User *aUser) {
-    for (int i = 0; i < _userVector.size(); i++)
+    for (unsigned int i = 0; i < _userVector.size(); i++)
         if (_userVector[i] -> getId() == aUser -> getId()) {
             _userVector.erase(_userVector.begin() + i);
             
@@ -47,7 +47,7 @@ bool UserManager::removeUser(User *aUser) {
 }
 
 bool UserManager::removeUser(int userId) {
-    for (int i = 0; i < _userVector.size(); i++)
+    for (unsigned int i = 0; i < _userVector.size(); i++)
         if (_userVector[i] -> getId() == userId) {
             _userVector.erase(_userVector.begin() + i);
             
@@ -62,7 +62,7 @@ void UserManager::removeAllUsers() {
 }
 
 User* UserManager::getUser(int userId) {
-    for (int i = 0; i < _userVector.size(); i++)
+    for (unsigned int i = 0; i < _userVector.size(); i++)
         if (_userVector[i] -> getId() == userId)
             return _userVector[i];
     
@@ -70,7 +70,7 @@ User* UserManager::getUser(int userId) {
 }
 
 User* UserManager::getUser(std::string userName) {
-    for (int i = 0; i < _userVector.size(); i++)
+    for (unsigned int i = 0; i < _userVector.size(); i++)
         if (!(_userVector[i] -> getName().compare(userName)))
             return _userVector[i];
     
@@ -86,12 +86,12 @@ User* UserManager::getPrizeWinner() {
         User *currentWinner = NULL;
         int currentCount = 0;
         
-        for (int i = 0; i < _userVector.size(); i++) {
+        for (unsigned int i = 0; i < _userVector.size(); i++) {
             std::vector<Music *> songVec = _userVector[i] -> getPlaylist() -> getAllTracks();
             
             int userCount = 0;
             
-            for (int j = 0; j < songVec.size(); j++)
+            for (unsigned int j = 0; j < songVec.size(); j++)
                 if (songVec[j] -> getAvailable())
                     userCount += songVec[j] -> getPlayCount();
             

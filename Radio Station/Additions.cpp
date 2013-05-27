@@ -18,7 +18,7 @@
 #endif
 
 #ifndef WIN32
-int getch() {
+int _getch() {
     struct termios oldt,
     newt;
     int            ch;
@@ -35,7 +35,7 @@ int getch() {
 namespace Additions {
     void waitForReturn() {
         while (true) { // Wait 'till Keyboard hit ...
-            int ch = getch();
+            int ch = _getch();
             
             if (ch == 13 || ch == 10)
                 break;
@@ -78,7 +78,7 @@ namespace Additions {
         if (in) {
             std::string contents;
             in.seekg(0, std::ios::end);
-            contents.resize(in.tellg());
+            contents.resize((unsigned int)in.tellg());
             in.seekg(0, std::ios::beg);
             in.read(&contents[0], contents.size());
             in.close();
@@ -102,9 +102,16 @@ namespace Additions {
     //      - Allows the return of an empty string;
     //      - Allows the user to cancel the input by pressing ESC (which is then checked with getESC()
     //
+
+	//
+	//	Also, this function needed to work on Windows and POSIX systems.
+	//	As of that, it is a bit different when compiled for both.
+	//
+	//	We are sorry for the mess of the code it is, but that is the price to pay for portability, I guess!
+	//
     
     std::string getline() {
-        char ch = getch();
+        char ch = _getch();
         
         if ((int)ch == 13 || (int)ch == 10)
             return "";
@@ -112,18 +119,25 @@ namespace Additions {
         std::string str = "";
         
         while ((int)ch != 13 && (int)ch != 10) {
+			bool biggerThanZero = false;
+
             if ((int) ch == 27)   // The ESC key was pressed.
                 return esc;
             
             if ((int)ch == 127 || (int)ch == 8) {
                 if (str.size() > 0) {
                     str = str.erase(str.size() - 1);
-                    
-                    std::cout << '\b';
-                    std::cout << " ";
-#ifndef WIN32
+#ifndef WIN32                  
                     std::cout << '\b';
 #endif
+                    std::cout << " ";
+                    std::cout << '\b';
+
+#ifdef WIN32
+					std::cout << '\b';
+					std::cout << " ";
+#endif
+					biggerThanZero = true;
                 }
             } else
 #ifdef WIN32 
@@ -132,26 +146,11 @@ namespace Additions {
 					str += std::string(&ch)[0];
             
 #ifdef WIN32
-            
-			if ((int) ch != 8 || str.size() > 0)
-				std::cout << std::string(&ch)[0];
-
-			if ((int) ch == 8 && str.size() == 1) {
-				// std::cout << std::string(&ch)[0];
-				//std::cout << " ";
-				std::cout << '\b';
-				std::cout << "";
-				//std::cout << '\b';
-
-				// em casa dou debug -.-
-				// i give up
-			}
-            
-#else
-            std::cout << std::string(&ch)[0];
+			if ((int) ch != 8 || biggerThanZero)
 #endif
+				std::cout << std::string(&ch)[0];
             
-            ch = getch();
+            ch = _getch();
         }
         
         return str;

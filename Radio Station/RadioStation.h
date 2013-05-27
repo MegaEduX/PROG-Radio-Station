@@ -12,6 +12,8 @@
 #include <vector>
 #include <string>
 
+#include <ctime>
+
 #include "Music.h"
 #include "Playlist.h"
 

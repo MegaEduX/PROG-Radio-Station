@@ -76,6 +76,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Additions.h" />
+    <ClInclude Include="CSVParser.h" />
     <ClInclude Include="FilesIO.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="Playlist.h" />
