@@ -513,7 +513,7 @@ void reinitializeSet() {
     std::cout << std::endl << std::endl;
     
     if (reinitialize) {
-        RadioStation::Instance() -> generateSet();
+        RadioStation::Instance() -> generateGame();
         
         std::cout << "The set was reinitialized! ";
     } else
@@ -1463,6 +1463,8 @@ void playlistManager() {
 
 void loggedInMenu() {
     std::cout << "Welcome to " << (!RadioStation::Instance()->getName().compare("") ? "the radio station" : RadioStation::Instance()->getName()) << ", " << loggedInUser -> getName() << "!" << std::endl << std::endl;
+    
+    std::cout << "The current winner is " << UserManager::Instance() -> getPrizeWinner() -> getName() << ". Congratulations!" << std::endl << std::endl;
     
     std::cout << "1. Top 10 Songs" << std::endl;
     std::cout << "2. Search our Music Library" << std::endl;

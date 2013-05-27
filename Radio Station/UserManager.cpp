@@ -87,7 +87,8 @@ User* UserManager::getPrizeWinner() {
         int userCount = 0;
         
         for (int j = 0; j < songVec.size(); j++)
-            userCount += songVec[i] -> getPlayCount();
+            if (songVec[j] -> getAvailable())
+                userCount += songVec[j] -> getPlayCount();
         
         if (userCount > currentCount) {
             currentWinner = _userVector[i];
