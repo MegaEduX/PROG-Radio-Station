@@ -749,12 +749,14 @@ void getSongsFromKey() {
                             break;
                         }
                     
-                    if (!foundArtist) {
+                    if (!foundArtist)
                         artistList.push_back(theArtist);
-                        
-                        std::cout << "[" << artistList.size() - 1 << "] " << theArtist << std::endl;
-                    }
                 }
+                
+                std::sort(artistList.begin(), artistList.end());
+                
+                for (int i = 0; i < artistList.size(); i++)
+                    std::cout << "[" << i << "] " << artistList[i] << std::endl;
                 
                 std::cout << std::endl << "Please type the choosen artist name or number: ";
                 
@@ -832,12 +834,14 @@ void getSongsFromKey() {
                             break;
                         }
                     
-                    if (!foundAuthor) {
+                    if (!foundAuthor)
                         authorList.push_back(theAuthor);
-                        
-                        std::cout << "[" << authorList.size() - 1 << "] " << theAuthor << std::endl;
-                    }
                 }
+                
+                std::sort(authorList.begin(), authorList.end());
+                
+                for (int i = 0; i < authorList.size(); i++)
+                    std::cout << "[" << i << "] " << authorList[i] << std::endl;
                 
                 std::cout << std::endl << "Please type the choosen author name or number: ";
                 
@@ -897,33 +901,63 @@ void getSongsFromKey() {
                 
             case (baseASCIINumber + 3): {
                 
-                std::cout << std::endl << std::endl << "Please type an year: ";
+                Additions::clearConsole();
+                
+                std::cout << "Radio Station :: Year List" << std::endl << std::endl;
+                
+                std::vector<int> yearList;
+                
+                for (int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
+                    int theYear = RadioStation::Instance() -> getAllTracks() -> getAllTracks()[i] -> getYear();
+                    
+                    bool foundYear = false;
+                    
+                    for (int i = 0; i < yearList.size(); i++)
+                        if (yearList[i] == theYear) {
+                            foundYear = true;
+                            
+                            break;
+                        }
+                    
+                    if (!foundYear)
+                        yearList.push_back(theYear);
+                }
+                
+                for (int i = 0; i < yearList.size(); i++)
+                    std::cout << "[" << i << "] " << yearList[i] << std::endl;
+                
+                std::cout << std::endl << "Please type the choosen author name or number: ";
                 
                 std::string yearStr = Additions::getline();
                 
                 if (Additions::gotESC(yearStr)) {
-                    Additions::clearConsole();
-                    
                     getSongsFromKey();
                     
                     break;
                 }
                 
-                while (!atoi(yearStr.c_str())) {
-                    std::cout << std::endl << "You typed an invalid year. Please try again: ";
-                    
-                    yearStr = Additions::getline();
-                    
-                    if (Additions::gotESC(yearStr)) {
-                        Additions::clearConsole();
-                        
-                        getSongsFromKey();
+                int result = atoi(yearStr.c_str());
+                
+                for (int i = 0; i < yearList.size(); i++)
+                    if (yearList[i] == result) {
+                        getYearMusics(yearList[i]);
                         
                         break;
                     }
+                
+                if (result < yearList.size()) {
+                    getYearMusics(yearList[result]);
+                    
+                    break;
                 }
                 
-                getYearMusics(atoi(yearStr.c_str()));
+                std::cout << std::endl << std::endl << "You have inserted an invalid option. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                
+                Additions::clearConsole();
+                
+                getSongsFromKey();
                 
                 break;
                 
