@@ -944,12 +944,16 @@ void getSongsFromKey() {
                 
                 for (int i = 0; i < yearList.size(); i++)
                     if (yearList[i] == result) {
+                        Additions::clearConsole();
+                        
                         getYearMusics(yearList[i]);
                         
                         break;
                     }
                 
                 if (result < yearList.size()) {
+                    Additions::clearConsole();
+                    
                     getYearMusics(yearList[result]);
                     
                     break;
@@ -1091,11 +1095,13 @@ void getAuthorMusics (std::string author) {
 }
 
 void getYearMusics (int year) {
+    std::cout << "Radio Station :: Year Detail (" << year << ")" << std::endl << std::endl;
+    
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
 	for (int i = 0; i < allTracksVec.size(); i++)
 		if (allTracksVec[i]->getYear() == year)
-			std::cout << std::endl << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
+			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
     
     std::cout << std::endl << "Please type a song ID to view more info: ";
     
