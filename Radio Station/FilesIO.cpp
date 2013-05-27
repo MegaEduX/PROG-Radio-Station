@@ -314,6 +314,8 @@ Playlist FilesIO::playlistForUser(int userId) {
     for (int i = 0; i < rows.size(); i++) {
         std::vector<Music *> searchResult = RadioStation::Instance()->getAllTracks()->getAllTracks();
         
+#warning This doesn't make /fucking/ sense /at all/. FIX THIS ASAP!
+        
         if (searchResult.size() != 1) {
             std::cout << "A music track wasn't found for ID " << rows[i][0] << ", or the result was ambiguous. Please look into this!" << std::endl;
         } else

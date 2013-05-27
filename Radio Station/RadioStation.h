@@ -47,6 +47,8 @@ public:
 	Playlist* getAllTracks(); // Adicionado por razoes obvias
     
     std::vector<Music *> getTopTen(); // Noone should be able to edit it, so let's not pass it by reference.
+    
+    void updateTopTen();
 	
 };
 

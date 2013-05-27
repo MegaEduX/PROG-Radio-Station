@@ -617,6 +617,8 @@ void adminPanel() {
 void topTenSongs() {
     std::cout << "Radio Station :: Top Ten" << std::endl << std::endl;
     
+    RadioStation::Instance() -> updateTopTen();
+    
     std::vector<Music *> topTen = RadioStation::Instance() -> getTopTen();
     
     for (int i = 0; i < topTen.size(); i++) {
@@ -775,7 +777,7 @@ void getSongsFromKey() {
                     if (artistList.size() > result) {
                         Additions::clearConsole();
                         
-                        getAuthorMusics(artistList[result]);
+                        getArtistMusics(artistList[result]);
                         
                         break;
                     }
@@ -784,7 +786,7 @@ void getSongsFromKey() {
                     
                     Additions::clearConsole();
                     
-                    getAuthorMusics(artistList[0]);
+                    getArtistMusics(artistList[0]);
                     
                     break;
                 
@@ -794,7 +796,7 @@ void getSongsFromKey() {
                         if (!artistList[i].compare(artistName)) {
                             Additions::clearConsole();
                             
-                            getAuthorMusics(artistList[i]);
+                            getArtistMusics(artistList[i]);
                             
                             break;
                         }
@@ -1033,11 +1035,13 @@ void getArtistMusics (std::string artist) {
 }
 
 void getAuthorMusics (std::string author) {
+	std::cout << "Radio Station :: Author Detail (" << author << ")" << std::endl << std::endl;
+    
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
 	for (int i = 0; i < allTracksVec.size(); i++)
-		if (allTracksVec[i]->getAuthor().compare(author))
-			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
+		if (!allTracksVec[i]->getAuthor().compare(author))
+			std::cout << "[" << i << "] " << allTracksVec[i]->getAuthor() << " by " << allTracksVec[i]->getAuthor() << std::endl;
     
     std::cout << std::endl << "Please type a song ID to view more info: ";
     

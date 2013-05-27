@@ -66,3 +66,7 @@ Playlist* RadioStation::getAllTracks() {
 std::vector<Music *> RadioStation::getTopTen() {
     return _allTracks.getTopTen();
 }
+
+void RadioStation::updateTopTen() {
+    _allTracks.updateTopTen();
+}
