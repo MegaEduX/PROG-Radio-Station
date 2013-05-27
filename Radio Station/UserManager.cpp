@@ -77,30 +77,34 @@ User* UserManager::getUser(std::string userName) {
     return NULL;
 }
 
+void UserManager::resetPrizeWinner() {
+    _prizeWinner = NULL;
+}
+
 User* UserManager::getPrizeWinner() {
-    // make the set only generate once
-    // then cache it
-    // and only change when the admin wants
-    // and on program start
-    User *currentWinner = NULL;
-    int currentCount = 0;
-    
-    for (int i = 0; i < _userVector.size(); i++) {
-        std::vector<Music *> songVec = _userVector[i] -> getPlaylist() -> getAllTracks();
+    if (!_prizeWinner) {
+        User *currentWinner = NULL;
+        int currentCount = 0;
         
-        int userCount = 0;
-        
-        for (int j = 0; j < songVec.size(); j++)
-            if (songVec[j] -> getAvailable())
-                userCount += songVec[j] -> getPlayCount();
-        
-        if (userCount > currentCount) {
-            currentWinner = _userVector[i];
-            currentCount = userCount;
+        for (int i = 0; i < _userVector.size(); i++) {
+            std::vector<Music *> songVec = _userVector[i] -> getPlaylist() -> getAllTracks();
+            
+            int userCount = 0;
+            
+            for (int j = 0; j < songVec.size(); j++)
+                if (songVec[j] -> getAvailable())
+                    userCount += songVec[j] -> getPlayCount();
+            
+            if (userCount > currentCount) {
+                currentWinner = _userVector[i];
+                currentCount = userCount;
+            }
         }
+        
+        _prizeWinner = currentWinner;
     }
     
-    return currentWinner;
+    return _prizeWinner;
 }
 
 const unsigned int UserManager::userCount() {

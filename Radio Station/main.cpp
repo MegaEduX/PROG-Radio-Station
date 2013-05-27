@@ -515,6 +515,8 @@ void reinitializeSet() {
     if (reinitialize) {
         RadioStation::Instance() -> generateGame();
         
+        UserManager::Instance() -> resetPrizeWinner();
+        
         std::cout << "The set was reinitialized! ";
     } else
         std::cout << "The set wasn't reinitialized. ";

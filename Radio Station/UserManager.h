@@ -26,6 +26,8 @@ private:
 	static UserManager *um_pInstance;
 
 	std::vector<User *> _userVector;
+    
+    User *_prizeWinner;
 
 public:
     
@@ -45,7 +47,7 @@ public:
     
     User *getPrizeWinner();
     
-    // const unsigned int adminCount(); - This is retarded.
+    void resetPrizeWinner();
 
 };
 
