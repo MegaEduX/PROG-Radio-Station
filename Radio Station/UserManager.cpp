@@ -78,6 +78,10 @@ User* UserManager::getUser(std::string userName) {
 }
 
 User* UserManager::getPrizeWinner() {
+    // make the set only generate once
+    // then cache it
+    // and only change when the admin wants
+    // and on program start
     User *currentWinner = NULL;
     int currentCount = 0;
     
