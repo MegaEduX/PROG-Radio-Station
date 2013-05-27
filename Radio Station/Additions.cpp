@@ -97,6 +97,12 @@ namespace Additions {
         return !str.compare(esc);
     }
     
+    //
+    //  This is basically std::getline, with a few key differences:
+    //      - Allows the return of an empty string;
+    //      - Allows the user to cancel the input by pressing ESC (which is then checked with getESC()
+    //
+    
     std::string getline() {
         char ch = getch();
         

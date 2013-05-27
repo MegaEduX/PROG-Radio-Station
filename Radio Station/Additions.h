@@ -24,6 +24,8 @@ static const std::string esc = "__\\esc_key_pressed\\__"; // I seriously doubt t
 namespace Additions {
     std::vector<std::string> explode(const std::string &delimiter, const std::string &str);
     
+    // We ended up not using get_file_contents, but eh.
+    
     std::string get_file_contents(const char *filename);
     
     std::string getline();

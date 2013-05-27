@@ -54,7 +54,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
 void playlistManager();
 void topTenSongs();
 void getArtistMusics(std::string artist);
-void getAlbumMusics(std::string album);
+void getAuthorMusics(std::string album);
 void getYearMusics(int year);
 
 //
@@ -773,7 +773,7 @@ void getSongsFromKey() {
                     if (artistList.size() > result) {
                         Additions::clearConsole();
                         
-                        getArtistMusics(artistList[result]);
+                        getAuthorMusics(artistList[result]);
                         
                         break;
                     }
@@ -782,7 +782,7 @@ void getSongsFromKey() {
                     
                     Additions::clearConsole();
                     
-                    getArtistMusics(artistList[0]);
+                    getAuthorMusics(artistList[0]);
                     
                     break;
                 
@@ -792,7 +792,7 @@ void getSongsFromKey() {
                         if (!artistList[i].compare(artistName)) {
                             Additions::clearConsole();
                             
-                            getArtistMusics(artistList[i]);
+                            getAuthorMusics(artistList[i]);
                             
                             break;
                         }
@@ -814,11 +814,34 @@ void getSongsFromKey() {
                 
             case (baseASCIINumber + 2): {
                 
-                std::cout << std::endl << std::endl << "Please type an author name: ";
+                Additions::clearConsole();
+                
+                std::cout << "Radio Station :: Author List" << std::endl << std::endl;
+                
+                std::vector<std::string> authorList;
+                
+                for (int i = 0; i < RadioStation::Instance() -> getAllTracks() -> count(); i++) {
+                    std::string theAuthor = RadioStation::Instance() -> getAllTracks() -> getAllTracks()[i] -> getAuthor();
+                    
+                    bool foundAuthor = false;
+                    
+                    for (int i = 0; i < authorList.size(); i++)
+                        if (!authorList[i].compare(theAuthor)) {
+                            foundAuthor = true;
+                            
+                            break;
+                        }
+                    
+                    if (!foundAuthor) {
+                        authorList.push_back(theAuthor);
+                        
+                        std::cout << "[" << authorList.size() - 1 << "] " << theAuthor << std::endl;
+                    }
+                }
+                
+                std::cout << std::endl << "Please type the choosen author name or number: ";
                 
                 std::string authorName = Additions::getline();
-                
-                Additions::clearConsole();
                 
                 if (Additions::gotESC(authorName)) {
                     getSongsFromKey();
@@ -826,7 +849,47 @@ void getSongsFromKey() {
                     break;
                 }
                 
-                getArtistMusics(authorName);
+                if (atoi(authorName.c_str())) { // We got a number!
+                    
+                    int result = atoi(authorName.c_str());
+                    
+                    if (authorName.size() > result) {
+                        Additions::clearConsole();
+                        
+                        getAuthorMusics(authorList[result]);
+                        
+                        break;
+                    }
+                    
+                } else if (!authorName.compare("0")) { // We got 0.
+                    
+                    Additions::clearConsole();
+                    
+                    getAuthorMusics(authorList[0]);
+                    
+                    break;
+                    
+                } else { // We got a name.
+                    
+                    for (int i = 0; i < authorList.size(); i++) {
+                        if (!authorList[i].compare(authorName)) {
+                            Additions::clearConsole();
+                            
+                            getAuthorMusics(authorList[i]);
+                            
+                            break;
+                        }
+                    }
+                    
+                }
+                
+                std::cout << std::endl << std::endl << "You have inserted an invalid option. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                
+                Additions::clearConsole();
+                
+                getSongsFromKey();
                 
                 break;
                 
