@@ -11,7 +11,7 @@
 #ifdef WIN32 // Windows includes
 #include <windows.h>
 #include <conio.h>
-#else // Non-Windows  (POSIX) includes
+#else // Non-Windows (POSIX) includes
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>

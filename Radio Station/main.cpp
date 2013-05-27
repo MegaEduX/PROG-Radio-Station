@@ -760,17 +760,53 @@ void getSongsFromKey() {
                 
                 std::string artistName = Additions::getline();
                 
-                Additions::clearConsole();
-                
                 if (Additions::gotESC(artistName)) {
                     getSongsFromKey();
                     
                     break;
                 }
                 
-                // getArtistMusics(artistName);
+                if (atoi(artistName.c_str())) { // We got a number!
+                    
+                    int result = atoi(artistName.c_str());
+                    
+                    if (artistList.size() > result) {
+                        Additions::clearConsole();
+                        
+                        getArtistMusics(artistList[result]);
+                        
+                        break;
+                    }
+                    
+                } else if (!artistName.compare("0")) { // We got 0.
+                    
+                    Additions::clearConsole();
+                    
+                    getArtistMusics(artistList[0]);
+                    
+                    break;
                 
-                // do something here!
+                } else { // We got a name.
+                    
+                    for (int i = 0; i < artistList.size(); i++) {
+                        if (!artistList[i].compare(artistName)) {
+                            Additions::clearConsole();
+                            
+                            getArtistMusics(artistList[i]);
+                            
+                            break;
+                        }
+                    }
+                    
+                }
+                
+                std::cout << std::endl << std::endl << "You have inserted an invalid option. Press Return to continue.";
+                
+                Additions::waitForReturn();
+                
+                Additions::clearConsole();
+                
+                getSongsFromKey();
                 
                 break;
                 
@@ -846,10 +882,12 @@ void getSongsFromKey() {
 }
 
 void getArtistMusics (std::string artist) {
+    std::cout << "Radio Station :: Artist Detail (" << artist << ")" << std::endl << std::endl;
+    
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
 	for (int i = 0; i < allTracksVec.size(); i++)
-		if (allTracksVec[i]->getArtist().compare(artist))
+		if (!allTracksVec[i]->getArtist().compare(artist))
 			std::cout << "[" << i << "] " << allTracksVec[i]->getTitle() << " by " << allTracksVec[i]->getArtist() << std::endl;
     
     std::cout << std::endl << "Please type a song ID to view more info: ";
@@ -1099,7 +1137,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
         }
     }
     
-    std::cout << "Search Results:" << std::endl << std::endl;
+    std::cout << std::endl << "Search Results:";
     
     std::vector<Music *> searchResult = RadioStation::Instance() -> getAllTracks() -> search(-1, nameStr, artistStr, authorStr, albumStr, genreStr, (yearInt == 0 ? -1 : yearInt));
     
