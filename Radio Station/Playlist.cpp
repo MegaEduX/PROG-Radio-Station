@@ -2,7 +2,7 @@
 //  User.cpp
 //  Radio Station
 //
-//  Created by Jo‹o Almeida on 19/05/13.
+//  T3G12 - MIEIC 2012/2013
 //
 
 #include "Playlist.h"

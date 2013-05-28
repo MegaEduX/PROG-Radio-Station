@@ -1,6 +1,8 @@
 //
 //  Music.h
-//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//  Radio Station
+//
+//  T3G12 - MIEIC 2012/2013
 //
 //  This class manages a single song object and its data.
 //

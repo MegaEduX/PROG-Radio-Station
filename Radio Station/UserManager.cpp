@@ -2,8 +2,7 @@
 //  UserManager.cpp
 //  Radio Station
 //
-//  Created by Eduardo Almeida on 19/05/13.
-//  Copyright (c) 2013 Bitten Apps. All rights reserved.
+//  T3G12 - MIEIC 2012/2013
 //
 
 #include "UserManager.h"

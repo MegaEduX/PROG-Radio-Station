@@ -1,6 +1,8 @@
 //
 //  User.h
-//  Created by Eduardo Almeida, Joao Almeida and Joao Ramos
+//  Radio Station
+//
+//  T3G12 - MIEIC 2012/2013
 //
 //  This class takes care of the User objects and their information.
 //
