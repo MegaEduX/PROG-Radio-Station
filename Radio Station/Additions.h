@@ -3,6 +3,7 @@
 //  Radio Station
 //
 //  T3G12 - MIEIC 2012/2013
+//  Eduardo Almeida, Joao Almeida and Joao Ramos
 //
 //  This namespace contains functions used on various parts of the program.
 //

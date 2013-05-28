@@ -3,6 +3,7 @@
 //  Radio Station
 //
 //  T3G12 - MIEIC 2012/2013
+//  Eduardo Almeida, Joao Almeida and Joao Ramos
 //
 
 #include <iostream>
@@ -1603,7 +1604,7 @@ void login() {
         if (!theUser)
             std::cout << "ID/Name not found! Please try again!" << std::endl;
         else
-            std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << ". ";
+            std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl << "Press Return to proceed. ";
 
 			Additions::waitForReturn();
 

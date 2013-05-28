@@ -3,6 +3,7 @@
 //  Radio Station
 //
 //  T3G12 - MIEIC 2012/2013
+//  Eduardo Almeida, Joao Almeida and Joao Ramos
 //
 //  This class takes care of the main Radio Station.
 //
