@@ -1766,7 +1766,9 @@ void start() {
                 
                 Additions::clearConsole();
                 
-                std::cout << "Radio Station (1.0)" << std::endl << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << std::endl << "Thanks for using this program. Please come back soon!";
+                std::cout << "Radio Station (1.0)" << std::endl << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << std::endl << "Thanks for using this program. Please come back soon!" << std::endl << std::endl << "Press Return to terminate the process. ";
+                
+                Additions::waitForReturn();
                 
                 exit(0);
                 
