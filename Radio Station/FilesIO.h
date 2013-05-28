@@ -38,7 +38,11 @@ public:
     
 	static FilesIO* Instance();
     
-    bool loadTopTen();
+    //
+    //  The Top10 is generated at runtime, and not saved into any file.
+    //
+    //  Removed:
+    //      - bool loadTopTen();
     
     //
     // The global files

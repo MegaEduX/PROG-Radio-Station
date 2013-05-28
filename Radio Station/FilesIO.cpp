@@ -120,8 +120,10 @@ bool FilesIO::storeGlobals() {
 //
 //  id
 //
+//  We ended up removing this, as we generate this at runtime.
+//
 
-bool FilesIO::loadTopTen() {
+/* bool FilesIO::loadTopTen() {
     CSVParser parser(topTenFile);
     
     std::vector<std::vector<std::string>> parsedCsv = parser.tableRows(true);
@@ -137,7 +139,7 @@ bool FilesIO::loadTopTen() {
         std::vector<Music *> search = RadioStation::Instance()->getAllTracks()->search(atoi(parsedCsv[i][0].c_str()), "", 0, "", "", "", 0);
         
         if (search.size() > 0) {
-            topTenPlaylist.addSong(search[0]/*, atoi(parsedCsv[i][1].c_str())*/);
+            topTenPlaylist.addSong(search[0]*/ /*, atoi(parsedCsv[i][1].c_str())*/ /*);
         } else {
             std::cout << "Couldn't find song with ID " << parsedCsv[i][0] << ". Maybe the database is corrupt? Proceeding anyway..." << std::endl;
             
@@ -149,7 +151,7 @@ bool FilesIO::loadTopTen() {
         return true;
     
     return false;
-}
+} */
 
 //
 //  Users File Format: (prone to change!)
