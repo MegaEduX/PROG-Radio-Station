@@ -78,21 +78,6 @@ void editMusic(Music *theMusic) {
 		theMusic -> setTitle(newTitle); //changes title
 
 	std::cout << std::endl;
-    
-	std::cout << "Song Album [" << theMusic->getAlbum() << "]: ";
-
-	std::string newAlbum = Additions::getline();
-    
-    if (Additions::gotESC(newAlbum)) {
-        Additions::clearConsole();
-        
-        editMusicMenu();
-    }
-
-	if (newAlbum.compare(""))
-		theMusic -> setAlbum(newAlbum); //changes Album
-
-	std::cout << std::endl;
 
 	std::cout << "Song Artist [" << theMusic->getArtist() << "]: ";
 
@@ -106,6 +91,36 @@ void editMusic(Music *theMusic) {
 
 	if (newArtist.compare(""))
 		theMusic -> setArtist(newArtist); //changes Artist
+
+	std::cout << std::endl;
+
+	std::cout << "Song Author [" << theMusic->getAuthor() << "]: ";
+
+	std::string newAuthor = Additions::getline();
+    
+    if (Additions::gotESC(newAuthor)) {
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
+
+	if (newAuthor.compare(""))
+		theMusic -> setAuthor(newAuthor); //changes Author
+
+	std::cout << std::endl;
+
+	std::cout << "Song Album [" << theMusic->getAlbum() << "]: ";
+
+	std::string newAlbum = Additions::getline();
+    
+    if (Additions::gotESC(newAlbum)) {
+        Additions::clearConsole();
+        
+        editMusicMenu();
+    }
+
+	if (newAlbum.compare(""))
+		theMusic -> setAlbum(newAlbum); //changes Album
 
 	std::cout << std::endl;
 
@@ -189,6 +204,8 @@ void editMusic(Music *theMusic) {
                 break;
                 
             case escKey:    // ESC
+
+				Additions::clearConsole();
                 
                 editMusicMenu();
                 
@@ -334,7 +351,7 @@ void addMusic() {
         if (Additions::gotESC(title)) {
             Additions::clearConsole();
             
-            editMusicMenu();
+            musicManager();
         }
         
         std::cout << std::endl;
@@ -353,7 +370,7 @@ void addMusic() {
         if (Additions::gotESC(artist)) {
             Additions::clearConsole();
             
-            editMusicMenu();
+            musicManager();
         }
         
         std::cout << std::endl;
@@ -369,7 +386,7 @@ void addMusic() {
     if (Additions::gotESC(author)) {
         Additions::clearConsole();
         
-        editMusicMenu();
+        musicManager();
     }
     
     std::cout << std::endl;
@@ -381,7 +398,7 @@ void addMusic() {
     if (Additions::gotESC(album)) {
         Additions::clearConsole();
         
-        editMusicMenu();
+        musicManager();
     }
     
     std::cout << std::endl;
@@ -393,7 +410,7 @@ void addMusic() {
     if (Additions::gotESC(genre)) {
         Additions::clearConsole();
         
-        editMusicMenu();
+        musicManager();
     }
     
     int year = 0;
@@ -408,7 +425,7 @@ void addMusic() {
         if (Additions::gotESC(yearStr)) {
             Additions::clearConsole();
             
-            editMusicMenu();
+            musicManager();
         }
         
         if (atoi(yearStr.c_str()) > 0)
@@ -452,7 +469,7 @@ void addMusic() {
                 
                 Additions::clearConsole();
                 
-                editMusicMenu();
+                musicManager();
                 
                 break;
                 
@@ -1604,7 +1621,7 @@ void login() {
         if (!theUser)
             std::cout << "ID/Name not found! Please try again!" << std::endl;
         else {
-            std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl << "Press Return to proceed. ";
+            std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl << std::endl << "Press Return to proceed. ";
 
 			Additions::waitForReturn();
 		}
