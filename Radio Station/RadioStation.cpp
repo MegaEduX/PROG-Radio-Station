@@ -41,6 +41,10 @@ std::string RadioStation::getName() {
 
 void RadioStation::generateGame() {
     srand((unsigned)time(NULL));
+
+	for (unsigned int i = 0; i < _allTracks.count(); i++)
+		_allTracks.getAllTracks()[i] -> setPlayCount(0);
+	// Makes sure the play count of all tracks is 0 before starting to get random "PlayCounts" in every music//
     
     for (unsigned int i = 0; i < _allTracks.count(); i++)
         _allTracks.getAllTracks()[i] -> setPlayCount(rand() % maxPlaysPerSong);
