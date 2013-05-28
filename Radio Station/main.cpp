@@ -1603,10 +1603,11 @@ void login() {
         
         if (!theUser)
             std::cout << "ID/Name not found! Please try again!" << std::endl;
-        else
+        else {
             std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl << "Press Return to proceed. ";
 
 			Additions::waitForReturn();
+		}
 
     } while (!theUser);
     
@@ -1770,7 +1771,15 @@ void start() {
                 
                 Additions::clearConsole();
                 
-                std::cout << "Radio Station (1.0)" << std::endl << std::endl << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)" << std::endl << std::endl << "Thanks for using this program. Please come back soon!" << std::endl << std::endl << "Press Return to terminate the process. ";
+                std::cout << "Radio Station (1.0)" << std::endl << std::endl;
+				
+#ifdef WIN32
+				std::cout << "(c) 2013 MIEIC 2012/2013 - T3G12 (PROG)"; // The copyright character may not be correctly encoded under Windows.
+#else
+				std::cout << "© 2013 MIEIC 2012/2013 - T3G12 (PROG)"; // Works fine under OS X, though!
+#endif
+					
+				std::cout << std::endl << std::endl << "Thanks for using this program. Please come back soon!" << std::endl << std::endl << "Press Return to terminate the process. ";
                 
                 Additions::waitForReturn();
                 
