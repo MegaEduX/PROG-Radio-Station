@@ -1603,7 +1603,7 @@ void login() {
         if (!theUser)
             std::cout << "ID/Name not found! Please try again!" << std::endl;
         else
-            std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << "." << std::endl;
+            std::cout << std::endl << "You are now logged-in with name " << theUser -> getName() << " and ID " << theUser->getId() << ". ";
 
 			Additions::waitForReturn();
 
