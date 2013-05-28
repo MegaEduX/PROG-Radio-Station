@@ -244,8 +244,11 @@ void editMusicMenu() {
         
         std::string songIdStr = Additions::getline();
         
-        if (Additions::gotESC(songIdStr))
+        if (Additions::gotESC(songIdStr)) {
+            Additions::clearConsole();
+            
             musicManager();
+        }
         
         int songId = atoi(songIdStr.c_str());
         
@@ -321,29 +324,43 @@ void addMusic() {
     std::cout << "Music Manager :: New Music" << std::endl;
     std::cout << std::endl;
     
-    std::cout << "Title: ";
+    std::string title;
     
-    std::string title = Additions::getline();
-    
-    if (Additions::gotESC(title)) {
-        Additions::clearConsole();
+    while (!title.compare("")) {
+        std::cout << "Title: ";
         
-        editMusicMenu();
+        title = Additions::getline();
+        
+        if (Additions::gotESC(title)) {
+            Additions::clearConsole();
+            
+            editMusicMenu();
+        }
+        
+        std::cout << std::endl;
+        
+        if (!title.compare(""))
+            std::cout << "Title is a required field." << std::endl;
     }
     
-    std::cout << std::endl;
+    std::string artist;
     
-    std::cout << "Artist: ";
-    
-    std::string artist = Additions::getline();
-    
-    if (Additions::gotESC(artist)) {
-        Additions::clearConsole();
+    while (!artist.compare("")) {
+        std::cout << "Artist: ";
         
-        editMusicMenu();
+        artist = Additions::getline();
+        
+        if (Additions::gotESC(artist)) {
+            Additions::clearConsole();
+            
+            editMusicMenu();
+        }
+        
+        std::cout << std::endl;
+        
+        if (!artist.compare(""))
+            std::cout << "Artist is a required field." << std::endl;
     }
-    
-    std::cout << std::endl;
     
     std::cout << "Author: ";
     
@@ -396,6 +413,9 @@ void addMusic() {
         
         if (atoi(yearStr.c_str()) > 0)
             year = atoi(yearStr.c_str());
+        
+        if (!year)
+            std::cout << "Year is a required field." << std::endl;
     }
     
     bool available = false;
@@ -449,7 +469,7 @@ void addMusic() {
     
     std::cout << std::endl << std::endl;
     
-    Music *newMusic = new Music(RadioStation::Instance()->getAllTracks()->count(), year, title, artist, author, album, genre, 0, 0, 0, available);
+    Music *newMusic = new Music(RadioStation::Instance() -> getAllTracks() -> count(), year, title, artist, author, album, genre, 0, 0, 0, available);
     
     if (RadioStation::Instance()->getAllTracks()->addSong(newMusic))
         std::cout << "The track was successfully added!";
@@ -468,7 +488,7 @@ void addMusic() {
 }
 
 void reinitializeSet() {
-    std::cout << "Radio Station :: Set Control Panel" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Set Control Panel" << std::endl << std::endl;
     
     std::cout << "Are you sure you want to reinitialize the station set? (y/n): ";
     
@@ -530,7 +550,7 @@ void reinitializeSet() {
 }
 
 void changeName() {
-    std::cout << "Radio Station :: Name Changer" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Name Changer" << std::endl << std::endl;
     
     std::cout << "Current Name: " << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "None!") << std::endl;
     std::cout << "New Name: ";
@@ -617,7 +637,7 @@ void adminPanel() {
 }
 
 void topTenSongs() {
-    std::cout << "Radio Station :: Top Ten" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Top Ten" << std::endl << std::endl;
     
     RadioStation::Instance() -> updateTopTen();
     
@@ -627,6 +647,9 @@ void topTenSongs() {
         Music *theTrack = topTen[i];
         std::cout << "[" << theTrack -> getId() << "] " << theTrack -> getTitle() << " by " << theTrack -> getArtist() << " (" << theTrack -> getPlayCount() << " plays | " << theTrack -> getLikes() << " likes | " << theTrack -> getDislikes() << " dislikes)" << std::endl;
     }
+    
+    if (!topTen.size())
+        std::cout << "There are currently no songs." << std::endl;
     
     std::cout << std::endl << "Press Return to go back.";
     
@@ -641,7 +664,7 @@ void searchLibrary() {
     bool name = false, artist = false, author = false, album = false, genre = false, year = false;
     
     while (true) {
-        std::cout << "Radio Station :: Library Search :: (Step 1 of 2)" << std::endl << std::endl;
+        std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Library Search :: (Step 1 of 2)" << std::endl << std::endl;
         
         std::cout << "Search by..." << std::endl;
         std::cout << (name ? " - 1. Name (Selected)" : " - 1. Name") << std::endl;
@@ -718,7 +741,7 @@ void searchLibrary() {
 }
 
 void getSongsFromKey() {
-    std::cout << "Radio Station :: Get Tracks" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Get Tracks" << std::endl << std::endl;
     
     std::cout << "1. All songs from Artist..." << std::endl;
     std::cout << "2. All songs from Author..." << std::endl;
@@ -726,7 +749,17 @@ void getSongsFromKey() {
     
     std::cout << std::endl;
     
-    std::cout << "Please choose an option.";
+    if (RadioStation::Instance() -> getAllTracks() -> count())
+        std::cout << "Please choose an option.";
+    else {
+        std::cout << "This operation can't be performed at this time. There are no songs yet." << std::endl << std::endl << "Press Return to continue.";
+        
+        Additions::waitForReturn();
+        
+        Additions::clearConsole();
+        
+        loggedInMenu();
+    }
     
     while (true) {
         int ch = _getch();
@@ -736,7 +769,7 @@ void getSongsFromKey() {
                 
                 Additions::clearConsole();
                 
-                std::cout << "Radio Station :: Artist List" << std::endl << std::endl;
+                std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Artist List" << std::endl << std::endl;
                 
                 std::vector<std::string> artistList;
                 
@@ -823,7 +856,7 @@ void getSongsFromKey() {
                 
                 Additions::clearConsole();
                 
-                std::cout << "Radio Station :: Author List" << std::endl << std::endl;
+                std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Author List" << std::endl << std::endl;
                 
                 std::vector<std::string> authorList;
                 
@@ -910,7 +943,7 @@ void getSongsFromKey() {
                 
                 Additions::clearConsole();
                 
-                std::cout << "Radio Station :: Year List" << std::endl << std::endl;
+                std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Year List" << std::endl << std::endl;
                 
                 std::vector<int> yearList;
                 
@@ -992,7 +1025,7 @@ void getSongsFromKey() {
 }
 
 void getArtistMusics (std::string artist) {
-    std::cout << "Radio Station :: Artist Detail (" << artist << ")" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Artist Detail (" << artist << ")" << std::endl << std::endl;
     
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
@@ -1046,7 +1079,7 @@ void getArtistMusics (std::string artist) {
 }
 
 void getAuthorMusics (std::string author) {
-	std::cout << "Radio Station :: Author Detail (" << author << ")" << std::endl << std::endl;
+	std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Author Detail (" << author << ")" << std::endl << std::endl;
     
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
@@ -1100,7 +1133,7 @@ void getAuthorMusics (std::string author) {
 }
 
 void getYearMusics (int year) {
-    std::cout << "Radio Station :: Year Detail (" << year << ")" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Year Detail (" << year << ")" << std::endl << std::endl;
     
 	std::vector<Music *> allTracksVec = RadioStation::Instance() -> getAllTracks() -> getAllTracks();
 	
@@ -1154,7 +1187,7 @@ void getYearMusics (int year) {
 }
 
 void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool genre, bool year) {
-    std::cout << "Radio Station :: Library Search :: (Step 2 of 2)" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Library Search :: (Step 2 of 2)" << std::endl << std::endl;
     
     std::string nameStr, artistStr, authorStr, albumStr, genreStr;
     
@@ -1256,7 +1289,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
     std::vector<Music *> searchResult = RadioStation::Instance() -> getAllTracks() -> search(-1, nameStr, artistStr, authorStr, albumStr, genreStr, (yearInt == 0 ? -1 : yearInt));
     
     if (searchResult.size() == 0) {
-        std::cout << "Your search returned no results. Please press Return to retry.";
+        std::cout << std::endl << std::endl << "Your search returned no results. Please press Return to retry.";
         
         Additions::waitForReturn();
         
@@ -1308,7 +1341,7 @@ void searchLibraryStepTwo(bool name, bool artist, bool author, bool album, bool 
 
 void userWorkWithSong(Music *theMusic) {
     while (true) {
-        std::cout << "Radio Station :: Song Details" << std::endl << std::endl;
+        std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Song Details" << std::endl << std::endl;
         
         std::vector<Music *> songSearch = loggedInUser -> getPlaylist() -> search(theMusic->getId(), "", "", "", "", "", -1);
         
@@ -1406,7 +1439,7 @@ void userWorkWithSong(Music *theMusic) {
 }
 
 void playlistManager() {
-	std::cout << "Radio Station :: Playlist Manager" << std::endl;
+	std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Playlist Manager" << std::endl;
     
     Playlist *allTracks = RadioStation::Instance() -> getAllTracks();
     
@@ -1548,7 +1581,7 @@ void login() {
     
     FilesIO::Instance() -> loadAllUsers();
     
-    std::cout << "Radio Station :: Login" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: Login" << std::endl << std::endl;
     
     do {
         std::cout << "Enter ID or Name: ";
@@ -1582,7 +1615,7 @@ void login() {
 }
 		
 void newUser() {
-    std::cout << "Radio Station :: New User" << std::endl << std::endl;
+    std::cout << (RadioStation::Instance() -> getName().compare("") ? RadioStation::Instance() -> getName() : "Radio Station") << " :: New User" << std::endl << std::endl;
     
     if (UserManager::Instance() -> userCount() == 0)
         std::cout << "There are currently no registered users. This will be the admin user." << std::endl << std::endl;
