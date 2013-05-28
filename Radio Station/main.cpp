@@ -27,7 +27,7 @@
 //
 
 static const int baseASCIINumber = 48;
-
+    
 static const int escKey = 27;
 
 static const int returnKeyPOSIX = 13;
@@ -1459,7 +1459,7 @@ void playlistManager() {
     }
     
     for (unsigned int i = 0 ; i < userTracks.size(); i++)
-        std::cout << "[" << i << "] " << userTracks[i]->getTitle() << " by " << userTracks[i]->getArtist() <<  std::endl;
+        std::cout << "[" << userTracks[i]->getId() << "] " << userTracks[i]->getTitle() << " by " << userTracks[i]->getArtist() <<  std::endl;
     
     std::cout << std::endl << "Please type the song ID you want to see details of: ";
     
@@ -1716,9 +1716,9 @@ void newUser() {
     User *theUser = new User(UserManager::Instance()->userCount(), age, (sexChar == 'F' ? kSexFemale : kSexMale), name, newPlaylist);
     
     if (UserManager::Instance() -> addUser(theUser))
-        std::cout << "You are registered and may login now!" << std::endl << "Press any key to go back to the main menu." << std::endl;
+        std::cout << "You are now registered and may now login! User ID: " << theUser -> getId() << "." << std::endl << std::endl <<  "Press any key to go back to the main menu. ";
     else
-        std::cout << "There was a problem. Please try again." << std::endl << "Press any key to go back to the main menu." << std::endl;
+        std::cout << "There was a problem. Please try again." << std::endl << "Press any key to go back to the main menu. ";
     
     Additions::waitForReturn();
     
